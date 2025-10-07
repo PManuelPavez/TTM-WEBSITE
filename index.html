@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>TTM - MANAGEMENT
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="To The Moon Management: acompañamiento holístico para artistas.">
+  <meta name="theme-color" content="#1f2f5b">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; base-uri 'self'; form-action 'self';">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="no-js">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <!-- Banda superior (logo centrado) -->
+    <div class="brandbar">
+      <div class="container brandbar-inner">
+        <a href="#home" class="brand" aria-label="TTM inicio">
+          <span class="brand-word">TTM</span>
+          <span class="brand-sub">TO THE MOON MANAGEMENT</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Barra de pestañas debajo del logo -->
+    <div class="tabsbar" role="navigation" aria-label="Principal">
+      <div class="container tabsbar-inner">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="navTabs">
+          <span class="sr-only">Abrir menú</span>
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+        <ul id="navTabs" class="nav-tabs" role="tablist">
+          <li><a href="#home" data-link aria-current="page">Home</a></li>
+          <li><a href="#artists" data-link>Artists</a></li>
+          <li><a href="#services" data-link>Services</a></li>
+          <li><a href="team.html" data-link>Team</a></li>
+          <li><a href="#studio" data-link>Studio</a></li> <!-- <- antes Hall of Fame -->
+          <li><a href="#partners" data-link>Partners</a></li>
+          <li><a href="#contact" data-link>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO / SLIDER -->
+    <section id="home" class="hero" aria-label="Destacados" data-section>
+      <div class="slider" data-autoplay="true" data-interval="5500" aria-roledescription="carrusel">
+        <div class="slides" id="slides" role="group" aria-live="polite">
+          <article class="slide ph ph1" aria-roledescription="slide" aria-label="Slide 1 de 3">
+            <div class="hero-caption">
+              <h1 class="display">Unlock potential</h1>
+              <p>Gestión 360° para artistas. Inspirado en alto rendimiento, orientado a resultados.</p>
+              <div class="hero-ctas">
+                <a href="#artists" class="btn btn-primary" data-link>Ver Artists</a>
+                <a href="#services" class="btn btn-outline" data-link>Ver Services</a>
+              </div>
+            </div>
+          </article>
+          <article class="slide ph ph2" aria-roledescription="slide" aria-label="Slide 2 de 3">
+            <div class="hero-caption">
+              <h2 class="display">Carreras sostenibles</h2>
+              <p>Plan, performance y marca en equilibrio para crecer sin perder identidad.</p>
+            </div>
+          </article>
+          <article class="slide ph ph3" aria-roledescription="slide" aria-label="Slide 3 de 3">
+            <div class="hero-caption">
+              <h2 class="display">Partners con propósito</h2>
+              <p>Alianzas medibles, experiencias reales, reporting claro.</p>
+            </div>
+          </article>
+        </div>
+
+        <button class="ctrl prev" aria-label="Slide anterior" data-prev>‹</button>
+        <button class="ctrl next" aria-label="Slide siguiente" data-next>›</button>
+
+        <div class="dots" role="tablist" aria-label="Paginación carrusel">
+          <button role="tab" aria-selected="true" aria-controls="slide-1" data-dot="0"></button>
+          <button role="tab" aria-selected="false" aria-controls="slide-2" data-dot="1"></button>
+          <button role="tab" aria-selected="false" aria-controls="slide-3" data-dot="2"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR GOAL -->
+    <section id="goal" class="section" data-section>
+      <div class="container">
+        <header class="section-head"><h2 class="section-title">NUESTRO OBJETIVO</h2></header>
+        <div class="prose">
+          <p>En To The Moon creemos que cada artista ya tiene dentro de sí lo necesario para brillar,
+             y nuestro trabajo es acompañarte a descubrirlo y potenciarlo para que construyas una carrera auténtica y genuina, a tu manera. Queremos que sigas amando lo que hacés, que disfrutes el camino, 
+             que cuides a los tuyos y que vivas de tu arte sin que el éxito se convierta en una carga. Hablamos de un éxito sano, que te impulse sin lastimarte y que te permita rodearte de buenas relaciones;
+              un éxito sustentable,
+              que se sostenga en el tiempo con una identidad propia y única; y un éxito expansible, que crezca con vos, que se adapte a las nuevas tendencias y 
+            que se proyecte como una onda que contagia energía e inspiración. Nosotros nos ocupamos de todo lo que no sea arte, para que vos puedas enfocarte en lo que mejor sabés hacer: crear.
+        </div>
+      </div>
+    </section>
+
+    <!-- PLACEHOLDERS (con data-section para pestaña activa) -->
+    <section id="artists" class="section section-muted" data-section><div class="container"><h3 class="h3 muted">Artists (placeholder)</h3></div></section>
+    <section id="services" class="section" data-section><div class="container"><h3 class="h3 muted">Services (placeholder)</h3></div></section>
+    <section id="team" class="section section-muted" data-section>
+  <div class="container">
+    <header class="section-head">
+      <h2 class="section-title">TEAM</h2>
+    </header>
+    <div id="teamGrid" class="grid cards"></div>
+  </div>
+</section>
+
+    <section id="studio" class="section" data-section><div class="container"><h3 class="h3 muted">Studio (placeholder)</h3></div></section>
+    <section id="partners" class="section section-muted" data-section><div class="container"><h3 class="h3 muted">Partners (placeholder)</h3></div></section>
+    <section id="contact" class="section" data-section><div class="container"><h3 class="h3 muted">Contact (placeholder)</h3></div></section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="social">
+        <a href="#" aria-label="Email" class="soc">✉️</a>
+        <a href="#" aria-label="Instagram" class="soc">◎</a>
+        <a href="#" aria-label="X/Twitter" class="soc">𝕏</a>
+      </div>
+      <p class="small muted">© <span id="year"></span> To The Moon Management</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

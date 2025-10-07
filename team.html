@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>TTM — Team</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Team de To The Moon Management.">
+  <meta name="theme-color" content="#1f2f5b">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; base-uri 'self'; form-action 'self';">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="no-js">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <!-- HEADER idéntico -->
+  <header class="site-header" role="banner">
+    <div class="brandbar">
+      <div class="container brandbar-inner">
+        <a href="index.html#home" class="brand" aria-label="TTM inicio">
+          <span class="brand-word">TTM</span>
+          <span class="brand-sub">TO THE MOON MANAGEMENT</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="tabsbar" role="navigation" aria-label="Principal">
+      <div class="container tabsbar-inner">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="navTabs">
+          <span class="sr-only">Abrir menú</span>
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+        <ul id="navTabs" class="nav-tabs" role="tablist">
+          <li><a href="index.html#home" data-link>Home</a></li>
+          <li><a href="index.html#artists" data-link>Artists</a></li>
+          <li><a href="index.html#services" data-link>Services</a></li>
+          <li><a href="team.html" aria-current="page">Team</a></li>
+          <li><a href="index.html#studio" data-link>Studio</a></li>
+          <li><a href="index.html#partners" data-link>Partners</a></li>
+          <li><a href="index.html#contact" data-link>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <header class="section-head">
+          <h1 class="section-title">TEAM</h1>
+        </header>
+        <p class="prose" style="margin-bottom:18px">Nuestro equipo combina estrategia, gestión operativa, bienestar y comunicación visual para acompañar carreras auténticas.</p>
+
+        <!-- Filtros simples (opcional) -->
+        <form id="teamFilters" class="filters" role="search" aria-label="Filtrar equipo">
+          <label><span class="label">Buscar</span><input type="search" id="tq" placeholder="Nombre o rol"></label>
+          <label><span class="label">Rol</span>
+            <select id="trole">
+              <option value="">Todos</option>
+              <option>Director de Estrategias</option>
+              <option>Manager Personal</option>
+              <option>Nutricionista</option>
+              <option>Fotógrafa & Community</option>
+            </select>
+          </label>
+        </form>
+
+        <!-- Grid de cards -->
+        <div id="teamGrid" class="grid cards"></div>
+      </div>
+    </section>
+    <!-- Toast accesible para feedback -->
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="social">
+        <a href="#" aria-label="Email" class="soc">✉️</a>
+        <a href="#" aria-label="Instagram" class="soc">◎</a>
+        <a href="#" aria-label="X/Twitter" class="soc">𝕏</a>
+      </div>
+      <p class="small muted">© <span id="year"></span> To The Moon Management</p>
+    </div>
+  </footer>
+  <!-- Toast accesible para feedback -->
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+
+  <script src="script.js" defer></script>
+  <script src="team.js" defer></script>
+</body>
+</html>
