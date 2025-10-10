@@ -227,31 +227,109 @@ img{max-width:100%;height:auto;display:block}
 /* Empty state */
 .empty{padding:18px;border:1px dashed #cfd7ea;border-radius:12px;background:#fff;color:#2a396d;text-align:center}
 
-// services-horizontal.js — layout horizontal con numeración y animación
-(function(){
-  const services = [
-    { title: "Manager personal", text: "En TTM el artista cuenta con un acompañamiento cercano y constante. El manager personal se convierte en una herramienta integral que organiza, planifica y gestiona todas las áreas que componen al artista, tanto la humana como la de marca. El objetivo principal es que el artista pueda enfocarse plenamente en su arte y que mientras se entrega a esa pasión, se construya como individuo." },
-    { title: "Estrategia de carrera y marca", text: "Trabajamos en la construcción de una identidad sólida y diferenciada, desarrollando un plan estratégico individualizado, hecho a medida del artista, que potencie la marca y trace un camino claro de crecimiento, con objetivos medibles y acciones concretas que generen impacto a largo plazo dentro de la industria." },
-    { title: "Agenda interactiva", text: "Diseñamos y compartimos una agenda personalizada y digital en la que manager y artista trabajan en conjunto. Allí se definen objetivos SMART, se dividen en hitos y tareas, y se siguen con metodologías ágiles (Scrum, Sprints), asegurando organización, claridad y avances constantes." },
-    { title: "Entrenamiento / Studio", text: "Contamos con un estudio de producción musical y una sala de entrenamiento de mezcla en nuestra oficina en Ciudad Autónoma de Buenos Aires. Este espacio está pensado para que los artistas puedan desarrollar su sonido, perfeccionar su técnica y crear sinergia entre ellos, compartiendo conocimientos e inspiración." },
-    { title: "Desarrollo personal", text: "Sabemos que el éxito real comienza con la persona. Por eso brindamos herramientas de apoyo en salud mental, nutrición, entrenamiento físico y hábitos sostenibles, asegurando que el artista crezca en equilibrio y mantenga un rendimiento alto sin comprometer su bienestar." },
-    { title: "Desarrollo de productos audiovisuales", text: "Contamos con un equipo de fotógrafos, filmmakers y community managers que generan contenido profesional y creativo. De esta manera, el artista puede comunicar su identidad con material propio, de calidad y alineado a su visión." },
-    { title: "Press & media", text: "Gestionamos la relación con la prensa, medios y plataformas, elaborando estrategias de comunicación que amplifiquen el alcance del artista y aseguren una exposición coherente y positiva de la marca." },
-    { title: "Logística y viajes", text: "Organizamos y coordinamos traslados, itinerarios y necesidades logísticas en cada fecha o gira. El objetivo es que el artista tenga una experiencia fluida y segura, pudiendo concentrarse en su performance sin preocuparse por los detalles operativos." },
-    { title: "Booking, legal & negotiation", text: "Asesoramos y gestionamos negociaciones de contratos, bookings y acuerdos comerciales. Garantizamos transparencia, respaldo legal y condiciones justas que protejan al artista y fortalezcan su desarrollo profesional." },
-    { title: "Espiritualidad", text: "En TTM entendemos que la carrera artística también es un camino personal profundo. Por eso ofrecemos acompañamiento espiritual y prácticas de conciencia que ayudan al artista a mantenerse en paz, conectado con su propósito y con claridad frente a los desafíos de la industria." }
-  ];
+/* === SERVICES HORIZONTAL - Mejoras: icons, TOC, reveal, back-to-top === */
 
-  const container = document.getElementById("servicesList");
-  if (!container) return;
+.services-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 300px; /* contenido + TOC */
+  gap: 32px;
+  align-items: start;
+  margin-top: 50px;
+}
 
-  container.innerHTML = services.map((s, i) => `
-    <div class="service-block">
-      <div class="service-number">${String(i + 1).padStart(2, "0")}</div>
-      <div class="service-content">
-        <h3 class="service-title">${s.title}</h3>
-        <p class="service-text">${s.text}</p>
-      </div>
-    </div>
-  `).join("");
+/* Cuando en mobile, TOC desaparece y queda single column */
+@media (max-width: 1000px) {
+  .services-wrapper { grid-template-columns: 1fr; }
+}
+
+/* El contenedor que tenías */
+.services-horizontal {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* Cada bloque ahora con icono a la izquierda del número */
+.service-block {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 44px 0;
+  border-bottom: 1px solid #eef3fb;
+  position: relative;
+  min-height: 120px;
+}
+
+/* número grande */
+.service-number {
+  flex-shrink: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #dfe7fb;
+  line-height: 1;
+  min-width: 90px;
+  text-align: right;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* icono pequeño encima del número (izquierda) */
+.service-icon {
+  width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:10px;background:#f6f9ff;border:1px solid #e3eafc;color:#1f2f5b;
+  margin-right:12px;flex-shrink:0;
+}
+.service-content { flex:1; max-width:880px; }
+.service-title{ margin:0 0 12px;font-size:1.3rem;font-weight:700;color:#1f2f5b; }
+.service-text{ font-size:1rem;line-height:1.7;color:#2a2f45; }
+
+/* Small meta / anchor link */
+.service-anchor{
+  position:absolute;left:-9999px; /* offscreen for keyboard access */
+}
+.service-permalink{
+  margin-left:6px;font-size:.85rem;color:#6b7796;text-decoration:none;
+}
+.service-permalink:focus-visible{outline:3px solid #6aa8ff;outline-offset:3px}
+
+/* TOC (table of contents) sticky */
+.services-toc{
+  position:sticky;top:110px;padding:18px;border-radius:12px;background:#fff;border:1px solid #e9eefb;
+  height:max-content;align-self:start;
+}
+.services-toc h4{margin:0 0 8px;font-size:1rem;color:#1f2f5b}
+.services-toc ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.services-toc a{color:#2a3a6b;text-decoration:none;padding:6px 8px;border-radius:8px}
+.services-toc a[aria-current="true"], .services-toc a:hover{background:#eef3ff}
+
+/* Back to top */
+.back-to-top{
+  position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:999px;background:#1f2f5b;color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.18);z-index:999;
+  border:0;cursor:pointer;opacity:0;transform:translateY(16px);transition:opacity .22s ease,transform .22s ease;
+}
+.back-to-top.show{opacity:1;transform:translateY(0)}
+.back-to-top:focus-visible{outline:3px solid #6aa8ff;outline-offset:3px}
+
+/* reveal state */
+.service-block.is-hidden{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
+.service-block.is-visible{opacity:1;transform:none}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .service-block, .service-block.is-hidden, .service-block.is-visible { transition:none !important; transform:none !important; opacity:1 !important; }
+  .back-to-top, .services-toc { transition:none !important; }
+}
+
+/* minor responsive tweaks */
+@media (max-width:700px){
+  .service-number{font-size:2rem;text-align:left}
+  .service-icon{width:36px;height:36px}
+  .service-block{padding:22px 0;gap:14px}
+  .services-wrapper{gap:18px}
+}
+
 })();
