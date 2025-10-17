@@ -8,27 +8,20 @@
   <meta name="theme-color" content="#1f2f5b">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="no-js">
-  <a class="skip-link" href="#main">Saltar al contenido</a>
-
-  <!-- HEADER -->
-  <header class="site-header" role="banner">
+<body>
+  <header class="site-header">
     <div class="brandbar">
       <div class="container brandbar-inner">
-        <a href="#home" class="brand" aria-label="TTM inicio">
+        <a href="#home" class="brand">
           <span class="brand-word">TTM</span>
           <span class="brand-sub">TO THE MOON MANAGEMENT</span>
         </a>
       </div>
     </div>
 
-    <div class="tabsbar" role="navigation" aria-label="Principal">
+    <div class="tabsbar">
       <div class="container tabsbar-inner">
-        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="navTabs">
-          <span class="sr-only">Abrir menú</span>
-          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-        </button>
-        <ul id="navTabs" class="nav-tabs" role="tablist">
+        <ul id="navTabs" class="nav-tabs">
           <li><a href="#home" data-link aria-current="page">Home</a></li>
           <li><a href="#artists" data-link>Artists</a></li>
           <li><a href="services.html">Services</a></li>
@@ -41,44 +34,18 @@
     </div>
   </header>
 
-  <!-- MAIN -->
   <main id="main">
-    <!-- HERO con slider -->
+    <!-- HERO SLIDER -->
     <section id="home" class="hero">
-      <div class="slider" id="heroSlider">
-        <div class="slides">
-          <div class="slide active" style="background-image:url('assets/hero1.jpg')">
-            <div class="overlay">
-              <h1>Unlock Your Potential</h1>
-              <p>Representamos y acompañamos el talento desde una mirada humana e integral.</p>
-            </div>
-          </div>
-          <div class="slide" style="background-image:url('assets/hero2.jpg')">
-            <div class="overlay">
-              <h1>Crecer con propósito</h1>
-              <p>Desarrollo artístico, bienestar y estrategia de carrera.</p>
-            </div>
-          </div>
-          <div class="slide" style="background-image:url('assets/hero3.jpg')">
-            <div class="overlay">
-              <h1>To The Moon</h1>
-              <p>Un equipo que impulsa el arte y la autenticidad.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Controles -->
-        <button class="slider-btn prev" aria-label="Anterior">‹</button>
-        <button class="slider-btn next" aria-label="Siguiente">›</button>
-        <div class="dots" id="heroDots"></div>
+      <div id="heroSlider" class="fade-slider">
+        <!-- Las slides se insertan dinámicamente desde slider.json -->
+        <div class="dots" id="sliderDots"></div>
       </div>
     </section>
 
     <section id="artists" class="section section-muted">
       <div class="container">
-        <header class="section-head">
-          <h2 class="section-title">Artists</h2>
-        </header>
+        <h2 class="section-title">Artists</h2>
         <p class="prose">Próximamente roster de artistas To The Moon.</p>
       </div>
     </section>
@@ -117,5 +84,6 @@
   </footer>
 
   <script src="script.js" defer></script>
+  <script src="slider.js" defer></script>
 </body>
 </html>
