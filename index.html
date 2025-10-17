@@ -1,31 +1,33 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>To The Moon Management</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Management artístico integral — To The Moon Management.">
-  <meta name="theme-color" content="#1f2f5b">
+  <meta charset="utf-8" />
+  <title>To The Moon Management — Home</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="To The Moon Management — Gestión 360° para artistas." />
   <link rel="stylesheet" href="styles.css">
-  <link rel="preload" as="image" href="assets/hero1.webp">
-<link rel="preload" as="image" href="assets/hero2.webp">
-
 </head>
 <body>
-  <header class="site-header">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header" role="banner">
     <div class="brandbar">
       <div class="container brandbar-inner">
-        <a href="#home" class="brand">
+        <a href="#main" class="brand" aria-label="TTM inicio">
           <span class="brand-word">TTM</span>
           <span class="brand-sub">TO THE MOON MANAGEMENT</span>
         </a>
       </div>
     </div>
 
-    <div class="tabsbar">
+    <div class="tabsbar" role="navigation" aria-label="Principal">
       <div class="container tabsbar-inner">
-        <ul id="navTabs" class="nav-tabs">
-          <li><a href="#home" data-link aria-current="page">Home</a></li>
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="navTabs">
+          <span class="sr-only">Abrir menú</span>
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+        <ul id="navTabs" class="nav-tabs" role="tablist">
+          <li><a href="#main" data-link aria-current="page">Home</a></li>
           <li><a href="#artists" data-link>Artists</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="team.html">Team</a></li>
@@ -37,45 +39,90 @@
     </div>
   </header>
 
-  <main id="main">
- <!-- HERO SLIDER (reemplazar sección home actual) -->
-<section id="home" class="hero" aria-label="Hero" role="region">
-  <div id="heroSlider" class="fade-slider" aria-roledescription="carousel" aria-label="Hero images" data-autoplay="true" tabindex="0">
-    <!-- slides se insertan dinámicamente -->
-    <div class="dots" id="sliderDots" role="tablist" aria-label="Selector de slide"></div>
-  </div>
-</section>
+  <main id="main" tabindex="-1">
+    <!-- HERO sencillo (sin slider) -->
+    <section class="hero-plain" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <h1 id="hero-title">Unlock your potential</h1>
+        <p class="hero-lead">Gestión 360° para artistas. Inspirado en alto rendimiento, orientado a resultados.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="team.html">Ver Team</a>
+          <a class="btn btn-outline" href="services.html">Ver Services</a>
+          <a class="btn btn-ghost" href="slider.html">Ver Portfolio / Slides</a>
+        </div>
+      </div>
+    </section>
 
+    <!-- OUR GOAL (ahora aparece debajo del hero) -->
+    <section id="our-goal" class="section section-goal" aria-labelledby="goal-title">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="goal-title" class="section-title">OUR GOAL</h2>
+        </header>
+        <div class="prose">
+          <p>Para personas con ambición creativa, no hay nada peor que mirar atrás y pensar “¿qué hubiera pasado si…?”. En TTM trabajamos codo a codo con artistas y partners para desbloquear su máximo potencial y construir carreras auténticas, sostenibles y expansibles. Nuestro enfoque holístico garantiza que miremos siempre hacia adelante y con propósito.</p>
+        </div>
+      </div>
+    </section>
 
+    <!-- Placeholder de otras secciones -->
     <section id="artists" class="section section-muted">
       <div class="container">
-        <h2 class="section-title">Artists</h2>
+        <h3 class="section-sub">Artists</h3>
         <p class="prose">Próximamente roster de artistas To The Moon.</p>
       </div>
     </section>
 
     <section id="studio" class="section">
       <div class="container">
-        <h2 class="section-title">Studio</h2>
+        <h3 class="section-sub">Studio</h3>
         <p class="prose">Espacio creativo y sala de entrenamiento de mezcla en Buenos Aires.</p>
       </div>
     </section>
 
     <section id="partners" class="section section-muted">
       <div class="container">
-        <h2 class="section-title">Partners</h2>
+        <h3 class="section-sub">Partners</h3>
         <p class="prose">Próximamente partners estratégicos de To The Moon.</p>
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <!-- CONTACT: formulario mejorado -->
+    <section id="contact" class="section section-contact" aria-labelledby="contact-title">
       <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <form id="contactForm" class="form">
-          <input type="text" name="name" placeholder="Nombre completo" required>
-          <input type="email" name="email" placeholder="Email" required>
-          <textarea name="message" placeholder="Mensaje" required></textarea>
-          <button type="submit" class="btn-primary">Enviar</button>
+        <header class="section-head">
+          <h2 id="contact-title" class="section-title">Contact</h2>
+          <p class="prose">Escribinos para consultas de representación, booking o studio. Respondemos en 48 horas hábiles.</p>
+        </header>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="grid two">
+            <label class="form-field">
+              <span class="label">Nombre</span>
+              <input name="name" type="text" placeholder="Nombre completo" required aria-required="true">
+            </label>
+            <label class="form-field">
+              <span class="label">Email</span>
+              <input name="email" type="email" placeholder="tu@ejemplo.com" required aria-required="true">
+            </label>
+          </div>
+
+          <label class="form-field">
+            <span class="label">Asunto</span>
+            <input name="subject" type="text" placeholder="Motivo del contacto (ej: booking, info estudio)">
+          </label>
+
+          <label class="form-field">
+            <span class="label">Mensaje</span>
+            <textarea name="message" rows="6" placeholder="Contanos qué necesitás" required aria-required="true"></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+            <button type="button" id="contactReset" class="btn btn-outline">Limpiar</button>
+          </div>
+
+          <div id="contactFeedback" class="form-feedback" role="status" aria-live="polite" hidden></div>
         </form>
       </div>
     </section>
@@ -88,6 +135,5 @@
   </footer>
 
   <script src="script.js" defer></script>
-  <script src="slider.js" defer></script>
 </body>
 </html>
