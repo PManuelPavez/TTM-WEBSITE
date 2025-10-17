@@ -1,17 +1,17 @@
 [
   {
-    "image": "assets/hero1.webp",
+    "image": "images/slide1.jpg",
     "title": "Unlock Your Potential",
-    "subtitle": "Representamos y acompañamos el talento desde una mirada humana e integral."
+    "text": "Gestión 360° para artistas."
   },
   {
-    "image": "assets/hero2.webp",
-    "title": "Crecer con propósito",
-    "subtitle": "Desarrollo artístico, bienestar y estrategia de carrera."
+    "image": "images/slide2.jpg",
+    "title": "Holistic Management",
+    "text": "Desarrollo integral, humano y profesional."
   },
   {
-    "image": "assets/hero3.webp",
-    "title": "To The Moon",
-    "subtitle": "Un equipo que impulsa el arte y la autenticidad."
+    "image": "images/slide3.jpg",
+    "title": "High Performance",
+    "text": "Estrategias que transforman talento en legado."
   }
 ]
