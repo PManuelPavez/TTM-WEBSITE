@@ -186,3 +186,19 @@
     // ignore in strict environments
   }
 })();
+// MENU HAMBURGUESA + AÑO FOOTER
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav-tabs");
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener("click", () => {
+      nav.classList.toggle("open");
+      menuToggle.classList.toggle("active");
+    });
+  }
+
+  // año automático en el footer
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+});
