@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>TTM - Management</title>
+  <title>To The Moon Management</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Management artístico integral — To The Moon Management.">
   <meta name="theme-color" content="#1f2f5b">
@@ -43,10 +43,34 @@
 
   <!-- MAIN -->
   <main id="main">
+    <!-- HERO con slider -->
     <section id="home" class="hero">
-      <div class="container">
-        <h1 class="hero-title">Unlock Your Potential</h1>
-        <p class="hero-sub">Representamos, acompañamos y potenciamos el talento desde una mirada humana e integral.</p>
+      <div class="slider" id="heroSlider">
+        <div class="slides">
+          <div class="slide active" style="background-image:url('assets/hero1.jpg')">
+            <div class="overlay">
+              <h1>Unlock Your Potential</h1>
+              <p>Representamos y acompañamos el talento desde una mirada humana e integral.</p>
+            </div>
+          </div>
+          <div class="slide" style="background-image:url('assets/hero2.jpg')">
+            <div class="overlay">
+              <h1>Crecer con propósito</h1>
+              <p>Desarrollo artístico, bienestar y estrategia de carrera.</p>
+            </div>
+          </div>
+          <div class="slide" style="background-image:url('assets/hero3.jpg')">
+            <div class="overlay">
+              <h1>To The Moon</h1>
+              <p>Un equipo que impulsa el arte y la autenticidad.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles -->
+        <button class="slider-btn prev" aria-label="Anterior">‹</button>
+        <button class="slider-btn next" aria-label="Siguiente">›</button>
+        <div class="dots" id="heroDots"></div>
       </div>
     </section>
 
