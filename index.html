@@ -35,13 +35,14 @@
   </header>
 
   <main id="main">
-    <!-- HERO SLIDER -->
-    <section id="home" class="hero">
-      <div id="heroSlider" class="fade-slider">
-        <!-- Las slides se insertan dinámicamente desde slider.json -->
-        <div class="dots" id="sliderDots"></div>
-      </div>
-    </section>
+ <!-- HERO SLIDER (reemplazar sección home actual) -->
+<section id="home" class="hero" aria-label="Hero" role="region">
+  <div id="heroSlider" class="fade-slider" aria-roledescription="carousel" aria-label="Hero images" data-autoplay="true" tabindex="0">
+    <!-- slides se insertan dinámicamente -->
+    <div class="dots" id="sliderDots" role="tablist" aria-label="Selector de slide"></div>
+  </div>
+</section>
+
 
     <section id="artists" class="section section-muted">
       <div class="container">
