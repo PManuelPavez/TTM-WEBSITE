@@ -4,48 +4,44 @@
   <meta charset="utf-8" />
   <title>Artists — To The Moon Management</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Roster de artistas — To The Moon Management" />
   <link rel="stylesheet" href="styles.css" />
   <script defer src="artists.js"></script>
 </head>
 <body>
   <header class="site-header">
-    <div class="brandbar">
-      <a href="index.html" class="brand">TTM</a>
+    <div class="brandbar container">
+      <a href="index.html" class="brand">TTM <span class="brand-sub">TO THE MOON</span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="mainNav">Menu</button>
     </div>
-    <nav class="tabsbar">
+    <nav id="mainNav" class="tabsbar container" aria-label="Main">
       <ul class="nav-tabs">
         <li><a href="index.html">Home</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="team.html">Team</a></li>
         <li><a href="artists.html" aria-current="page">Artists</a></li>
-        <li><a href="index.html#studio">Studio</a></li>
-          <li><a href="index.html#partners">Partners</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="#studio" data-link>Studio</a></li>
+          <li><a href="#partners" data-link>Partners</a></li>
+          <li><a href="#contact" data-link>Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- HERO FULL-BLEED con texto per-letter -->
+  <!-- HERO FULL BLEED: banner per-letter -->
   <section class="artists-hero full-bleed-hero" aria-label="Artists hero">
     <div class="rotating-banner">
-      <div id="rotatingText" class="rotating-text" aria-hidden="true">
-        <!-- JS llenará las letras -->
-      </div>
+      <div id="rotatingText" class="rotating-text" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- LISTA VERTICAL DE ARTISTAS (foto arriba, box azul) -->
-  <main class="artists-section">
-    <div class="container">
-      <h2 class="section-title">Our Artists</h2>
-      <div id="artistsList" class="artists-list" aria-live="polite"></div>
-    </div>
+  <!-- ARTISTS LIST (vertical cards) -->
+  <main class="artists-section container" id="main">
+    <h2 class="section-title">Our Artists</h2>
+    <div id="artistsList" class="artists-list" aria-live="polite"></div>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> To The Moon Management</p>
-    </div>
+  <footer class="site-footer container">
+    <p>© <span id="year"></span> To The Moon Management</p>
   </footer>
 </body>
 </html>
