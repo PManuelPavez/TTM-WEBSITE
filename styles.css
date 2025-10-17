@@ -438,3 +438,97 @@ img{max-width:100%;height:auto;display:block}
   .fade-overlay p { font-size: 1rem; }
   .dots { bottom: 20px; }
 }
+/* HERO SLIDER */
+.fade-slider {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  overflow: hidden;
+  background: #0e203f;
+}
+
+.fade-slider .slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  background-size: cover;
+  background-position: center;
+}
+
+.fade-slider .slide.active {
+  opacity: 1;
+}
+
+.fade-slider .dots {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.fade-slider .dots button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: transparent;
+  cursor: pointer;
+  transition: background .3s;
+}
+
+.fade-slider .dots button.active {
+  background: #fff;
+}
+
+/* OUR GOAL */
+.section-goal {
+  background: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+.section-goal h2 {
+  color: #0d2146;
+  letter-spacing: .2em;
+  margin-bottom: 20px;
+}
+.section-goal p {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* CONTACT */
+.section-contact {
+  background: #f4f6fb;
+  padding: 60px 20px;
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.contact-form .grid.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.contact-form input, .contact-form textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.btn-primary {
+  padding: 10px 20px;
+  background: #0d2146;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
