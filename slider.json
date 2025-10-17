@@ -1,16 +1,16 @@
 [
   {
-    "image": "https://source.unsplash.com/1600x900/?music,studio",
+    "image": "assets/hero1.webp",
     "title": "Unlock Your Potential",
     "subtitle": "Representamos y acompañamos el talento desde una mirada humana e integral."
   },
   {
-    "image": "https://source.unsplash.com/1600x900/?concert,artist",
+    "image": "assets/hero2.webp",
     "title": "Crecer con propósito",
     "subtitle": "Desarrollo artístico, bienestar y estrategia de carrera."
   },
   {
-    "image": "https://source.unsplash.com/1600x900/?recording,producer",
+    "image": "assets/hero3.webp",
     "title": "To The Moon",
     "subtitle": "Un equipo que impulsa el arte y la autenticidad."
   }
