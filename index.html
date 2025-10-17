@@ -3,97 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To The Moon Management</title>
-  <meta name="description" content="Gestión 360° para artistas. Inspirado en alto rendimiento, orientado a resultados.">
+  <title>Artists — To The Moon Management</title>
   <link rel="stylesheet" href="styles.css">
+  <script defer src="artists.js"></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="brandbar">
-      <div class="container brandbar-inner">
-        <a href="#home" class="brand">
-          <span class="brand-word">TTM</span>
-          <span class="brand-sub">TO THE MOON MANAGEMENT</span>
-        </a>
-      </div>
+      <a href="index.html" class="brand">TTM</a>
     </div>
-
-    <div class="tabsbar">
-      <div class="container tabsbar-inner">
-        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="navTabs">
-          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-        </button>
-        <ul id="navTabs" class="nav-tabs">
-          <li><a href="#home" data-link aria-current="page">Home</a></li>
-          <li><a href="artists.html">Artists</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="team.html">Team</a></li>
-          <li><a href="#studio" data-link>Studio</a></li>
-          <li><a href="#partners" data-link>Partners</a></li>
-          <li><a href="#contact" data-link>Contact</a></li>
-        </ul>
-      </div>
-    </div>
+    <nav class="tabsbar">
+      <ul class="nav-tabs">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="artists.html" aria-current="page">Artists</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main id="home">
-    <!-- HERO SLIDER -->
-    <section class="hero-slider" aria-label="Hero Slider">
-      <div id="slider" class="fade-slider" data-autoplay="true">
-        <div class="slides" id="sliderSlides"></div>
-        <div class="dots" id="sliderDots"></div>
-      </div>
-    </section>
+  <!-- HERO ROTANTE -->
+  <section class="artists-hero">
+    <div class="rotating-banner">
+      <div class="rotating-text" id="rotatingText">ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS •</div>
+    </div>
+  </section>
 
-    <!-- OUR GOAL -->
-    <section id="goal" class="section-goal">
-      <div class="container">
-        <h2 class="section-title">OUR GOAL</h2>
-        <p>Para personas con ambición creativa, no hay nada peor que mirar atrás y pensar “¿qué hubiera pasado si...?”. En To The Moon trabajamos codo a codo con artistas y partners para desbloquear su máximo potencial y construir carreras auténticas, sostenibles y expansibles. Nuestro enfoque holístico garantiza que siempre miremos hacia adelante, con propósito y claridad.</p>
-      </div>
-    </section>
-
-    <!-- STUDIO -->
-    <section id="studio" class="section">
-      <div class="container">
-        <h2 class="section-title">Studio</h2>
-        <p>Espacio creativo y sala de producción musical en Buenos Aires. Diseñado para la evolución técnica y artística.</p>
-      </div>
-    </section>
-
-    <!-- PARTNERS -->
-    <section id="partners" class="section section-muted">
-      <div class="container">
-        <h2 class="section-title">Partners</h2>
-        <p>Próximamente partners estratégicos de To The Moon.</p>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section section-contact">
-      <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <p>Escribinos para consultas de representación o colaboraciones.</p>
-        <form id="contactForm" class="contact-form">
-          <div class="grid two">
-            <input type="text" name="name" placeholder="Nombre completo" required>
-            <input type="email" name="email" placeholder="Email" required>
-          </div>
-          <textarea name="message" rows="5" placeholder="Tu mensaje" required></textarea>
-          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-        </form>
-        <p id="formMessage" class="form-message"></p>
-      </div>
-    </section>
+  <!-- SECCIÓN DE ARTISTAS -->
+  <main class="artists-section">
+    <div class="container">
+      <h2 class="section-title">Our Artists</h2>
+      <div id="artistsList" class="artists-list"></div>
+    </div>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> To The Moon Management</p>
-    </div>
+    <p>© <span id="year"></span> To The Moon Management</p>
   </footer>
 
-  <script src="script.js" defer></script>
-  <script src="slider.js" defer></script>
 </body>
 </html>
