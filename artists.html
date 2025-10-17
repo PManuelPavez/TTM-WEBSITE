@@ -1,14 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
   <title>Artists — To The Moon Management</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
   <script defer src="artists.js"></script>
 </head>
 <body>
-
   <header class="site-header">
     <div class="brandbar">
       <a href="index.html" class="brand">TTM</a>
@@ -23,24 +22,27 @@
     </nav>
   </header>
 
-  <!-- HERO ROTANTE -->
-  <section class="artists-hero">
+  <!-- HERO FULL-BLEED con texto per-letter -->
+  <section class="artists-hero full-bleed-hero" aria-label="Artists hero">
     <div class="rotating-banner">
-      <div class="rotating-text" id="rotatingText">ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS •</div>
+      <div id="rotatingText" class="rotating-text" aria-hidden="true">
+        <!-- JS llenará las letras -->
+      </div>
     </div>
   </section>
 
-  <!-- SECCIÓN DE ARTISTAS -->
+  <!-- LISTA VERTICAL DE ARTISTAS (foto arriba, box azul) -->
   <main class="artists-section">
     <div class="container">
       <h2 class="section-title">Our Artists</h2>
-      <div id="artistsList" class="artists-list"></div>
+      <div id="artistsList" class="artists-list" aria-live="polite"></div>
     </div>
   </main>
 
   <footer class="site-footer">
-    <p>© <span id="year"></span> To The Moon Management</p>
+    <div class="container">
+      <p>© <span id="year"></span> To The Moon Management</p>
+    </div>
   </footer>
-
 </body>
 </html>
