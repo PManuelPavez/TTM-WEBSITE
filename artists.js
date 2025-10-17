@@ -1,100 +1,104 @@
-// artists.js — genera la lista horizontal de artistas
-(function(){
-  const data = [
+// artists.js
+document.addEventListener("DOMContentLoaded", () => {
+  const textElement = document.getElementById("rotatingText");
+  const text = textElement.textContent;
+  textElement.innerHTML = "";
+
+  // Separar letras para rotar individualmente
+  [...text].forEach((char, i) => {
+    const span = document.createElement("span");
+    span.textContent = char;
+    span.style.animationDelay = `${i * 0.1}s`;
+    textElement.appendChild(span);
+  });
+
+  // Año dinámico en footer
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+
+  // ARTISTAS DATA
+  const artists = [
     {
-      id: "a1",
-      name: "Luna Soler",
-      role: "Cantautora / Productora",
-      photo: "assets/artists/luna_soler.jpg",
-      bio: "Luna crea canciones con un pulso íntimo y potente; su trabajo combina electrónica y folk en paisajes sonoros emotivos.",
-      links: { ig: "https://instagram.com/luna", mail: "luna@tothemoon.example" }
+      name: "Servando",
+      bio: "DJ y productor argentino con presencia global en la música electrónica. Su sonido sofisticado y adaptable lo ha llevado a escenarios internacionales y a ser apoyado por referentes como Hernán Cattáneo y Budakid.",
+      photo: "assets/artists/servando.jpg",
+      links: {
+        instagram: "https://www.instagram.com/servandomusic",
+        soundcloud: "https://soundcloud.com/servando_music",
+        youtube: "https://www.youtube.com/@servandomusic",
+        presskit: "https://servando.dj-presskit.com/"
+      }
     },
     {
-      id: "a2",
-      name: "Marco Vega",
-      role: "DJ / Productor",
-      photo: "assets/artists/marco_vega.jpg",
-      bio: "DJ y curador de sets nocturnos con una sensibilidad sonora que mezcla house, techno y grooves latinos.",
-      links: { ig: "https://instagram.com/marcovega", mail: "booking@marco.example", tel:"+5491144455566" }
+      name: "Luciano Bedini",
+      bio: "DJ y productor de Pergamino, Buenos Aires. Fusiona progressive house, dub techno y deep house en paisajes sonoros melódicos y emocionales. Ha editado en sellos como Sound Avenue y Future Avenue.",
+      photo: "assets/artists/luciano_bedini.jpg",
+      links: {
+        instagram: "https://www.instagram.com/luciaanobedini",
+        soundcloud: "https://soundcloud.com/luciano-bedini",
+        presskit: "https://lucianobedini.dj-presskit.com/"
+      }
     },
     {
-      id: "a3",
-      name: "Sofía Rojas",
-      role: "Multi-instrumentista",
-      photo: "assets/artists/sofia_rojas.jpg",
-      bio: "Sofía aporta arreglos orquestales y texturas acústicas; su enfoque conecta lo clásico con lo contemporáneo.",
-      links: { ig: "https://instagram.com/sofiarojas", mail: "sofia@tothemoon.example" }
+      name: "Manu Pavez",
+      bio: "DJ y productor argentino con visión moderna del progressive house. Crea experiencias emocionales únicas en la pista, con técnica y sensibilidad.",
+      photo: "assets/artists/manu_pavez.jpg",
+      links: {
+        instagram: "https://www.instagram.com/manupavez_",
+        soundcloud: "https://soundcloud.com/manupavez",
+        youtube: "https://www.youtube.com/@manupavez",
+        presskit: "https://drive.google.com/drive/folders/1VfZLoKmZqqgi8qIFOhhOrmd6fvLi9fsQ"
+      }
+    },
+    {
+      name: "Fideksen",
+      bio: "DJ y productor argentino que combina elegancia, groove y una fuerte identidad melódica. Fundador del sello La Casadiscografica, referente de nuevos talentos.",
+      photo: "assets/artists/fideksen.jpg",
+      links: {
+        instagram: "https://www.instagram.com/fideksen",
+        soundcloud: "https://soundcloud.com/fideksensound"
+      }
+    },
+    {
+      name: "Kentavros",
+      bio: "DJ argentino oriundo de 9 de Julio. Su estilo progresivo construye atmósferas inmersivas con una profunda conexión emocional con el público.",
+      photo: "assets/artists/kentavros.jpg",
+      links: {
+        instagram: "https://www.instagram.com/kentavros_music",
+        soundcloud: "https://soundcloud.com/kentavros_music",
+        youtube: "https://www.youtube.com/channel/UCWkeiQKMZn4GmnZ30VPgiqQ",
+        presskit: "https://drive.google.com/file/d/1yV-sDy5wIHp6HhAR5YLrfATwbSPgPHDG/view"
+      }
+    },
+    {
+      name: "p37ro",
+      bio: "DJ y productor argentino con identidad marcada por el progressive. Su música combina atmósferas hipnóticas y grooves envolventes, avalada por Hernán Cattáneo y otros referentes.",
+      photo: "assets/artists/p37ro.jpg",
+      links: {
+        instagram: "https://www.instagram.com/p37r0.fragueiro",
+        soundcloud: "https://soundcloud.com/user-560556342"
+      }
     }
   ];
 
-  const strip = document.getElementById('artistsStrip');
-  if (!strip) return;
+  const list = document.getElementById("artistsList");
 
-  function createIconBtn(type, href, label){
-    if (!href) return '';
-    const svg = {
-      ig: '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10z" fill="currentColor"/></svg>',
-      mail: '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v.5l-10 6-10-6V6zM2 9.2V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9.2l-9.4 5.6a2 2 0 0 1-2.2 0L2 9.2z" fill="currentColor"/></svg>',
-      tel: '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.6 11.6 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 7a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.6 11.6 0 0 0 .6 3.6 1 1 0 0 1-.25 1l-2.25 2.2z" fill="currentColor"/></svg>'
-    }[type] || '';
-    const a = document.createElement(type === 'mail' ? 'a' : 'a');
-    a.className = 'icon-btn';
-    a.href = (type === 'mail') ? `mailto:${href}` : (type === 'tel' ? `tel:${href}` : href);
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    a.title = label;
-    a.innerHTML = svg;
-    return a;
-  }
-
-  // render cards
-  strip.innerHTML = '';
-  data.forEach((p, idx) => {
-    const card = document.createElement('article');
-    card.className = 'artist-card';
-    card.tabIndex = 0;
-    card.setAttribute('role','listitem');
+  artists.forEach(artist => {
+    const card = document.createElement("div");
+    card.classList.add("artist-card");
     card.innerHTML = `
-      <div class="artist-photo" style="background-image:url('${p.photo}')" role="img" aria-label="${p.name}"></div>
-      <div class="artist-body">
-        <h3 class="artist-name">${p.name}</h3>
-        <p class="artist-role">${p.role}</p>
-        <p class="artist-bio">${p.bio}</p>
-        <div class="artist-actions"></div>
+      <div class="artist-photo" style="background-image:url('${artist.photo}')"></div>
+      <div class="artist-content">
+        <h3>${artist.name}</h3>
+        <p>${artist.bio}</p>
+        <div class="artist-links">
+          ${artist.links.instagram ? `<a href="${artist.links.instagram}" target="_blank">Instagram</a>` : ""}
+          ${artist.links.soundcloud ? `<a href="${artist.links.soundcloud}" target="_blank">SoundCloud</a>` : ""}
+          ${artist.links.youtube ? `<a href="${artist.links.youtube}" target="_blank">YouTube</a>` : ""}
+          ${artist.links.presskit ? `<a href="${artist.links.presskit}" target="_blank">Presskit</a>` : ""}
+        </div>
       </div>
     `;
-    // append action icons
-    const actions = card.querySelector('.artist-actions');
-    if (p.links?.ig) actions.appendChild(createIconBtn('ig', p.links.ig, `Instagram de ${p.name}`));
-    if (p.links?.mail) actions.appendChild(createIconBtn('mail', p.links.mail, `Email a ${p.name}`));
-    if (p.links?.tel)  actions.appendChild(createIconBtn('tel', p.links.tel, `Llamar a ${p.name}`));
-
-    strip.appendChild(card);
+    list.appendChild(card);
   });
-
-  // keyboard: left/right to navigate through cards when focus is on strip
-  strip.addEventListener('keydown', (e) => {
-    const focused = document.activeElement;
-    if (!focused || !strip.contains(focused)) return;
-    if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      const next = focused.nextElementSibling || strip.firstElementChild;
-      next?.focus();
-      next?.scrollIntoView({behavior:'smooth', inline:'center'});
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      const prev = focused.previousElementSibling || strip.lastElementChild;
-      prev?.focus();
-      prev?.scrollIntoView({behavior:'smooth', inline:'center'});
-    }
-  });
-
-  // optional: auto-center first card on load
-  window.addEventListener('load', () => {
-    const first = strip.querySelector('.artist-card');
-    first?.scrollIntoView({behavior:'smooth', inline:'center'});
-    // set year
-    const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
-  });
-})();
+});
