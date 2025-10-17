@@ -741,3 +741,123 @@ img{max-width:100%;height:auto;display:block}
 
 /* accessible focus for cards */
 .artist-card:focus { outline: 3px solid rgba(106,168,255,0.18); outline-offset:4px; }
+/* ===== ARTISTS PAGE ===== */
+
+/* HERO full width */
+.artists-hero {
+  background: linear-gradient(180deg, #000 0%, #06142b 100%);
+  color: #fff;
+  overflow: hidden;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.rotating-banner {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rotating-text {
+  display: inline-block;
+  font-size: clamp(36px, 8vw, 96px);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #e6e9ff;
+  animation: slideLetters 10s linear infinite;
+}
+
+@keyframes slideLetters {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Cada letra girando */
+.rotating-text span {
+  display: inline-block;
+  animation: letterSpin 2.5s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes letterSpin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+/* Alterna tiempos entre letras */
+.rotating-text span:nth-child(odd) {
+  animation-delay: 0.2s;
+}
+.rotating-text span:nth-child(even) {
+  animation-delay: 0.4s;
+}
+
+/* ===== ARTISTS VERTICAL LIST ===== */
+
+.artists-section {
+  background: #0b1633;
+  padding: 60px 20px;
+  color: #fff;
+}
+
+.artists-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.artist-card {
+  background: linear-gradient(180deg, #0d2650 0%, #102b63 100%);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.artist-card:hover {
+  transform: translateY(-6px);
+}
+
+.artist-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.artist-content {
+  flex: 1;
+}
+
+.artist-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.artist-content p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.artist-links {
+  margin-top: 12px;
+}
+
+.artist-links a {
+  color: #cddcff;
+  text-decoration: none;
+  margin-right: 14px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+.artist-links a:hover {
+  color: #fff;
+}
