@@ -1,4 +1,4 @@
-No quiero que cambies mi css solo que lo mejores. :root{
+:root{
   --blue:#1f2f5b;     --blue-2:#24386a;
   --ink:#10131a;      --fg:#e8edf6;
   --muted:#6b7796;    --line:#cfd7ea;
@@ -332,7 +332,7 @@ img{max-width:100%;height:auto;display:block}
   .services-wrapper{gap:18px}
 }
 
-})();
+();
 /* ===== HERO SLIDER - local images + fade/zoom/text ===== */
 .fade-slider {
   position: relative;
