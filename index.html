@@ -3,43 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artists — To The Moon Management</title>
+  <meta name="description" content="To The Moon Management — Artist Management & Creative Development.">
+  <title>To The Moon Management</title>
   <link rel="stylesheet" href="styles.css">
-  <script defer src="artists.js"></script>
+  <script defer src="main.js"></script>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="site-header">
     <div class="brandbar">
-      <a href="index.html" class="brand">TTM</a>
+      <a href="index.html" class="brand">
+        <img src="assets/logo-ttm.svg" alt="To The Moon Management" class="logo">
+      </a>
     </div>
     <nav class="tabsbar">
       <ul class="nav-tabs">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="artists.html">Artists</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="team.html">Team</a></li>
-        <li><a href="artists.html" aria-current="page">Artists</a></li>
+        <li><a href="#studio">Studio</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
+      <button class="menu-toggle" aria-label="Abrir menú">☰</button>
     </nav>
   </header>
 
-  <!-- HERO ROTANTE -->
-  <section class="artists-hero">
-    <div class="rotating-banner">
-      <div class="rotating-text" id="rotatingText">ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS •</div>
+  <!-- HERO / SLIDER -->
+  <section class="hero">
+    <div class="hero-slider">
+      <div class="slide" style="background-image: url('assets/slider/slide1.jpg');">
+        <div class="overlay">
+          <h1>Unlock Potential.</h1>
+          <p>Artist management with a holistic vision.</p>
+          <a href="artists.html" class="btn-primary">Discover Artists</a>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('assets/slider/slide2.jpg');">
+        <div class="overlay">
+          <h1>Creative Development</h1>
+          <p>We connect purpose, music and growth.</p>
+          <a href="services.html" class="btn-primary">Our Services</a>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('assets/slider/slide3.jpg');">
+        <div class="overlay">
+          <h1>To The Moon Management</h1>
+          <p>Empowering artists worldwide.</p>
+          <a href="#contact" class="btn-primary">Contact Us</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- SECCIÓN DE ARTISTAS -->
-  <main class="artists-section">
+  <!-- OUR GOAL -->
+  <section class="goal">
     <div class="container">
-      <h2 class="section-title">Our Artists</h2>
-      <div id="artistsList" class="artists-list"></div>
+      <h2>Our Goal</h2>
+      <p>
+        To The Moon Management acompaña a artistas en su desarrollo integral, combinando estrategia, identidad y bienestar. 
+        Creemos en el crecimiento sostenible y auténtico, potenciando cada aspecto de su carrera dentro y fuera del escenario.
+      </p>
     </div>
-  </main>
+  </section>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
-    <p>© <span id="year"></span> To The Moon Management</p>
+    <div class="container">
+      <p>© <span id="year"></span> To The Moon Management — All rights reserved.</p>
+    </div>
   </footer>
 
 </body>
