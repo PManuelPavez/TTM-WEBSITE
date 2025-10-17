@@ -1,63 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>TTM — Artists</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Roster de artistas — To The Moon Management" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artists — To The Moon Management</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="artists.js"></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="brandbar">
-      <div class="container brandbar-inner">
-        <a href="index.html" class="brand" aria-label="TTM Home">
-          <span class="brand-word">TTM</span>
-          <span class="brand-sub">TO THE MOON MANAGEMENT</span>
-        </a>
-      </div>
+      <a href="index.html" class="brand">TTM</a>
     </div>
-
-    <nav class="tabsbar" aria-label="Principal">
-      <div class="container tabsbar-inner">
-        <ul class="nav-tabs">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="artists.html" aria-current="page">Artists</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="team.html">Team</a></li>
-          <li><a href="index.html#studio">Studio</a></li>
-          <li><a href="index.html#partners">Partners</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-      </div>
+    <nav class="tabsbar">
+      <ul class="nav-tabs">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="artists.html" aria-current="page">Artists</a></li>
+      </ul>
     </nav>
   </header>
 
-  <main id="main">
-    <!-- Banner con texto giratorio -->
-    <section class="artists-hero" role="region" aria-label="Artists hero">
-      <div class="artists-hero-inner container">
-        <div class="rotor" aria-hidden="true">
-          <span class="rotor-text">ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS •</span>
-        </div>
-      </div>
-    </section>
+  <!-- HERO ROTANTE -->
+  <section class="artists-hero">
+    <div class="rotating-banner">
+      <div class="rotating-text" id="rotatingText">ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS • ARTISTS •</div>
+    </div>
+  </section>
 
-    <!-- Grid horizontal de mini-bios -->
-    <section class="artists-section">
-      <div class="container">
-        <h2 class="section-title">Artists</h2>
-        <div id="artistsStrip" class="artists-strip" role="list" aria-label="Lista de artistas"></div>
-      </div>
-    </section>
+  <!-- SECCIÓN DE ARTISTAS -->
+  <main class="artists-section">
+    <div class="container">
+      <h2 class="section-title">Our Artists</h2>
+      <div id="artistsList" class="artists-list"></div>
+    </div>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p class="small muted">© <span id="year"></span> To The Moon Management</p>
-    </div>
+    <p>© <span id="year"></span> To The Moon Management</p>
   </footer>
 
-  <script src="artists.js" defer></script>
 </body>
 </html>
