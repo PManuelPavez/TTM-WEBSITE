@@ -1,128 +1,206 @@
-// artists.js — monta banner per-letter + tarjetas verticales
-document.addEventListener('DOMContentLoaded', () => {
-  // ---------- Banner per-letter ----------
-  const bannerEl = document.getElementById('rotatingText');
-  const baseWord = 'ARTISTS';
-  const repeats = 6;             // cuántas repeticiones para poder achicar fuente
-  const letterDelay = 0.08;      // segundos entre letras (stagger)
-  const animDuration = 2.4;      // segundos (coincidir con CSS)
+// artists.js — improved: continuous marquee with speed control, compact single-text cards,
+// lazy batch loading, expand/collapse toggles (no inner white boxes)
 
-  if (bannerEl) {
-    const full = Array.from({length: repeats}, () => baseWord).join(' • ');
-    bannerEl.innerHTML = ''; // clear
+(() => {
+  'use strict';
 
-    Array.from(full).forEach((char, idx) => {
-      const span = document.createElement('span');
-      span.textContent = char;
-      // spaces keep width but no strong animation
-      if (char === ' ') {
-        span.style.display = 'inline-block';
-        span.style.width = '0.35em';
-        span.style.opacity = '1';
-      }
-      // set inline animation timing to create moving wave A -> R -> T ...
-      span.style.animationDelay = `${(idx * letterDelay).toFixed(3)}s`;
-      span.style.animationDuration = `${animDuration}s`;
-      bannerEl.appendChild(span);
-    });
-
-    // optional: duplicate content to simulate horizontal scroll if you enable .repeat-scroll class in CSS
-    // bannerEl.classList.add('repeat-scroll');
-  }
-
-  // ----- Year -----
-  const y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear();
-
-  // ---------- Artists data (vertical cards) ----------
-  // Revisa y reemplaza las rutas de photo por las imágenes reales dentro assets/artists/
-  const artists = [
-    {
-      name: "Servando",
-      photo: "assets/artists/servando.jpg",
-      bio: `Servando es un DJ y productor argentino en ascenso dentro de la escena global de la música electrónica. Su enfoque sofisticado y versátil le permite moverse entre los géneros...`,
-      links: {
-        instagram: "https://www.instagram.com/servandomusic?igsh=aWd6OHVyMmxzbGg2",
-        soundcloud: "https://soundcloud.com/servando_music",
-        youtube: "https://www.youtube.com/@servandomusic",
-        presskit: "https://servando.dj-presskit.com/"
-      }
-    },
-    {
-      name: "Luciano Bedini",
-      photo: "assets/artists/luciano_bedini.jpg",
-      bio: `Luciano Bedini es DJ y productor...`,
-      links: {
-        instagram: "https://www.instagram.com/luciaanobedini",
-        soundcloud: "https://soundcloud.com/luciano-bedini",
-        presskit: "https://lucianobedini.dj-presskit.com/"
-      }
-    },
-    {
-      name: "Manu Pavez",
-      photo: "assets/artists/manu_pavez.jpg",
-      bio: `Manu Pavez es DJ y productor con una visión moderna...`,
-      links: {
-        instagram: "https://www.instagram.com/manupavez_",
-        soundcloud: "https://soundcloud.com/manupavez",
-        youtube: "https://www.youtube.com/@manupavez",
-        presskit: "https://drive.google.com/..."
-      }
-    },
-    {
-      name: "Fideksen",
-      photo: "assets/artists/fideksen.jpg",
-      bio: `Fideksen es un DJ y productor argentino con un sonido que combina elegancia y groove...`,
-      links: {
-        instagram: "https://www.instagram.com/fideksen",
-        soundcloud: "https://soundcloud.com/fideksensound"
-      }
-    },
-    {
-      name: "Kentavros",
-      photo: "assets/artists/kentavros.jpg",
-      bio: `Kentavros (Sebastián Mansilla) trabaja dentro del progressive y melodic house...`,
-      links: {
-        instagram: "https://www.instagram.com/kentavros_music",
-        soundcloud: "https://soundcloud.com/kentavros_music",
-        youtube: "https://www.youtube.com/..."
-      }
-    },
-    {
-      name: "p37ro",
-      photo: "assets/artists/p37ro.jpg",
-      bio: `p37ro es un DJ y productor argentino con identidad marcada por el progressive...`,
-      links: {
-        instagram: "https://www.instagram.com/p37r0.fragueiro",
-        soundcloud: "https://soundcloud.com/user-560556342"
-      }
-    }
+  /* ---------- DATA (usa tus datos reales o extiende) ---------- */
+  const ARTISTS = [
+    { name:"Servando", role:"DJ / Producer", photo:"assets/artists/servando.jpg",
+      text: `Servando es un DJ y productor argentino en ascenso dentro de la escena global de la música electrónica. Ha compartido cabina con figuras como Ezequiel Arias, Budakid y Hernán Cattáneo; sus producciones se han editado en sellos relevantes y su proyección internacional sigue en crecimiento.` },
+    { name:"Luciano Bedini", role:"DJ / Producer", photo:"assets/artists/luciano_bedini.jpg",
+      text: `Luciano fusiona progressive house, dub techno y deep house creando paisajes melódicos e hipnóticos. Su música ha sido editada por sellos como Sound Avenue y Future Avenue.` },
+    { name:"Manu Pavez", role:"DJ / Producer", photo:"assets/artists/manu_pavez.jpg",
+      text: `Manu transforma cada set en un viaje emocional. Con múltiples lanzamientos, su enfoque combina técnica y sensibilidad.` },
+    { name:"Fideksen", role:"DJ / Producer", photo:"assets/artists/fideksen.jpg",
+      text: `Fideksen aporta elegancia melódica y groove. Fundador de La Casadiscografica, impulsa nuevos talentos con visión artística.` },
+    { name:"Kentavros", role:"DJ", photo:"assets/artists/kentavros.jpg",
+      text: `Kentavros desarrolla atmósferas inmersivas dentro del progressive y melodic house, conectando emocionalmente con el público.` },
+    { name:"p37ro", role:"DJ / Producer", photo:"assets/artists/p37ro.jpg",
+      text: `p37ro combina técnica y sensibilidad en sus producciones progressive apoyadas por referentes de la escena.` }
   ];
 
-  const listEl = document.getElementById('artistsList');
-  if (!listEl) return;
+  /* ---------- UTILS ---------- */
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
-  // simple HTML escape
-  const esc = (s) => (s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : '');
+  /* ---------- MARQUEE (continuous) ---------- */
+  function initMarquee() {
+    const marquee = $('#artistsMarquee');
+    if (!marquee) return;
 
-  listEl.innerHTML = '';
-  artists.forEach(art => {
-    const card = document.createElement('article');
-    card.className = 'artist-card';
-    // card inner HTML (photo on top, content below)
-    card.innerHTML = `
-      <div class="artist-photo" role="img" aria-label="${esc(art.name)}" style="background-image:url('${esc(art.photo)}')"></div>
-      <div class="artist-content">
-        <h3>${esc(art.name)}</h3>
-        <p>${esc(art.bio)}</p>
-        <div class="artist-links">
-          ${art.links?.instagram ? `<a href="${esc(art.links.instagram)}" target="_blank" rel="noopener noreferrer">Instagram</a>` : ''}
-          ${art.links?.soundcloud ? `<a href="${esc(art.links.soundcloud)}" target="_blank" rel="noopener noreferrer">SoundCloud</a>` : ''}
-          ${art.links?.youtube ? `<a href="${esc(art.links.youtube)}" target="_blank" rel="noopener noreferrer">YouTube</a>` : ''}
-          ${art.links?.presskit ? `<a href="${esc(art.links.presskit)}" target="_blank" rel="noopener noreferrer">Presskit</a>` : ''}
+    // build initial items (text repeated). Use more repeats to fill wide screens.
+    const base = 'ARTISTS';
+    const repeatCount = 16;
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < repeatCount; i++) {
+      const sp = document.createElement('span');
+      sp.className = 'marq-item';
+      sp.textContent = base;
+      fragment.appendChild(sp);
+    }
+    // append two copies for seamless
+    marquee.appendChild(fragment.cloneNode(true));
+    marquee.appendChild(fragment.cloneNode(true));
+
+    // determine speed: allow data attribute on marquee element data-speed (px/sec) or default 120
+    const pxPerSec = parseFloat(marquee.datasetSpeed || marquee.dataset?.speed) || 120;
+
+    // compute duration based on total width (two copies)
+    requestAnimationFrame(() => {
+      const totalW = marquee.scrollWidth;
+      // duration seconds = width(px) / pxPerSec (but we want translateX -50% (one copy))
+      const oneCopyWidth = totalW / 2;
+      const durationSec = clamp(oneCopyWidth / pxPerSec, 8, 180); // clamp to avoid extreme durations
+      marquee.style.animationDuration = `${durationSec}s`;
+      // set running class to start CSS animation
+      marquee.classList.add('running');
+    });
+  }
+
+  /* ---------- TITLE underline ---------- */
+  function animateTitle() {
+    const t = $('.artists-title');
+    if (!t) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    requestAnimationFrame(() => setTimeout(() => t.classList.add('underlined'), 120));
+  }
+
+  /* ---------- CARDS: lazy load in batches, single-text, expand/collapse ---------- */
+  const BATCH = 2;
+  let idx = 0;
+  const listRoot = $('#artistsList');
+  const sentinel = $('#loadMoreSentinel');
+
+  function makeCard(d) {
+    const art = document.createElement('article');
+    art.className = 'artist-card';
+    art.tabIndex = 0;
+
+    art.innerHTML = `
+      <div class="artist-left" data-src="${escapeHtml(d.photo)}"></div>
+      <div class="artist-right">
+        <div class="artist-row">
+          <div class="title">
+            <span>${escapeHtml(d.name)}</span>
+            <small>${escapeHtml(d.role)}</small>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="artist-socials" aria-hidden="false">
+              <a href="#" class="artist-ig" title="Instagram">IG</a>
+              <a href="#" class="artist-sc" title="SoundCloud">SC</a>
+            </div>
+            <div class="expand-area">
+              <button class="expand-btn" aria-expanded="false" aria-label="Expandir biografía">
+                <span class="arrow">▾</span>
+              </button>
+            </div>
+          </div>
         </div>
+
+        <p class="artist-bio">${escapeHtml(d.text)}</p>
+        <!-- no inner white box; extra content is the same text shown fully when expanded -->
       </div>
     `;
-    listEl.appendChild(card);
+
+    const left = art.querySelector('.artist-left');
+    const imgSrc = left.dataset.src;
+    // image lazy set on insert (handled in loader)
+
+    // expand logic
+    const btn = art.querySelector('.expand-btn');
+    btn.addEventListener('click', () => toggle(art, btn));
+
+    // keyboard shortcut
+    art.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+    });
+
+    return art;
+  }
+
+  function escapeHtml(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function loadBatch() {
+    if (!listRoot) return;
+    const stop = Math.min(idx + BATCH, ARTISTS.length);
+    for (; idx < stop; idx++) {
+      const data = ARTISTS[idx];
+      // placeholder for shimmer effect
+      const ph = document.createElement('div'); ph.className = 'artist-placeholder';
+      listRoot.appendChild(ph);
+
+      // replace in next paint to keep UI responsive
+      (function(p, d) {
+        requestAnimationFrame(() => {
+          const card = makeCard(d);
+          listRoot.replaceChild(card, p);
+          // lazy-load background image
+          const left = card.querySelector('.artist-left');
+          const src = left.getAttribute('data-src');
+          if (src) {
+            const img = new Image();
+            img.onload = () => left.style.backgroundImage = `url('${src}')`;
+            img.src = src;
+          }
+        });
+      })(ph, data);
+    }
+
+    // disconnect when done
+    if (idx >= ARTISTS.length && sentinelObserver) { sentinelObserver.disconnect(); sentinel.style.display = 'none'; }
+  }
+
+  let sentinelObserver = null;
+  function initLazy() {
+    // load first batch immediately for perceived speed
+    loadBatch();
+    if ('IntersectionObserver' in window && sentinel) {
+      sentinelObserver = new IntersectionObserver((entries) => {
+        entries.forEach(en => { if (en.isIntersecting) loadBatch(); });
+      }, { root: null, rootMargin: '300px', threshold: 0.1 });
+      sentinelObserver.observe(sentinel);
+    } else {
+      while (idx < ARTISTS.length) loadBatch();
+    }
+  }
+
+  // toggle expand/collapse
+  function toggle(card, btn) {
+    const expanded = card.classList.toggle('expanded');
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    // scroll into view on expand (respect reduced motion)
+    if (expanded && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 220);
+    }
+  }
+
+  /* ---------- INIT on DOMContentLoaded ---------- */
+  document.addEventListener('DOMContentLoaded', () => {
+    initMarquee();
+    animateTitle();
+    initLazy();
+
+    // expose speed control: if user sets #marqueeSpeed input, update animation speed live
+    const marquee = $('#artistsMarquee');
+    if (marquee) {
+      const speedInput = document.getElementById('marqueeSpeed');
+      if (speedInput) {
+        speedInput.addEventListener('input', (e) => {
+          const pxPerSec = parseFloat(e.target.value) || 120;
+          const totalW = marquee.scrollWidth;
+          const duration = Math.max(8, (totalW / 2) / pxPerSec);
+          marquee.style.animationDuration = `${duration}s`;
+        });
+      }
+    }
+
+    // footer year
+    const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
   });
-});
+
+})();
