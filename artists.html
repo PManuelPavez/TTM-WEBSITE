@@ -5,43 +5,71 @@
   <title>Artists — To The Moon Management</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Roster de artistas — To The Moon Management" />
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="artists.js"></script>
+  <!-- Preload logo + moon image for LCP -->
+  <link rel="preload" as="image" href="assets/logo.svg">
+  <link rel="preload" as="image" href="assets/moon.png ">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="brandbar container">
-      <a href="index.html" class="brand">TTM <span class="brand-sub">TO THE MOON</span></a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="mainNav">Menu</button>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+ <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="brandbar">
+      <div class="brandbar-inner container">
+        <a href="index.html" class="brand" aria-label="To The Moon Management — Inicio">
+          <picture>
+            <source srcset="assets/logo.svg" type="image/svg+xml">
+            <img src="assets/logo.svg" alt="To The Moon Management" width="320" height="76" loading="eager" decoding="async">
+          </picture>
+          <span class="brand-sub"></span>
+        </a>
+
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
-    <nav id="mainNav" class="tabsbar container" aria-label="Main">
-      <ul class="nav-tabs">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="team.html">Team</a></li>
-        <li><a href="artists.html" aria-current="page">Artists</a></li>
-        <li><a href="#studio" data-link>Studio</a></li>
-          <li><a href="#partners" data-link>Partners</a></li>
-          <li><a href="#contact" data-link>Contact</a></li>
-      </ul>
+
+    <nav id="mainNav" class="tabsbar" aria-label="Navegación principal">
+      <div class="tabsbar-inner container">
+        <ul class="nav-tabs" role="menubar">
+          <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+          <li role="none"><a role="menuitem" href="artists.html" aria-current="page">Artists</a></li>
+          <li role="none"><a role="menuitem" href="services.html">Services</a></li>
+          <li role="none"><a role="menuitem" href="team.html">Team</a></li>
+          <li role="none"><a role="menuitem" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
     </nav>
   </header>
 
-  <!-- HERO FULL BLEED: banner per-letter -->
-  <section class="artists-hero full-bleed-hero" aria-label="Artists hero">
-    <div class="rotating-banner">
-      <div id="rotatingText" class="rotating-text" aria-hidden="true"></div>
-    </div>
-  </section>
+  <main id="main" class="container">
+    <!-- HERO: full-bleed background (moon) con overlay y marquee -->
+    <section class="artists-hero hero-with-moon" aria-label="Artists hero">
+      <div class="hero-overlay"></div>
+      <div class="marquee-wrap" role="presentation" aria-hidden="true">
+        <div class="marquee" id="artistsMarquee" data-speed="120" aria-hidden="true"></div>
+      </div>
+    </section>
 
-  <!-- ARTISTS LIST (vertical cards) -->
-  <main class="artists-section container" id="main">
-    <h2 class="section-title">Our Artists</h2>
-    <div id="artistsList" class="artists-list" aria-live="polite"></div>
+    <!-- ARTISTS LIST (lazy) -->
+    <section class="artists-section" aria-label="Roster">
+      <div id="artistsList" class="artists-list" aria-live="polite"></div>
+      <div id="loadMoreSentinel" class="load-sentinel" aria-hidden="true"></div>
+    </section>
   </main>
 
-  <footer class="site-footer container">
-    <p>© <span id="year"></span> To The Moon Management</p>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>© <span id="year"></span> To The Moon Management</div>
+    </div>
   </footer>
+
+  <!-- scripts -->
+  <script src="script.js" defer></script>
+  <script src="artists.js" defer></script>
 </body>
 </html>
