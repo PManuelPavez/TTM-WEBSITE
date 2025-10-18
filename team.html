@@ -1,52 +1,72 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>TTM — Team</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <title>Team — To The Moon Management</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Equipo — To The Moon Management" />
+  <link rel="preload" as="image" href="assets/logo.svg">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+ <!-- Header -->
+  <header class="site-header" role="banner">
     <div class="brandbar">
-      <div class="container brandbar-inner">
-        <a href="index.html#home" class="brand"><span class="brand-word">TTM</span><span class="brand-sub">TO THE MOON MANAGEMENT</span></a>
+      <div class="brandbar-inner container">
+        <a href="index.html" class="brand" aria-label="To The Moon Management — Inicio">
+          <picture>
+            <source srcset="assets/logo.svg" type="image/svg+xml">
+            <img src="assets/logo.svg" alt="To The Moon Management" width="320" height="76" loading="eager" decoding="async">
+          </picture>
+          <span class="brand-sub"></span>
+        </a>
+
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
-    <div class="tabsbar">
-      <div class="container tabsbar-inner">
-        <ul id="navTabs" class="nav-tabs">
-          <li><a href="index.html#home">Home</a></li>
-          <li><a href="artists.html">Artists</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="team.html" aria-current="page">Team</a></li>
-          <li><a href="index.html#studio">Studio</a></li>
-          <li><a href="index.html#partners">Partners</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+
+    <nav id="mainNav" class="tabsbar" aria-label="Navegación principal">
+      <div class="tabsbar-inner container">
+        <ul class="nav-tabs" role="menubar">
+          <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+          <li role="none"><a role="menuitem" href="artists.html">Artists</a></li>
+          <li role="none"><a role="menuitem" href="services.html">Services</a></li>
+          <li role="none"><a role="menuitem" href="team.html" aria-current="page">Team</a></li>
+          <li role="none"><a role="menuitem" href="contact.html">Contact</a></li>
         </ul>
       </div>
-    </div>
+    </nav>
   </header>
 
-  <main>
+  <main id="main" class="container">
+    <main>
     <section class="section">
       <div class="container">
         <header class="section-head">
           <h1 class="section-title">TEAM</h1>
+           <p class="prose">El equipo de To The Moon: gestión, nutrición y producción visual.</p>
         </header>
         <div id="teamGrid" class="grid cards"></div>
       </div>
     </section>
   </main>
-
-  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+ <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <p class="small muted">© <span id="year"></span> To The Moon Management</p>
+      <div>© <span id="year"></span> To The Moon Management</div>
     </div>
   </footer>
 
+  <!-- scripts -->
+  <script src="script.js" defer></script>
   <script src="team.js" defer></script>
 </body>
 </html>
+
