@@ -332,7 +332,6 @@ img{max-width:100%;height:auto;display:block}
   .services-wrapper{gap:18px}
 }
 
-();
 /* ===== HERO SLIDER - local images + fade/zoom/text ===== */
 .fade-slider {
   position: relative;
@@ -861,3 +860,283 @@ img{max-width:100%;height:auto;display:block}
 .artist-links a:hover {
   color: #fff;
 }
+
+/* ===== Fix: centro del brand/header consistente en todas las páginas ===== */
+.brandbar-inner, .brandbar {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+/* si tu header usa .container dentro de brandbar, asegurar centrado */
+.brandbar .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* si la página artists tiene reglas que sobrescriben, las neutralizamos aquí */
+.artists-hero ~ header .brandbar-inner,
+.artists-hero header .brandbar-inner {
+  justify-content: center !important;
+}
+/* ===========================
+   ARTISTS — improved visuals
+   - full-bleed hero (no white stripes)
+   - continuous marquee with speed control
+   - compact single-text cards (clamped) expandable
+   - nicer gradients, shadows and socials
+   =========================== */
+
+/* FULL-BLEED HERO: occupy entire viewport width (avoid container white gutters) */
+.artists-hero {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw); /* full-bleed */
+  padding: 28px 0;
+  background: linear-gradient(180deg,#000 0%, #041326 100%);
+  overflow: visible;
+  z-index: 1;
+}
+
+/* Fade edges now blend towards page background (subtle, not white) */
+.hero-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(60px, 8vw, 160px);
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-fade.left-fade {
+  left: 0;
+  background: linear-gradient(90deg, rgba(4,19,38,1) 0%, rgba(4,19,38,0) 60%);
+  opacity: 0.95;
+}
+.hero-fade.right-fade {
+  right: 0;
+  background: linear-gradient(-90deg, rgba(4,19,38,1) 0%, rgba(4,19,38,0) 60%);
+  opacity: 0.95;
+}
+
+/* MARQUEE: container centered visually but full-bleed loop */
+.marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  padding: 10px 0;
+}
+
+/* marquee element — JS duplicates content twice and toggles .running */
+.marquee {
+  display:inline-flex;
+  gap: 2.6rem;
+  white-space:nowrap;
+  align-items:center;
+  will-change: transform;
+}
+
+/* individual item */
+.marq-item {
+  display:inline-block;
+  font-weight:900;
+  color:#e6e9ff;
+  letter-spacing:.12em;
+  font-size: clamp(28px, 6.6vw, 88px);
+  text-transform:uppercase;
+  padding-inline: 0.25rem;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* when JS adds .running it uses CSS animation with computed duration */
+.marquee.running {
+  animation-name: marquee-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+}
+
+/* keyframes move -50% (we duplicate content) */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .marquee.running { animation: none !important; }
+}
+
+/* ===== Title (centered white + underline from center) ===== */
+.artists-title {
+  text-align: center;
+  color: #ffffff;
+  font-size: clamp(28px, 6vw, 52px);
+  font-weight: 900;
+  letter-spacing: .12em;
+  margin: 18px 0 12px;
+  position: relative;
+  display: inline-block;
+  padding: 6px 12px;
+}
+.artists-title::after {
+  content: "";
+  display:block;
+  height:6px;
+  width:70%;
+  background: linear-gradient(90deg, rgba(230,233,255,0.16), rgba(230,233,255,0.34));
+  transform-origin:center;
+  transform: scaleX(0);
+  transition: transform 700ms cubic-bezier(.2,.9,.2,1);
+  margin:8px auto 0;
+  border-radius: 6px;
+}
+.artists-title.underlined::after { transform: scaleX(1); }
+
+/* ===== Artists list (compact cards) ===== */
+.artists-section {
+  background: linear-gradient(180deg,#041326 0%, #021422 100%);
+  padding: 36px 20px 80px;
+  color: #fff;
+}
+.artists-list {
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  max-width: var(--container);
+  margin: 28px auto 0;
+}
+
+/* card: keep rectangular & compact; collapsed by default using clamp */
+.artist-card {
+  display:flex;
+  gap: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 16px 34px rgba(2,8,20,0.45);
+  transition: transform .22s ease, box-shadow .22s ease, background 320ms ease, max-height .48s cubic-bezier(.2,.9,.2,1);
+  background: linear-gradient(180deg, rgba(15,42,91,0.95) 0%, rgba(18,56,109,0.9) 55%, rgba(255,255,255,0.02) 100%);
+  min-height: 260px;
+  max-height: 260px; /* collapsed */
+}
+
+/* expanded state: allow more height */
+.artist-card.expanded {
+  max-height: 980px; /* enough room for full bio */
+}
+
+/* left: photo panel */
+.artist-left {
+  flex: 0 0 320px;
+  min-width: 320px;
+  height: 100%;
+  background: linear-gradient(180deg,#0b2b57,#0f3a6a);
+  background-size:cover;
+  background-position:center;
+  transition: transform .28s ease;
+}
+
+/* right: content area */
+.artist-right {
+  flex: 1 1 auto;
+  padding: 18px 20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:10px;
+}
+
+/* name row: left name, right socials + expand arrow */
+.artist-row {
+  display:flex;align-items:center;gap:12px;justify-content:space-between;width:100%;
+}
+.artist-row .title {
+  font-weight:900;font-size:1.05rem;color:#fff;
+  display:flex;flex-direction:column;gap:4px;
+}
+.artist-row .title small { font-weight:600;color:rgba(255,255,255,0.9);font-size:0.85rem; }
+
+/* socials: circular, keep color contrast */
+.artist-socials { display:flex;gap:8px;align-items:center;margin-left:18px }
+.artist-socials a {
+  width:36px;height:36px;border-radius:999px;display:inline-grid;place-items:center;
+  color:#0f2a5b;background:#fff;font-weight:700;text-decoration:none;
+  box-shadow:0 6px 18px rgba(2,8,20,0.12);
+}
+.artist-socials a:hover{transform:translateY(-3px)}
+
+/* compact single-text: collapsed uses line-clamp, expanded shows full text */
+.artist-bio {
+  color: rgba(255,255,255,0.95);
+  font-size:0.98rem;
+  line-height:1.5;
+  display:-webkit-box;
+  -webkit-line-clamp: 5; /* collapsed lines */
+  -webkit-box-orient: vertical;
+  overflow:hidden;
+  transition: -webkit-line-clamp 320ms ease;
+}
+
+/* when expanded, remove clamp so full text visible */
+.artist-card.expanded .artist-bio {
+  -webkit-line-clamp: unset;
+  overflow:visible;
+}
+
+/* expand button (V) — right aligned */
+.expand-area {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+}
+.expand-btn {
+  background:transparent;border:0;color:rgba(255,255,255,0.95);font-size:18px;cursor:pointer;
+  padding:6px 8px;border-radius:8px;display:inline-flex;align-items:center;gap:8px;
+}
+.expand-btn .arrow {
+  display:inline-block;transition:transform .28s ease;font-size:18px;
+}
+.artist-card.expanded .expand-btn .arrow { transform:rotate(180deg); }
+
+/* aesthetic accent: subtle top highlight & inner overlay gradient for readability */
+.artist-right::before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:0;
+  height:40%;
+  pointer-events:none;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+}
+
+/* placeholder shimmer during lazy insert */
+.artist-placeholder {
+  min-height:260px;border-radius:12px;background:linear-gradient(90deg,#0b2346 0%, #0d2f58 50%, #0b2346 100%);
+  animation: placeSh 1.3s linear infinite;
+}
+@keyframes placeSh {0%{filter:brightness(1)}50%{filter:brightness(1.06)}100%{filter:brightness(1)}}
+
+/* Mobile: stack, card full width, smaller left image */
+@media (max-width:880px) {
+  .artist-card { flex-direction:column; min-height:auto; max-height:none; }
+  .artist-left { width:100%; min-width:auto; height:220px; }
+  .artist-right { padding:14px; }
+  .artist-bio { -webkit-line-clamp: 6; }
+}
+
+/* ensure marquee item size decrease on small screens */
+@media (max-width:640px) {
+  .marq-item { font-size: clamp(18px, 9vw, 36px); }
+  .artists-title { font-size: clamp(20px, 8vw, 34px); }
+}
+
+/* reduced motion: disable marquee animation and smooth scrolling */
+@media (prefers-reduced-motion: reduce) {
+  .marquee.running { animation: none !important; }
+  .artist-card, .artist-bio { transition: none !important; }
+}
+
