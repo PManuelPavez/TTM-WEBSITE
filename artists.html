@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <title>Artists — To The Moon Management</title>
+  <title>ARTIST — TTM</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg" href="assets/favicon.svg">
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Roster de artistas — To The Moon Management" />
   <!-- Preload logo + moon image for LCP -->
@@ -62,11 +64,59 @@
     </section>
   </main>
 
+   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div>© <span id="year"></span> To The Moon Management</div>
+      <p>© 2025 To The Moon Management</p>
+      <div class="social">
+        <a href="https://www.instagram.com/tothemoonmanagement" target="_blank" class="soc ig" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7m10 2c1.6 0 3 1.4 3 3v10c0 1.6-1.4 3-3 3H7c-1.6 0-3-1.4-3-3V7c0-1.6 1.4-3 3-3h10M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+        </a>
+        <button class="soc mail" id="openForm" aria-label="Email">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 13.5 2 6.75V18h20V6.75L12 13.5Z"/></svg>
+        </button>
+      </div>
     </div>
   </footer>
+
+    <!-- MODAL DE CONTACTO -->
+<div class="contact-modal" id="contactModal" hidden>
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="close-modal" id="closeForm" aria-label="Cerrar formulario">&times;</button>
+    <h2>Contacto</h2>
+
+    <form id="contactForm" action="https://formspree.io/f/yourFormID" method="POST">
+      <input type="text" name="name" id="name" placeholder="Nombre" required>
+
+      <select name="subject" id="subject" required>
+        <option value="" disabled selected>Seleccioná el motivo</option>
+        <option value="Services">Services</option>
+        <option value="Booking">Booking</option>
+        <option value="General Inquiry">General Inquiry</option>
+      </select>
+
+      <div id="artistSelectContainer" hidden>
+        <select name="artist" id="artist">
+          <option value="" disabled selected>Elegí un artista</option>
+          <option value="Servando">Servando</option>
+          <option value="Luciano Bedini">Luciano Bedini</option>
+          <option value="Manu Pavez">Manu Pavez</option>
+          <option value="Fideksen">Fideksen</option>
+          <option value="Kentavros">Kentavros</option>
+          <option value="p37ro">p37ro</option>
+        </select>
+      </div>
+
+      <textarea name="message" id="message" rows="6" required placeholder="Hola TTM! Me contacto por:"></textarea>
+
+      <button type="submit" class="btn-primary">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" hidden>¡Gracias por contactarte con To The Moon! Te responderemos pronto.</div>
 
   <!-- scripts -->
   <script src="script.js" defer></script>
