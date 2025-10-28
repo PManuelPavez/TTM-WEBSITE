@@ -1,99 +1,134 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>To The Moon Management — Home</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="To The Moon Management — Management & Studio" />
-  <!-- Preload logo for LCP -->
-  <link rel="preload" as="image" href="assets/logo.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To The Moon Management</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg" href="assets/favicon.svg">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <!-- Skip link -->
-  <a class="skip-link" href="#main">Saltar al contenido</a>
 
-  <!-- Header -->
-  <header class="site-header" role="banner">
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
     <div class="brandbar">
-      <div class="brandbar-inner container">
-        <a href="index.html" class="brand" aria-label="To The Moon Management — Inicio">
-          <picture>
+      <div class="brandbar-inner">
+        <picture>
             <source srcset="assets/logo.svg" type="image/svg+xml">
             <img src="assets/logo.svg" alt="To The Moon Management" width="320" height="76" loading="eager" decoding="async">
           </picture>
-          <span class="brand-sub"></span>
+           <span class="brand-sub"></span>
         </a>
-
-        <button class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
-          <span class="bar" aria-hidden="true"></span>
-          <span class="bar" aria-hidden="true"></span>
-          <span class="bar" aria-hidden="true"></span>
-        </button>
       </div>
     </div>
 
-    <nav id="mainNav" class="tabsbar" aria-label="Navegación principal">
-      <div class="tabsbar-inner container">
-        <ul class="nav-tabs" role="menubar">
-          <li role="none"><a role="menuitem" href="index.html" aria-current="page">Home</a></li>
-          <li role="none"><a role="menuitem" href="artists.html">Artists</a></li>
-          <li role="none"><a role="menuitem" href="services.html">Services</a></li>
-          <li role="none"><a role="menuitem" href="team.html">Team</a></li>
-          <li role="none"><a role="menuitem" href="contact.html">Contact</a></li>
-        </ul>
-      </div>
+    <nav class="tabsbar">
+      <button class="nav-toggle" aria-label="Abrir menú">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <ul class="nav-tabs">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="artists.html">Artists</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
-  <!-- HERO (simple slider / fallback) -->
-  <main id="main">
-    <section class="hero">
-      <div class="fade-slider" id="heroSlider" data-autoplay="true" aria-roledescription="carousel">
-        <div class="slide ph1" role="group" aria-label="Slide 1">
-          <div class="fade-overlay">
-            <h1>To The Moon Management</h1>
-            <p>Gestión holística, estudio & desarrollo de artista.</p>
-
-          </div>
-        </div>
-
-        <div class="slide ph2" role="group" aria-label="Slide 2">
-          <div class="fade-overlay">
-            <h1>Studio & Development</h1>
-            <p>Estudio propio, producción audiovisual y entrenamiento.</p>
-          </div>
-        </div>
-
-        <div class="slide ph3" role="group" aria-label="Slide 3">
-          <div class="fade-overlay">
-            <h1>Turn ideas into impact</h1>
-            <p>Estrategia, booking y acompañamiento integral.</p>
-          </div>
-        </div>
-
-        <div class="dots" id="heroDots" aria-hidden="false"></div>
+  <!-- HERO / SLIDER -->
+  <section class="fade-slider">
+    <div class="slide active" style="background-image:url('assets/slide1.jpg')">
+      <div class="caption">
+        <h2>Unlock Potential</h2>
+        <p>Representamos artistas con propósito, visión y autenticidad.</p>
       </div>
-    </section>
-
-    <!-- OUR GOAL -->
-    <section class="section-goal">
-      <div class="container">
-        <h2>Our Goal</h2>
-        <p class="prose">Ayudar a artistas a desarrollar carreras sostenibles, auténticas y de alto impacto. Nos enfocamos en estrategia, bienestar y profesionalización con equipo propio de producción, fotografía y gestión.</p>
+    </div>
+    <div class="slide" style="background-image:url('assets/slide2.jpg')">
+      <div class="caption">
+        <h2>Music. Identity. Growth.</h2>
+        <p>Gestión integral de carrera con enfoque humano y estratégico.</p>
       </div>
-    </section>
+    </div>
+    <div class="slide" style="background-image:url('assets/slide3.jpg')">
+      <div class="caption">
+        <h2>To The Moon Management</h2>
+        <p>Donde la pasión se convierte en trayectoria.</p>
+      </div>
+    </div>
+    <div class="dots"></div>
+  </section>
 
+  <!-- SECCIONES HOME -->
+  <section class="section section-home-links">
+    <div class="container home-links">
+      <a href="artists.html" class="home-card">Artists</a>
+      <a href="services.html" class="home-card">Services</a>
+      <a href="team.html" class="home-card">Team</a>
+      <a href="contact.html" class="home-card">Contact</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div>© <span id="year"></span> To The Moon Management</div>
+      <p>© 2025 To The Moon Management</p>
       <div class="social">
-        <a class="soc" href="#" aria-label="Instagram">IG</a>
-        <a class="soc" href="#" aria-label="SoundCloud">SC</a>
+        <a href="https://www.instagram.com/tothemoonmanagement" target="_blank" class="soc ig" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7m10 2c1.6 0 3 1.4 3 3v10c0 1.6-1.4 3-3 3H7c-1.6 0-3-1.4-3-3V7c0-1.6 1.4-3 3-3h10M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+        </a>
+        <button class="soc mail" id="openForm" aria-label="Email">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 13.5 2 6.75V18h20V6.75L12 13.5Z"/></svg>
+        </button>
       </div>
     </div>
   </footer>
 
-  <script src="script.js" defer></script>
+  <!-- MODAL DE CONTACTO -->
+<div class="contact-modal" id="contactModal" hidden>
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="close-modal" id="closeForm" aria-label="Cerrar formulario">&times;</button>
+    <h2>Contacto</h2>
+
+    <form id="contactForm" action="https://formspree.io/f/yourFormID" method="POST">
+      <input type="text" name="name" id="name" placeholder="Nombre" required>
+
+      <select name="subject" id="subject" required>
+        <option value="" disabled selected>Seleccioná el motivo</option>
+        <option value="Services">Services</option>
+        <option value="Booking">Booking</option>
+        <option value="General Inquiry">General Inquiry</option>
+      </select>
+
+      <div id="artistSelectContainer" hidden>
+        <select name="artist" id="artist">
+          <option value="" disabled selected>Elegí un artista</option>
+          <option value="Servando">Servando</option>
+          <option value="Luciano Bedini">Luciano Bedini</option>
+          <option value="Manu Pavez">Manu Pavez</option>
+          <option value="Fideksen">Fideksen</option>
+          <option value="Kentavros">Kentavros</option>
+          <option value="p37ro">p37ro</option>
+        </select>
+      </div>
+
+      <textarea name="message" id="message" rows="6" required placeholder="Hola TTM! Me contacto por:"></textarea>
+
+      <button type="submit" class="btn-primary">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" hidden>¡Gracias por contactarte con To The Moon! Te responderemos pronto.</div>
+
+<script src="script.js"></script>
 </body>
 </html>
+
