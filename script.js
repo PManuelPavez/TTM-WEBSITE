@@ -91,3 +91,125 @@
   });
 
 })();
+
+// === SLIDER (sin cambios previos) ===
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.querySelector('.dots');
+let current = 0;
+
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  if (i === 0) dot.classList.add('active');
+  dot.addEventListener('click', () => showSlide(i));
+  dotsContainer.append(dot);
+});
+
+function showSlide(i) {
+  slides[current].classList.remove('active');
+  dotsContainer.children[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  dotsContainer.children[current].classList.add('active');
+}
+
+setInterval(() => {
+  const next = (current + 1) % slides.length;
+  showSlide(next);
+}, 5000);
+
+// === MENU HAMBURGUESA ===
+const navToggle = document.querySelector('.nav-toggle');
+const navTabs = document.querySelector('.nav-tabs');
+if (navToggle) {
+  navToggle.addEventListener('click', () => navTabs.classList.toggle('open'));
+}
+
+// === MODAL FORM LOGIC ===
+const modal = document.getElementById('contactModal');
+const openForm = document.getElementById('openForm');
+const closeForm = document.getElementById('closeForm');
+const overlay = document.querySelector('.modal-overlay');
+const form = document.getElementById('contactForm');
+const toast = document.getElementById('toast');
+
+const subject = document.getElementById('subject');
+const artistSelectContainer = document.getElementById('artistSelectContainer');
+const artistSelect = document.getElementById('artist');
+const message = document.getElementById('message');
+const nameInput = document.getElementById('name');
+
+function toggleModal(show) {
+  if (show) {
+    modal.hidden = false;
+    setTimeout(() => modal.classList.add('show'), 10);
+  } else {
+    modal.classList.remove('show');
+    setTimeout(() => modal.hidden = true, 300);
+  }
+}
+
+openForm?.addEventListener('click', () => toggleModal(true));
+closeForm?.addEventListener('click', () => toggleModal(false));
+overlay?.addEventListener('click', () => toggleModal(false));
+
+modal?.addEventListener('click', e => {
+  if (e.target === modal) toggleModal(false);
+});
+
+// === DYNAMIC FORM MESSAGE ===
+function updateMessage() {
+  const subj = subject.value;
+  const name = nameInput.value.trim();
+  const artist = artistSelect.value;
+  
+  let text = `Hola TTM! Me contacto por: ${subj}`;
+  
+  if (subj === 'Booking' && artist) {
+    text += `, sobre el artista ${artist}`;
+  }
+  
+  if (name) {
+    text += `. Mi nombre es ${name}.`;
+  }
+  
+  text += '\n\n';
+  message.value = text;
+}
+
+subject.addEventListener('change', () => {
+  const isBooking = subject.value === 'Booking';
+  artistSelectContainer.hidden = !isBooking;
+  updateMessage();
+});
+artistSelect.addEventListener('change', updateMessage);
+nameInput.addEventListener('input', updateMessage);
+subject.addEventListener('input', updateMessage);
+
+// === FORM SUBMIT + TOAST ===
+form?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form)
+  }).then(() => {
+    toggleModal(false);
+    showToast();
+    form.reset();
+  }).catch(() => {
+    showToast('Error al enviar, por favor intentá de nuevo.');
+  });
+});
+
+function showToast(text = '¡Gracias por contactarte con To The Moon! Te responderemos pronto.') {
+  toast.textContent = text;
+  toast.hidden = false;
+  setTimeout(() => toast.classList.add('show'), 10);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.hidden = true, 300);
+  }, 4000);
+}
+
+// === UNDERLINE ANIMATION ===
+const underline = document.querySelector('.underline-animated');
+window.addEventListener('load', () => underline?.classList.add('active'));
