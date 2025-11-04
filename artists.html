@@ -1,125 +1,114 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <title>ARTIST — TTM</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>To The Moon Management — Artists</title>
+
+  <!-- favicon / logo -->
   <!-- Favicon -->
   <link rel="icon" type="image/svg" href="assets/favicon.svg">
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Roster de artistas — To The Moon Management" />
-  <!-- Preload logo + moon image for LCP -->
-  <link rel="preload" as="image" href="assets/logo.svg">
-  <link rel="preload" as="image" href="assets/moon.png ">
-  <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
+
+  <!-- JS deferred -->
+  <script src="artists.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Saltar al contenido</a>
-
- <!-- Header -->
-  <header class="site-header" role="banner">
+  <!-- HEADER -->
+  <header class="site-header">
     <div class="brandbar">
-      <div class="brandbar-inner container">
-        <a href="index.html" class="brand" aria-label="To The Moon Management — Inicio">
-          <picture>
-            <source srcset="assets/logo.svg" type="image/svg+xml">
-            <img src="assets/logo.svg" alt="To The Moon Management" width="320" height="76" loading="eager" decoding="async">
-          </picture>
-          <span class="brand-sub"></span>
-        </a>
-
-        <button class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
-          <span class="bar" aria-hidden="true"></span>
-          <span class="bar" aria-hidden="true"></span>
-          <span class="bar" aria-hidden="true"></span>
-        </button>
-      </div>
+      <a class="brand-link" href="index.html" aria-label="To The Moon Home">
+        <img src="assets/logo.svg" alt="To The Moon" class="brand-logo" width="140" height="auto" loading="eager">
+      </a>
     </div>
 
-    <nav id="mainNav" class="tabsbar" aria-label="Navegación principal">
-      <div class="tabsbar-inner container">
-        <ul class="nav-tabs" role="menubar">
-          <li role="none"><a role="menuitem" href="index.html">Home</a></li>
-          <li role="none"><a role="menuitem" href="artists.html" aria-current="page">Artists</a></li>
-          <li role="none"><a role="menuitem" href="services.html">Services</a></li>
-          <li role="none"><a role="menuitem" href="team.html">Team</a></li>
-          <li role="none"><a role="menuitem" href="contact.html">Contact</a></li>
-        </ul>
-      </div>
+    <nav class="tabsbar" role="navigation" aria-label="Main navigation">
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <ul class="nav-tabs">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="artists.html" aria-current="page">Artists</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><button id="openContact" class="contact-btn">Contact</button></li>
+      </ul>
     </nav>
   </header>
 
-  <main id="main" class="container">
-    <!-- HERO: full-bleed background (moon) con overlay y marquee -->
-    <section class="artists-hero hero-with-moon" aria-label="Artists hero">
-      <div class="hero-overlay"></div>
-      <div class="marquee-wrap" role="presentation" aria-hidden="true">
-        <div class="marquee" id="artistsMarquee" data-speed="120" aria-hidden="true"></div>
+  <!-- LABELS MARQUEE (two sets for continuous loop; NO JS cloning) -->
+  <section class="labels-marquee" aria-hidden="true">
+    <div class="labels-track">
+      <!-- first sequence -->
+      <div class="labels-seq">
+        <img src="assets/labels/3RDAVENUE.svg" alt="3rd Avenue">
+        <img src="assets/labels/AHDIGITAL.svg" alt="AH Digital">
+        <img src="assets/labels/CIRCLEOFLIFE.png" alt="Circle of Life">
+        <img src="assets/labels/D9SA.svg" alt="D9SA">
+        <img src="assets/labels/LAFORESTA.svg" alt="La Foresta">
+        <img src="assets/labels/MADDEN.png" alt="Madden">
+        <img src="assets/labels/MUSIQUEDELUNE.svg" alt="Musique de Lune">
+        <img src="assets/labels/SOUNDAVENUE.png" alt="Sound Avenue">
+        <img src="assets/labels/THEMANGOALLEY.png" alt="The Mango Alley">
+        <img src="assets/labels/TRAFUL.png" alt="Traful">
+        <img src="assets/labels/VENTURERECORDS.png" alt="Venture Records">
       </div>
-    </section>
 
-    <!-- ARTISTS LIST (lazy) -->
-    <section class="artists-section" aria-label="Roster">
-      <div id="artistsList" class="artists-list" aria-live="polite"></div>
-      <div id="loadMoreSentinel" class="load-sentinel" aria-hidden="true"></div>
+      <!-- repeated sequence for seamless loop -->
+      <div class="labels-seq" aria-hidden="true">
+        <img src="assets/labels/3RDAVENUE.svg" alt="">
+        <img src="assets/labels/AHDIGITAL.svg" alt="">
+        <img src="assets/labels/CIRCLEOFLIFE.png" alt="">
+        <img src="assets/labels/D9SA.svg" alt="">
+        <img src="assets/labels/LAFORESTA.svg" alt="">
+        <img src="assets/labels/MADDEN.png" alt="">
+        <img src="assets/labels/MUSIQUEDELUNE.svg" alt="">
+        <img src="assets/labels/SOUNDAVENUE.png" alt="">
+        <img src="assets/labels/THEMANGOALLEY.png" alt="">
+        <img src="assets/labels/TRAFUL.png" alt="">
+        <img src="assets/labels/VENTURERECORDS.png" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="artists-main">
+    <h1 class="page-title">OUR ARTISTS</h1>
+
+    <!-- GRID: exactly 2 columns on desktop, 1 column on small screens -->
+    <section id="artistsGrid" class="artists-grid" aria-live="polite">
+      <!-- Cards are injected by JS for consistency -->
     </section>
   </main>
 
-   <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <p>© 2025 To The Moon Management</p>
-      <div class="social">
-        <a href="https://www.instagram.com/tothemoonmng" target="_blank" class="soc ig" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7m10 2c1.6 0 3 1.4 3 3v10c0 1.6-1.4 3-3 3H7c-1.6 0-3-1.4-3-3V7c0-1.6 1.4-3 3-3h10M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
-        </a>
-        <button class="soc mail" id="openForm" aria-label="Email">
-          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 13.5 2 6.75V18h20V6.75L12 13.5Z"/></svg>
-        </button>
+  <!-- ARTIST DETAILS MODAL -->
+  <div id="artistModal" class="artist-modal" hidden aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-wrapper">
+      <button class="modal-close" aria-label="Cerrar">×</button>
+      <div id="artistModalContent" class="modal-content-inner" tabindex="0"></div>
+    </div>
+  </div>
+
+  <!-- CONTACT FORM MODAL (re-uses your existing contact structure; prefilled by JS) -->
+  <div id="contactModal" class="modal contact-modal" hidden aria-hidden="true">
+    <div class="modal-wrapper">
+      <button class="modal-close" aria-label="Cerrar contacto">×</button>
+      <div class="modal-content-inner">
+        <h2>Contacto</h2>
+        <form id="contactForm" action="https://formspree.io/f/yourFormID" method="POST">
+          <input type="text" id="cf_name" name="name" placeholder="Nombre" required>
+          <input type="email" id="cf_email" name="email" placeholder="Email" required>
+          <select id="cf_subject" name="subject" required>
+            <option value="Services">Services</option>
+            <option value="Booking">Booking</option>
+            <option value="General Inquiry">General Inquiry</option>
+          </select>
+          <textarea id="cf_message" name="message" rows="5" placeholder="Hola TTM! Me contacto por:"></textarea>
+          <button class="btn-primary" type="submit">Enviar</button>
+        </form>
       </div>
     </div>
-  </footer>
-
-    <!-- MODAL DE CONTACTO -->
-<div class="contact-modal" id="contactModal" hidden>
-  <div class="modal-overlay"></div>
-  <div class="modal-content">
-    <button class="close-modal" id="closeForm" aria-label="Cerrar formulario">&times;</button>
-    <h2>Contacto</h2>
-
-    <form id="contactForm" action="https://formspree.io/f/yourFormID" method="POST">
-      <input type="text" name="name" id="name" placeholder="Nombre" required>
-
-      <select name="subject" id="subject" required>
-        <option value="" disabled selected>Seleccioná el motivo</option>
-        <option value="Services">Services</option>
-        <option value="Booking">Booking</option>
-        <option value="General Inquiry">General Inquiry</option>
-      </select>
-
-      <div id="artistSelectContainer" hidden>
-        <select name="artist" id="artist">
-          <option value="" disabled selected>Elegí un artista</option>
-          <option value="Servando">Servando</option>
-          <option value="Luciano Bedini">Luciano Bedini</option>
-          <option value="Manu Pavez">Manu Pavez</option>
-          <option value="Fideksen">Fideksen</option>
-          <option value="Kentavros">Kentavros</option>
-          <option value="p37ro">p37ro</option>
-        </select>
-      </div>
-
-      <textarea name="message" id="message" rows="6" required placeholder="Hola TTM! Me contacto por:"></textarea>
-
-      <button type="submit" class="btn-primary">Enviar</button>
-    </form>
   </div>
-</div>
 
-<!-- TOAST -->
-<div class="toast" id="toast" hidden>¡Gracias por contactarte con To The Moon! Te responderemos pronto.</div>
-
-  <!-- scripts -->
-  <script src="script.js" defer></script>
-  <script src="artists.js" defer></script>
 </body>
 </html>
