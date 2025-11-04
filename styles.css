@@ -1481,3 +1481,43 @@ body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,
 
 /* prevent body scroll when modal open */
 body.modal-open{overflow:hidden}
+
+/* === LABELS UNIFORMES - OVERRIDE === */
+
+/* contenedor base: mantiene la altura constante y centra todo */
+.labels-seq img {
+  display: inline-block;
+  width: auto;
+  height: 60px;              /* altura uniforme */
+  aspect-ratio: 3 / 1;       /* fuerza proporción horizontal sin deformar */
+  object-fit: contain;       /* evita recortes, muestra todo el logo */
+  object-position: center;   /* centra visualmente el logo */
+  padding: 0 12px;           /* espacio entre logos */
+  background: transparent;   /* asegura fondo limpio */
+  vertical-align: middle;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+/* todos los formatos responden igual (PNG, SVG, JPG) */
+.labels-seq img[src$=".png"],
+.labels-seq img[src$=".svg"],
+.labels-seq img[src$=".jpg"] {
+  max-height: 60px;
+  min-height: 60px;
+  max-width: 180px;          /* evita que alguno sea demasiado largo */
+}
+
+/* hover leve */
+.labels-seq img:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* en pantallas más pequeñas */
+@media (max-width: 768px) {
+  .labels-seq img {
+    height: 40px;
+    max-width: 120px;
+    padding: 0 8px;
+  }
+}
