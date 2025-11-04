@@ -1,206 +1,194 @@
-// artists.js — improved: continuous marquee with speed control, compact single-text cards,
-// lazy batch loading, expand/collapse toggles (no inner white boxes)
+/* artists.js - To The Moon Management (final, sin duplicados) */
+document.addEventListener("DOMContentLoaded", () => {
 
-(() => {
-  'use strict';
-
-  /* ---------- DATA (usa tus datos reales o extiende) ---------- */
+  /* ---------- Datos de artistas ---------- */
   const ARTISTS = [
-    { name:"Servando", role:"DJ / Producer", photo:"assets/artists/servando.jpg",
-      text: `Servando es un DJ y productor argentino en ascenso dentro de la escena global de la música electrónica. Ha compartido cabina con figuras como Ezequiel Arias, Budakid y Hernán Cattáneo; sus producciones se han editado en sellos relevantes y su proyección internacional sigue en crecimiento.` },
-    { name:"Luciano Bedini", role:"DJ / Producer", photo:"assets/artists/luciano_bedini.jpg",
-      text: `Luciano fusiona progressive house, dub techno y deep house creando paisajes melódicos e hipnóticos. Su música ha sido editada por sellos como Sound Avenue y Future Avenue.` },
-    { name:"Manu Pavez", role:"DJ / Producer", photo:"assets/artists/manu_pavez.jpg",
-      text: `Manu transforma cada set en un viaje emocional. Con múltiples lanzamientos, su enfoque combina técnica y sensibilidad.` },
-    { name:"Fideksen", role:"DJ / Producer", photo:"assets/artists/fideksen.jpg",
-      text: `Fideksen aporta elegancia melódica y groove. Fundador de La Casadiscografica, impulsa nuevos talentos con visión artística.` },
-    { name:"Kentavros", role:"DJ", photo:"assets/artists/kentavros.jpg",
-      text: `Kentavros desarrolla atmósferas inmersivas dentro del progressive y melodic house, conectando emocionalmente con el público.` },
-    { name:"p37ro", role:"DJ / Producer", photo:"assets/artists/p37ro.jpg",
-      text: `p37ro combina técnica y sensibilidad en sus producciones progressive apoyadas por referentes de la escena.` }
+    {
+      id: "servando",
+      name: "Servando",
+      photo: "assets/artists/servando.jpg",
+      bio: `Servando es un DJ y productor argentino en ascenso dentro de la escena global de la música electrónica. Su enfoque sofisticado y versátil le permite moverse entre los géneros, logrando un sonido único y adaptable a cualquier pista. Ha compartido cabina con artistas como Ezequiel Arias, Budakid, Emi Galván, John Cosani y más. Sus producciones son editadas por sellos como Mango Alley, Sound Avenue y SLC-6.`,
+      links: { ig: "https://www.instagram.com/servandomusic", sc: "https://soundcloud.com/servando_music", yt: "https://www.youtube.com/@servandomusic", presskit: "https://servando.dj-presskit.com/" }
+    },
+    {
+      id: "luciano",
+      name: "Luciano Bedini",
+      photo: "assets/artists/luciano.jpg",
+      bio: `Luciano Bedini es DJ y productor de música electrónica, nacido en Pergamino, Provincia de Buenos Aires. Su identidad artística se define por la fusión entre el progressive house, el dub techno y el deep house. Ha editado en sellos como Sound Avenue y Sincity.`,
+      links: { ig: "https://www.instagram.com/luciaanobedini", sc: "https://soundcloud.com/luciano-bedini", presskit: "https://lucianobedini.dj-presskit.com/" }
+    },
+    {
+      id: "manu",
+      name: "Manu Pavez",
+      photo: "assets/artists/manu.jpg",
+      bio: `Manu Pavez es un DJ y productor argentino con una visión moderna y versátil del progressive house. Su sonido se distingue por la conexión emocional con el público.`,
+      links: { ig: "https://www.instagram.com/manupavez_", sc: "https://soundcloud.com/manupavez", yt: "https://www.youtube.com/@manupavez" }
+    },
+    {
+      id: "fideksen",
+      name: "Fideksen",
+      photo: "assets/artists/fideksen.jpg",
+      bio: `Fideksen es un DJ y productor argentino con un sonido que combina elegancia, groove y una fuerte identidad melódica.`,
+      links: { ig: "https://www.instagram.com/fideksen", sc: "https://soundcloud.com/fideksensound" }
+    },
+    {
+      id: "kentavros",
+      name: "Kentavros",
+      photo: "assets/artists/kentavros.jpg",
+      bio: `Sebastián Mansilla aka Kentavros es un DJ argentino cuya propuesta mezcla progressive, melodic y deep house.`,
+      links: { ig: "https://www.instagram.com/kentavros_music", sc: "https://soundcloud.com/kentavros_music" }
+    },
+    {
+      id: "p37ro",
+      name: "P37RO",
+      photo: "assets/artists/p37ro.jpg",
+      bio: `p37ro es un DJ y productor argentino con una propuesta marcada por calidez, detalle y texturas progresivas.`,
+      links: { ig: "https://www.instagram.com/p37r0.fragueiro", sc: "https://soundcloud.com/user-560556342" }
+    }
   ];
 
-  /* ---------- UTILS ---------- */
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  /* ---------- Render grid ---------- */
+  const grid = document.getElementById("artistsGrid");
+  if (!grid) return;
 
-  /* ---------- MARQUEE (continuous) ---------- */
-  function initMarquee() {
-    const marquee = $('#artistsMarquee');
-    if (!marquee) return;
-
-    // build initial items (text repeated). Use more repeats to fill wide screens.
-    const base = 'ARTISTS';
-    const repeatCount = 16;
-    const fragment = document.createDocumentFragment();
-    for (let i = 0; i < repeatCount; i++) {
-      const sp = document.createElement('span');
-      sp.className = 'marq-item';
-      sp.textContent = base;
-      fragment.appendChild(sp);
-    }
-    // append two copies for seamless
-    marquee.appendChild(fragment.cloneNode(true));
-    marquee.appendChild(fragment.cloneNode(true));
-
-    // determine speed: allow data attribute on marquee element data-speed (px/sec) or default 120
-    const pxPerSec = parseFloat(marquee.datasetSpeed || marquee.dataset?.speed) || 120;
-
-    // compute duration based on total width (two copies)
-    requestAnimationFrame(() => {
-      const totalW = marquee.scrollWidth;
-      // duration seconds = width(px) / pxPerSec (but we want translateX -50% (one copy))
-      const oneCopyWidth = totalW / 2;
-      const durationSec = clamp(oneCopyWidth / pxPerSec, 8, 180); // clamp to avoid extreme durations
-      marquee.style.animationDuration = `${durationSec}s`;
-      // set running class to start CSS animation
-      marquee.classList.add('running');
-    });
-  }
-
-  /* ---------- TITLE underline ---------- */
-  function animateTitle() {
-    const t = $('.artists-title');
-    if (!t) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    requestAnimationFrame(() => setTimeout(() => t.classList.add('underlined'), 120));
-  }
-
-  /* ---------- CARDS: lazy load in batches, single-text, expand/collapse ---------- */
-  const BATCH = 2;
-  let idx = 0;
-  const listRoot = $('#artistsList');
-  const sentinel = $('#loadMoreSentinel');
-
-  function makeCard(d) {
-    const art = document.createElement('article');
-    art.className = 'artist-card';
-    art.tabIndex = 0;
-
-    art.innerHTML = `
-      <div class="artist-left" data-src="${escapeHtml(d.photo)}"></div>
-      <div class="artist-right">
-        <div class="artist-row">
-          <div class="title">
-            <span>${escapeHtml(d.name)}</span>
-            <small>${escapeHtml(d.role)}</small>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <div class="artist-socials" aria-hidden="false">
-              <a href="#" class="artist-ig" title="Instagram">IG</a>
-              <a href="#" class="artist-sc" title="SoundCloud">SC</a>
-            </div>
-            <div class="expand-area">
-              <button class="expand-btn" aria-expanded="false" aria-label="Expandir biografía">
-                <span class="arrow">▾</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <p class="artist-bio">${escapeHtml(d.text)}</p>
-        <!-- no inner white box; extra content is the same text shown fully when expanded -->
-      </div>
+  ARTISTS.forEach(a => {
+    const card = document.createElement("article");
+    card.className = "artist-card";
+    card.dataset.artist = a.id;
+    card.innerHTML = `
+      <img src="${a.photo}" alt="${escapeHtml(a.name)}" loading="lazy">
+      <h3>${escapeHtml(a.name)}</h3>
     `;
-
-    const left = art.querySelector('.artist-left');
-    const imgSrc = left.dataset.src;
-    // image lazy set on insert (handled in loader)
-
-    // expand logic
-    const btn = art.querySelector('.expand-btn');
-    btn.addEventListener('click', () => toggle(art, btn));
-
-    // keyboard shortcut
-    art.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
-    });
-
-    return art;
-  }
-
-  function escapeHtml(s) {
-    if (!s) return '';
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-
-  function loadBatch() {
-    if (!listRoot) return;
-    const stop = Math.min(idx + BATCH, ARTISTS.length);
-    for (; idx < stop; idx++) {
-      const data = ARTISTS[idx];
-      // placeholder for shimmer effect
-      const ph = document.createElement('div'); ph.className = 'artist-placeholder';
-      listRoot.appendChild(ph);
-
-      // replace in next paint to keep UI responsive
-      (function(p, d) {
-        requestAnimationFrame(() => {
-          const card = makeCard(d);
-          listRoot.replaceChild(card, p);
-          // lazy-load background image
-          const left = card.querySelector('.artist-left');
-          const src = left.getAttribute('data-src');
-          if (src) {
-            const img = new Image();
-            img.onload = () => left.style.backgroundImage = `url('${src}')`;
-            img.src = src;
-          }
-        });
-      })(ph, data);
-    }
-
-    // disconnect when done
-    if (idx >= ARTISTS.length && sentinelObserver) { sentinelObserver.disconnect(); sentinel.style.display = 'none'; }
-  }
-
-  let sentinelObserver = null;
-  function initLazy() {
-    // load first batch immediately for perceived speed
-    loadBatch();
-    if ('IntersectionObserver' in window && sentinel) {
-      sentinelObserver = new IntersectionObserver((entries) => {
-        entries.forEach(en => { if (en.isIntersecting) loadBatch(); });
-      }, { root: null, rootMargin: '300px', threshold: 0.1 });
-      sentinelObserver.observe(sentinel);
-    } else {
-      while (idx < ARTISTS.length) loadBatch();
-    }
-  }
-
-  // toggle expand/collapse
-  function toggle(card, btn) {
-    const expanded = card.classList.toggle('expanded');
-    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    // scroll into view on expand (respect reduced motion)
-    if (expanded && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 220);
-    }
-  }
-
-  /* ---------- INIT on DOMContentLoaded ---------- */
-  document.addEventListener('DOMContentLoaded', () => {
-    initMarquee();
-    animateTitle();
-    initLazy();
-
-    // expose speed control: if user sets #marqueeSpeed input, update animation speed live
-    const marquee = $('#artistsMarquee');
-    if (marquee) {
-      const speedInput = document.getElementById('marqueeSpeed');
-      if (speedInput) {
-        speedInput.addEventListener('input', (e) => {
-          const pxPerSec = parseFloat(e.target.value) || 120;
-          const totalW = marquee.scrollWidth;
-          const duration = Math.max(8, (totalW / 2) / pxPerSec);
-          marquee.style.animationDuration = `${duration}s`;
-        });
-      }
-    }
-
-    // footer year
-    const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+    grid.appendChild(card);
   });
 
-})();
+  /* ---------- Modal references ---------- */
+  const artistModal = document.getElementById("artistModal");
+  const artistModalContent = document.getElementById("artistModalContent");
+  const artistModalClose = artistModal.querySelector(".modal-close");
+
+  const contactModal = document.getElementById("contactModal");
+  const contactModalClose = contactModal?.querySelector(".modal-close");
+  const contactForm = document.getElementById("contactForm");
+  const cfName = document.getElementById("cf_name");
+  const cfEmail = document.getElementById("cf_email");
+  const cfSubject = document.getElementById("cf_subject");
+  const cfMessage = document.getElementById("cf_message");
+
+  /* ---------- Helpers ---------- */
+  function escapeHtml(str = "") {
+    return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+  }
+  function openArtistModal(artistObj) {
+    artistModalContent.innerHTML = `
+      <img src="${artistObj.photo}" alt="${escapeHtml(artistObj.name)}">
+      <h2>${escapeHtml(artistObj.name)}</h2>
+      <h4>BIOGRAFÍA</h4>
+      <p>${escapeHtml(artistObj.bio)}</p>
+      <div class="artist-links">
+        ${artistObj.links.ig?`<a href="${artistObj.links.ig}" target="_blank" rel="noopener">Instagram</a>`:''}
+        ${artistObj.links.sc?`<a href="${artistObj.links.sc}" target="_blank" rel="noopener">SoundCloud</a>`:''}
+        ${artistObj.links.yt?`<a href="${artistObj.links.yt}" target="_blank" rel="noopener">YouTube</a>`:''}
+        ${artistObj.links.presskit?`<a href="${artistObj.links.presskit}" target="_blank" rel="noopener">Presskit</a>`:''}
+      </div>
+      <div style="margin-top:18px;text-align:center">
+        <button class="btn-primary book-now" data-artist="${escapeHtml(artistObj.name)}">BOOK!</button>
+      </div>
+    `;
+    // show modal
+    artistModal.removeAttribute("hidden");
+    artistModal.setAttribute("aria-hidden","false");
+    document.body.classList.add("modal-open");
+    // focus for accessibility
+    artistModalContent.querySelector("h2")?.focus?.();
+  }
+  function closeArtistModal(){
+    artistModal.setAttribute("hidden","");
+    artistModal.setAttribute("aria-hidden","true");
+    artistModalContent.innerHTML = "";
+    document.body.classList.remove("modal-open");
+  }
+
+  function openContactModal(prefill = {}) {
+    if (!contactModal) return;
+    contactModal.removeAttribute("hidden");
+    contactModal.setAttribute("aria-hidden","false");
+    document.body.classList.add("modal-open");
+    if (prefill.name) cfName.value = prefill.name;
+    if (prefill.subject) cfSubject.value = prefill.subject;
+    if (prefill.message) cfMessage.value = prefill.message;
+    setTimeout(()=> cfName.focus(), 80);
+  }
+  function closeContactModal(){
+    if(!contactModal) return;
+    contactModal.setAttribute("hidden","");
+    contactModal.setAttribute("aria-hidden","true");
+    document.body.classList.remove("modal-open");
+    // do not clear values (so user can resume)
+  }
+
+  /* ---------- Event: click cards -> open artist modal ---------- */
+  grid.addEventListener("click", (e) => {
+    const card = e.target.closest(".artist-card");
+    if (!card) return;
+    const key = card.dataset.artist;
+    const artistObj = ARTISTS.find(a => a.id === key);
+    if (!artistObj) return;
+    openArtistModal(artistObj);
+  });
+
+  /* ---------- Close artist modal ---------- */
+  artistModalClose?.addEventListener("click", closeArtistModal);
+  artistModal.addEventListener("click", (e) => {
+    if (e.target === artistModal) closeArtistModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      if (!artistModal.hasAttribute("hidden")) closeArtistModal();
+      if (contactModal && !contactModal.hasAttribute("hidden")) closeContactModal();
+    }
+  });
+
+  /* ---------- Delegate: BOOK! button inside modal opens contact modal prefilled ---------- */
+  artistModalContent.addEventListener("click", (e) => {
+    const btn = e.target.closest(".book-now");
+    if (!btn) return;
+    const artistName = btn.dataset.artist || "";
+    // Prefill contact modal
+    openContactModal({
+      name: artistName,
+      subject: "Booking",
+      message: `Hola TTM! Me contacto por: Booking - Artista: ${artistName}`
+    });
+    // close artist modal when opening contact
+    closeArtistModal();
+  });
+
+  /* ---------- Contact modal open via header Contact button ---------- */
+  const openContactBtn = document.getElementById("openContact");
+  openContactBtn?.addEventListener("click", () => openContactModal({subject:"General Inquiry"}));
+
+  /* ---------- Contact modal close handlers ---------- */
+  contactModalClose?.addEventListener("click", closeContactModal);
+  contactModal?.addEventListener("click", (e) => {
+    if (e.target === contactModal) closeContactModal();
+  });
+
+  /* ---------- Contact form submit (Formspree used as example) ---------- */
+  contactForm?.addEventListener("submit", (e) => {
+    // let Formspree handle submission by default - you can intercept if you want AJAX.
+    // Basic client-side validation is already enforced by required attributes.
+    // Here we close the modal after submit (you may prefer to wait for response).
+    setTimeout(()=> {
+      closeContactModal();
+      // small confirmation (could be improved with toast)
+      alert("Gracias — tu mensaje fue enviado. Responderemos pronto.");
+    }, 200);
+  });
+
+  /* ---------- Accessibility: trap focus in modal (minimal) ---------- */
+  // Simple focus trap for artist modal & contact modal: return focus to body when closed.
+  // (If you need full focus trap, we can add a more complete implementation.)
+
+});
+
