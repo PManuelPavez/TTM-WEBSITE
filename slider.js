@@ -121,3 +121,44 @@
 
   init();
 })();
+// nav-toggle.js — gestión accesible del menú hamburguesa
+(function () {
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.nav-tabs');
+
+  if (!toggle || !nav) return;
+
+  function setExpanded(val) {
+    toggle.setAttribute('aria-expanded', String(val));
+    if (val) nav.classList.add('open'); else nav.classList.remove('open');
+  }
+
+  // click toggle
+  toggle.addEventListener('click', (e) => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    setExpanded(!expanded);
+  });
+
+  // close on resize if desktop size
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980 && nav.classList.contains('open')) {
+      setExpanded(false);
+    }
+  });
+
+  // close when clicking outside (mobile)
+  document.addEventListener('click', (e) => {
+    if (!nav.classList.contains('open')) return;
+    if (e.target === toggle || nav.contains(e.target)) return;
+    setExpanded(false);
+  });
+
+  // close on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setExpanded(false);
+  });
+
+  // ensure accessible attributes initially
+  toggle.setAttribute('aria-controls', nav.id || 'main-nav');
+  if (!toggle.hasAttribute('aria-expanded')) toggle.setAttribute('aria-expanded', 'false');
+})();
