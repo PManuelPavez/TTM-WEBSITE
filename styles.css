@@ -1312,3 +1312,172 @@ select:focus, input:focus, textarea:focus {
   .btn-primary { font-size: .9rem; }
   .footer-grid { flex-direction: column; text-align: center; }
 }
+/* --- ROOT COLORS --- */
+:root {
+  --blue: #122b4a;
+  --blue-light: #204b8c;
+  --ink: #10131a;
+  --fg: #f5f6fa;
+}
+
+/* --- RESET + BASE --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--fg);
+  background: linear-gradient(180deg, #0b1633 0%, #071228 100%);
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* --- HEADER --- */
+.site-header { position: sticky; top: 0; z-index: 1000; }
+.brandbar { background: var(--blue); text-align: center; padding: 12px 0; }
+.brand-logo { max-height: 70px; }
+
+.tabsbar { background: #1a3563; border-bottom: 1px solid rgba(255,255,255,.15); }
+.tabsbar-inner { display: flex; justify-content: center; align-items: center; position: relative; }
+.nav-toggle { display: none; position: absolute; left: 16px; background: none; border: 0; cursor: pointer; }
+.nav-toggle .bar { display: block; width: 22px; height: 2px; background: #fff; margin: 4px 0; }
+
+.nav-tabs {
+  display: flex; list-style: none; gap: 24px; padding: 12px 0;
+  transition: transform .3s ease-in-out;
+}
+.nav-tabs a {
+  color: #fff; text-transform: uppercase; letter-spacing: .08em; font-size: .85rem;
+  border-bottom: 2px solid transparent; padding-bottom: 4px;
+}
+.nav-tabs a:hover, .nav-tabs a[aria-current="page"] { border-color: #fff; }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .nav-toggle { display: block; }
+  .nav-tabs {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    flex-direction: column; gap: 12px;
+    background: #1a3563; transform: translateY(100%);
+    border-top: 1px solid rgba(255,255,255,.2);
+  }
+  .nav-tabs.open { transform: translateY(0); }
+}
+
+/* ================= LABELS LOOP ================= */
+.labels-marquee {
+  width: 200%;
+  overflow: hidden;
+  background: #0a1633;
+  display: flex;
+  align-items: center;
+  padding: 22px 0;
+  border-bottom: 20px solid rgba(255,255,255,0.1);
+}
+.labels-track {
+  display: flex;
+  width: calc(300px * 22);
+  animation: scrollLabels 20s linear infinite;
+}
+.labels-track img {
+  width: 280px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 24px;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity .3s;
+}
+.labels-track img:hover {
+  opacity: 1;
+}
+@keyframes scrollLabels {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---------- BASE / HEADER ---------- */
+:root{
+  --blue:#122b4a;
+  --fg:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:#071227;color:var(--fg);-webkit-font-smoothing:antialiased}
+
+/* header */
+.brandbar{background:var(--blue);display:flex;align-items:center;justify-content:center;padding:12px 16px}
+.brand-logo{height:64px;display:block}
+
+/* nav */
+.tabsbar{background:#0c2340;border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav-toggle{display:none}
+.nav-tabs{display:flex;gap:18px;list-style:none;align-items:center;justify-content:center;padding:12px;margin:0}
+.nav-tabs a, .nav-tabs button{color:var(--fg);background:none;border:0;padding:6px 8px;font-weight:600;cursor:pointer}
+@media (max-width:980px){
+  .nav-toggle{display:block;position:absolute;left:12px;top:12px}
+  .nav-tabs{position:fixed;left:0;right:0;bottom:0;transform:translateY(100%);flex-direction:column;padding:20px;background:#0c2340;transition:transform .28s}
+  .nav-tabs.open{transform:translateY(0)}
+}
+
+/* ---------- LABELS MARQUEE ---------- */
+.labels-marquee{background:#081a37;padding:18px 0;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.04)}
+.labels-track{display:flex;gap:40px;align-items:center;white-space:nowrap;will-change:transform;animation:marqueeScroll 40s linear infinite}
+.labels-seq{display:flex;gap:20px;align-items:center}
+.labels-track img{height:56px;width:auto;object-fit:contain;display:block;filter:grayscale(0) contrast(1);opacity:.95}
+@keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* slow down on hover */
+.labels-marquee:hover .labels-track{animation-play-state:paused}
+
+/* ---------- MAIN / GRID ---------- */
+.artists-main{padding:56px 18px 120px;position:relative;z-index:1;overflow-x:hidden}
+.page-title{text-align:center;font-weight:800;font-size:clamp(20px,4vw,36px);margin:6px 0 28px}
+
+/* FIXED 2 columns on desktop, 1 on small screens */
+.artists-grid{
+  max-width:1120px;margin:0 auto;display:grid;gap:24px;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+}
+@media (max-width:900px){
+  .artists-grid{grid-template-columns:1fr;padding:0 8px}
+}
+
+/* CARD: identical visual size */
+.artist-card{
+  background:linear-gradient(180deg,#0e2a5a 0%, #0a1b3a 100%);
+  border-radius:12px;overflow:hidden;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.35);
+  transition:transform .22s ease,box-shadow .22s ease;
+  display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
+}
+.artist-card:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(0,0,0,.45)}
+
+/* image container: force same height and crop */
+.artist-card img{
+  width:100%;height:320px;object-fit:cover;display:block;
+}
+
+/* fixed name area */
+.artist-card h3{
+  margin:0;padding:14px 16px;background:rgba(255,255,255,0.03);font-size:1.05rem;font-weight:700;color:var(--fg);text-align:center;
+}
+
+/* ---------- MODAL (artist) ---------- */
+.artist-modal, .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.72);z-index:2200}
+.artist-modal[hidden], .modal[hidden]{display:none}
+.modal-wrapper{background:linear-gradient(180deg,#0b2340,#071229);border-radius:12px;width:min(960px,94%);max-height:92vh;overflow:auto;padding:20px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.modal-close{position:absolute;right:12px;top:8px;background:none;border:0;color:#fff;font-size:26px;cursor:pointer}
+
+/* modal content inner */
+.modal-content-inner img{width:100%;height:auto;border-radius:8px;margin-bottom:14px}
+.modal-content-inner h2{margin:0 0 10px;font-size:1.6rem}
+.modal-content-inner p{color:rgba(255,255,255,0.92);line-height:1.6}
+.artist-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.artist-links a{background:#fff;color:#071229;padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:700}
+
+/* contact modal inner uses same structure */
+.contact-modal .modal-wrapper{background:#fff;color:#071229;padding:24px}
+.contact-modal input,.contact-modal select,.contact-modal textarea{width:100%;padding:10px;margin-top:10px;border-radius:6px;border:1px solid #d6dbe8}
+
+/* prevent body scroll when modal open */
+body.modal-open{overflow:hidden}
