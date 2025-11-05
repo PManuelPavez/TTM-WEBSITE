@@ -1,115 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>To The Moon Management — Artists</title>
+  <title>To The Moon — Artists</title>
 
-  <!-- favicon / logo -->
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg" href="assets/favicon.svg">
-    <link rel="stylesheet" href="styles.css" />
-
-  <!-- JS deferred -->
+  <!-- Favicon and base styles -->
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Main JS for artists page -->
   <script src="artists.js" defer></script>
 </head>
-<body>
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="brandbar">
-      <a class="brand-link" href="index.html" aria-label="To The Moon Home">
-        <img src="assets/logo.svg" alt="To The Moon" class="brand-logo" width="140" height="auto" loading="eager">
-      </a>
-    </div>
+<body class="artists-page">
 
-    <nav class="tabsbar" role="navigation" aria-label="Main navigation">
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-      </button>
-      <ul class="nav-tabs">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="artists.html" aria-current="page">Artists</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="team.html">Team</a></li>
-        <li><button id="openContact" class="contact-btn">Contact</button></li>
-      </ul>
+  <!-- Encabezado dinámico (brandbar + burger menu) -->
+  <header class="site-header" role="banner">
+    <div class="brandbar">
+      <div class="brandbar-inner container">
+        <!-- Logo principal -->
+        <a href="index.html" class="brand" aria-label="To The Moon Management — Inicio">
+          <picture>
+            <source srcset="assets/logo.svg" type="image/svg+xml">
+            <img src="assets/logo.svg" alt="To The Moon Management" width="320" height="76" loading="eager" decoding="async">
+          </picture>
+          <span class="brand-sub"></span>
+        </a>
+        <!-- Botón de menú hamburguesa -->
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <nav id="mainNav" class="tabsbar" aria-label="Navegación principal">
+      <div class="tabsbar-inner container">
+        <ul class="nav-tabs" role="menubar">
+          <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+          <li role="none"><a role="menuitem" href="artists.html" aria-current="page">Artists</a></li>
+          <li role="none"><a role="menuitem" href="services.html">Services</a></li>
+          <li role="none"><a role="menuitem" href="team.html">Team</a></li>
+          <li role="none"><button id="openContact" class="nav-contact-btn" type="button">Contact</button></li>
+        </ul>
+      </div>
     </nav>
   </header>
 
-  <!-- LABELS MARQUEE (two sets for continuous loop; NO JS cloning) -->
-  <section class="labels-marquee" aria-hidden="true">
-    <div class="labels-track">
-      <!-- first sequence -->
-      <div class="labels-seq">
-        <img src="assets/LABELS/3RDAVENUE.svg" alt="3rd Avenue">
-        <img src="assets/LABELS/AHDIGITAL.svg" alt="AH Digital">
-        <img src="assets/LABELS/CIRCLEOFLIFE.png" alt="Circle of Life">
-        <img src="assets/LABELS/D9SA.svg" alt="D9SA">
-        <img src="assets/LABELS/LAFORESTA.svg" alt="La Foresta">
-        <img src="assets/LABELS/MADDEN.png" alt="Madden">
-        <img src="assets/LABELS/MUSIQUEDELUNE.svg" alt="Musique de Lune">
-        <img src="assets/LABELS/SOUNDAVENUE.png" alt="Sound Avenue">
-        <img src="assets/LABELS/THEMANGOALLEY.png" alt="The Mango Alley">
-        <img src="assets/LABELS/TRAFUL.png" alt="Traful">
-        <img src="assets/LABELS/VENTURERECORDS.png" alt="Venture Records">
-      </div>
+  <!-- Subtle moving overlay on top of static dark blue background -->
+  <div class="bg-anim" aria-hidden="true"></div>
 
-      <!-- repeated sequence for seamless loop -->
-      <div class="labels-seq" aria-hidden="true">
-        <img src="assets/LABELS/3RDAVENUE.svg" alt="">
-        <img src="assets/LABELS/AHDIGITAL.svg" alt="">
-        <img src="assets/LABELS/CIRCLEOFLIFE.png" alt="">
-        <img src="assets/LABELS/D9SA.svg" alt="">
-        <img src="assets/LABELS/LAFORESTA.svg" alt="">
-        <img src="assets/LABELS/MADDEN.png" alt="">
-        <img src="assets/LABELS/MUSIQUEDELUNE.svg" alt="">
-        <img src="assets/LABELS/SOUNDAVENUE.png" alt="">
-        <img src="assets/LABELS/THEMANGOALLEY.png" alt="">
-        <img src="assets/LABELS/TRAFUL.png" alt="">
-        <img src="assets/LABELS/VENTURERECORDS.png" alt="">
+  <!-- Labels marquee with darker background and fade edges -->
+  <section class="labels-marquee" aria-hidden="false">
+    <div class="labels-clip">
+      <div class="labels-track" aria-hidden="true">
+        <!-- first sequence of logos (loop will occur via CSS animation) -->
+        <img src="assets/labels/3RDAVENUE.svg" alt="3rd Avenue" loading="lazy" />
+        <img src="assets/labels/AHDIGITAL.svg" alt="AH Digital" loading="lazy" />
+        <img src="assets/labels/CIRCLEOFLIFE.png" alt="Circle of Life" loading="lazy" />
+        <img src="assets/labels/LAFORESTA.svg" alt="La Foresta" loading="lazy" />
+        <img src="assets/labels/MUSIQUEDELUNE.svg" alt="Musique de Lune" loading="lazy" />
+        <img src="assets/labels/SOUNDAVENUE.png" alt="Sound Avenue" loading="lazy" />
+        <img src="assets/labels/THEMANGOALLEY.png" alt="The Mango Alley" loading="lazy" />
+        <!-- repeat second sequence for seamless loop -->
+        <img src="assets/labels/3RDAVENUE.svg" alt="3rd Avenue" loading="lazy" />
+        <img src="assets/labels/AHDIGITAL.svg" alt="AH Digital" loading="lazy" />
+        <img src="assets/labels/CIRCLEOFLIFE.png" alt="Circle of Life" loading="lazy" />
+        <img src="assets/labels/LAFORESTA.svg" alt="La Foresta" loading="lazy" />
+        <img src="assets/labels/MUSIQUEDELUNE.svg" alt="Musique de Lune" loading="lazy" />
+        <img src="assets/labels/SOUNDAVENUE.png" alt="Sound Avenue" loading="lazy" />
+        <img src="assets/labels/THEMANGOALLEY.png" alt="The Mango Alley" loading="lazy" />
       </div>
     </div>
   </section>
 
-  <!-- MAIN -->
-  <main class="artists-main">
-    <h1 class="page-title">OUR ARTISTS</h1>
-
-    <!-- GRID: exactly 2 columns on desktop, 1 column on small screens -->
-    <section id="artistsGrid" class="artists-grid" aria-live="polite">
-      <!-- Cards are injected by JS for consistency -->
+  <!-- Main content: artists grid -->
+  <main class="container page-content">
+    <section class="artists-section">
+      <h1 class="section-title">Artistas</h1>
+      <div id="artistsGrid" class="artists-grid" aria-live="polite"></div>
     </section>
   </main>
 
-  <!-- ARTIST DETAILS MODAL -->
-  <div id="artistModal" class="artist-modal" hidden aria-hidden="true" role="dialog" aria-modal="true">
+  <!-- Modal for artist details -->
+  <div id="artistModal" class="modal artist-modal" hidden aria-hidden="true" aria-labelledby="artistTitle" role="dialog">
     <div class="modal-wrapper">
-      <button class="modal-close" aria-label="Cerrar">×</button>
-      <div id="artistModalContent" class="modal-content-inner" tabindex="0"></div>
+      <button class="modal-close" aria-label="Cerrar artista">×</button>
+      <div id="artistModalContent" class="artist-modal-content" tabindex="0"><!-- Filled by JS --></div>
     </div>
   </div>
 
-  <!-- CONTACT FORM MODAL (re-uses your existing contact structure; prefilled by JS) -->
-  <div id="contactModal" class="modal contact-modal" hidden aria-hidden="true">
-    <div class="modal-wrapper">
-      <button class="modal-close" aria-label="Cerrar contacto">×</button>
-      <div class="modal-content-inner">
-        <h2>Contacto</h2>
-        <form id="contactForm" action="https://formspree.io/f/yourFormID" method="POST">
-          <input type="text" id="cf_name" name="name" placeholder="Nombre" required>
-          <input type="email" id="cf_email" name="email" placeholder="Email" required>
-          <select id="cf_subject" name="subject" required>
-            <option value="Services">Services</option>
-            <option value="Booking">Booking</option>
-            <option value="General Inquiry">General Inquiry</option>
+  <!-- Modal de contacto con overlay y formulario dinámico -->
+  <div class="contact-modal" id="contactModal" hidden>
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button class="close-modal" id="closeForm" aria-label="Cerrar formulario">&times;</button>
+      <h2>Contacto</h2>
+      <form id="contactForm" action="#" method="POST">
+        <input type="text" name="name" id="cf_name" placeholder="Nombre" required />
+
+        <select name="subject" id="cf_subject" required>
+          <option value="" disabled selected>Seleccioná el motivo</option>
+          <option value="Services">Services</option>
+          <option value="Booking">Booking</option>
+          <option value="General Inquiry">General Inquiry</option>
+        </select>
+
+        <div id="artistSelectContainer" hidden>
+          <select name="artist" id="cf_artist">
+            <option value="" disabled selected>Elegí un artista</option>
+            <option value="Servando">Servando</option>
+            <option value="Luciano Bedini">Luciano Bedini</option>
+            <option value="Manu Pavez">Manu Pavez</option>
+            <option value="Fideksen">Fideksen</option>
+            <option value="Kentavros">Kentavros</option>
+            <option value="P37RO">P37RO</option>
           </select>
-          <textarea id="cf_message" name="message" rows="5" placeholder="Hola TTM! Me contacto por:"></textarea>
-          <button class="btn-primary" type="submit">Enviar</button>
-        </form>
-      </div>
+        </div>
+
+        <textarea name="message" id="cf_message" rows="6" required placeholder="Hola TTM! Me contacto por:"></textarea>
+
+        <button type="submit" id="cf_send" class="btn-primary">Enviar</button>
+      </form>
     </div>
   </div>
-<!-- FOOTER -->
+  <!-- Toast de confirmación de contacto -->
+  <div class="toast" id="toast" hidden>¡Gracias por contactarte con To The Moon! Te responderemos pronto.</div>
+
+  <!-- Footer unificado (coincide con otras páginas) -->
   <footer class="site-footer">
     <div class="container footer-grid">
       <p>© 2025 To The Moon Management</p>
@@ -124,46 +141,5 @@
     </div>
   </footer>
 
-  <!-- MODAL DE CONTACTO -->
-<div class="contact-modal" id="contactModal" hidden>
-  <div class="modal-overlay"></div>
-  <div class="modal-content">
-    <button class="close-modal" id="closeForm" aria-label="Cerrar formulario">&times;</button>
-    <h2>Contacto</h2>
-
-    <form id="contactForm" action="https://formspree.io/f/yourFormID" method="POST">
-      <input type="text" name="name" id="name" placeholder="Nombre" required>
-
-      <select name="subject" id="subject" required>
-        <option value="" disabled selected>Seleccioná el motivo</option>
-        <option value="Services">Services</option>
-        <option value="Booking">Booking</option>
-        <option value="General Inquiry">General Inquiry</option>
-      </select>
-
-      <div id="artistSelectContainer" hidden>
-        <select name="artist" id="artist">
-          <option value="" disabled selected>Elegí un artista</option>
-          <option value="Servando">Servando</option>
-          <option value="Luciano Bedini">Luciano Bedini</option>
-          <option value="Manu Pavez">Manu Pavez</option>
-          <option value="Fideksen">Fideksen</option>
-          <option value="Kentavros">Kentavros</option>
-          <option value="p37ro">p37ro</option>
-        </select>
-      </div>
-
-      <textarea name="message" id="message" rows="6" required placeholder="Hola TTM! Me contacto por:"></textarea>
-
-      <button type="submit" class="btn-primary">Enviar</button>
-    </form>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast" hidden>¡Gracias por contactarte con To The Moon! Te responderemos pronto.</div>
-
-<script src="script.js"></script>
-<script src="artists.js"></script>
 </body>
 </html>
