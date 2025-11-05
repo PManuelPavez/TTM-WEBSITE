@@ -41,25 +41,115 @@
       </div>
     </nav>
   </header>
-
-  <main>
-    <section class="section">
-      <div class="container">
-        <header class="section-head">
-          <h1 class="section-title">SERVICES</h1>
-          <p class="prose" style="max-width:750px">Nuestro enfoque es holístico: acompañamos todas las áreas que intervienen en la carrera artística, integrando gestión, bienestar y propósito.</p>
-        </header>
-        <div id="servicesList"></div>
+<section class="services-hero">
+      <div class="hero-content">
+        <h1>Nuestros Servicios</h1>
+        <p>Descubrí lo que podemos hacer por vos</p>
       </div>
     </section>
-  </main>
+
+    <!-- Services layout: wrap table of contents and main content in a flex container -->
+    <div class="services-layout">
+      <!-- Sticky table of contents for service sections -->
+      <aside class="services-toc">
+        <h3>Contents</h3>
+        <ul>
+          <li><a href="#management">Management</a></li>
+          <li><a href="#booking">Booking</a></li>
+          <li><a href="#promotion">Promotion</a></li>
+          <li><a href="#distribution">Distribution</a></li>
+        </ul>
+      </aside>
+      <main class="services-main">
+        <!-- Management section -->
+        <section id="management" class="service-section">
+          <h2>Management</h2>
+          <div class="services-row">
+            <div class="service-card">
+              <div class="service-icon"><img src="assets/moon.png" alt="Management" loading="lazy" width="64" height="64" /></div>
+              <div class="service-content">
+                <h3>Desarrollo de Artistas</h3>
+                <p>Ofrecemos planificación de carrera a largo plazo, asesoramiento estratégico y apoyo diario para ayudar a los artistas a crecer su marca.</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon"><img src="assets/moon.png" alt="Management" loading="lazy" width="64" height="64" /></div>
+              <div class="service-content">
+                <h3>Coordinación de Proyectos</h3>
+                <p>Coordinamos todos los aspectos de los proyectos de un artista, desde los calendarios de lanzamientos hasta el merchandising, para lograr el máximo impacto.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Booking section -->
+        <section id="booking" class="service-section">
+          <h2>Booking</h2>
+          <div class="services-row">
+            <div class="service-card">
+              <div class="service-icon"><img src="assets/moon.png" alt="Booking" loading="lazy" width="64" height="64" /></div>
+              <div class="service-content">
+                <h3>Planificación de Giras</h3>
+                <p>Organizamos giras que conectan a los artistas con su público alrededor del mundo, encargándonos de la logística de principio a fin.</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon"><img src="assets/moon.png" alt="Booking" loading="lazy" width="64" height="64" /></div>
+              <div class="service-content">
+                <h3>Negociación de Eventos</h3>
+                <p>Nuestro equipo negocia las fechas de actuaciones y se asegura de que cada presentación cuente con condiciones favorables y una compensación justa.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Promotion section -->
+        <section id="promotion" class="service-section">
+          <h2>Promotion</h2>
+          <div class="services-row">
+            <div class="service-card">
+              <div class="service-icon"><img src="assets/moon.png" alt="Promotion" loading="lazy" width="64" height="64" /></div>
+              <div class="service-content">
+                <h3>Campañas de Medios</h3>
+                <p>Creamos campañas promocionales multiplataforma adaptadas al estilo y público objetivo de cada artista.</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon"><img src="assets/moon.png" alt="Promotion" loading="lazy" width="64" height="64" /></div>
+              <div class="service-content">
+                <h3>Estrategia en Redes Sociales</h3>
+                <p>Nuestros expertos digitales gestionan la presencia en redes sociales, impulsando la interacción de los fans y el crecimiento orgánico de las comunidades.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Distribution section -->
+        <section id="distribution" class="service-section">
+          <h2>Distribution</h2>
+          <div class="services-row">
+            <div class="service-card">
+              <div class="service-icon"><img src="assets/moon.png" alt="Distribution" loading="lazy" width="64" height="64" /></div>
+              <div class="service-content">
+                <h3>Distribución Digital</h3>
+                <p>Nos aseguramos de que tu música llegue a todas las principales plataformas de streaming con una gestión integral de lanzamientos.</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon"><img src="assets/moon.png" alt="Distribution" loading="lazy" width="64" height="64" /></div>
+              <div class="service-content">
+                <h3>Lanzamientos Físicos</h3>
+                <p>Desde vinilos hasta CDs, nos encargamos de la fabricación y distribución para poner copias físicas en manos de los fans.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
  
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-grid">
       <p>© 2025 To The Moon Management</p>
       <div class="social">
-        <a href="https://www.instagram.com/tothemoonmng" target="_blank" class="soc ig" aria-label="Instagram">
+        <a href="https://www.instagram.com/tothemoonmanagement" target="_blank" class="soc ig" aria-label="Instagram">
           <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7m10 2c1.6 0 3 1.4 3 3v10c0 1.6-1.4 3-3 3H7c-1.6 0-3-1.4-3-3V7c0-1.6 1.4-3 3-3h10M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
         </a>
         <button class="soc mail" id="openForm" aria-label="Email">
