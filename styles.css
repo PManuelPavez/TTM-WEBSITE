@@ -1428,7 +1428,7 @@ body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,
 @keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* slow down on hover */
-.labels-marquee:hover .labels-track{animation-play-state:paused}
+.labels-marquee:hover .labels-track{animation-play-state:nothing}
 
 /* ---------- MAIN / GRID ---------- */
 .artists-main{padding:56px 18px 120px;position:relative;z-index:1;overflow-x:hidden}
@@ -1488,11 +1488,11 @@ body.modal-open{overflow:hidden}
 .labels-seq img {
   display: inline-block;
   width: auto;
-  height: 60px;              /* altura uniforme */
-  aspect-ratio: 3 / 1;       /* fuerza proporción horizontal sin deformar */
+  height: 30px;              /* altura uniforme */
+  aspect-ratio: 1 / 1;       /* fuerza proporción horizontal sin deformar */
   object-fit: contain;       /* evita recortes, muestra todo el logo */
   object-position: center;   /* centra visualmente el logo */
-  padding: 0 12px;           /* espacio entre logos */
+  padding: 0 5px;           /* espacio entre logos */
   background: transparent;   /* asegura fondo limpio */
   vertical-align: middle;
   transition: transform .25s ease, opacity .25s ease;
@@ -1502,9 +1502,9 @@ body.modal-open{overflow:hidden}
 .labels-seq img[src$=".png"],
 .labels-seq img[src$=".svg"],
 .labels-seq img[src$=".jpg"] {
-  max-height: 60px;
+  max-height: 80px;
   min-height: 60px;
-  max-width: 180px;          /* evita que alguno sea demasiado largo */
+  max-width: 480px;          /* evita que alguno sea demasiado largo */
 }
 
 /* hover leve */
@@ -1520,4 +1520,942 @@ body.modal-open{overflow:hidden}
     max-width: 120px;
     padding: 0 8px;
   }
+}
+/* === LABELS UNIFORMES + ESCALA 20% === */
+
+/* Tamaño base aumentado */
+.labels-seq img {
+  display: inline-block;
+  width: auto;
+  height: 72px;              /* antes 60px → +20% */
+  aspect-ratio: 3 / 1;
+  object-fit: contain;
+  object-position: center;
+  padding: 0 14px;
+  background: transparent;
+  vertical-align: middle;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+/* Aplicar la misma escala a todos los formatos */
+.labels-seq img[src$=".png"],
+.labels-seq img[src$=".svg"],
+.labels-seq img[src$=".jpg"] {
+  max-height: 72px;
+  min-height: 72px;
+  max-width: 216px;          /* antes 180px → +20% */
+}
+
+/* Hover sutil */
+.labels-seq img:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* Escala proporcional también en pantallas pequeñas */
+@media (max-width: 768px) {
+  .labels-seq img {
+    height: 48px;            /* antes 40px → +20% */
+    max-width: 144px;
+    padding: 0 10px;
+  }
+}
+/* === LABELS UNIFORMES PERSONALIZADOS (Versión optimizada) === */
+
+/* Tamaño base de logos */
+.labels-seq img {
+  display: inline-block;
+  width: auto;
+  height: 104px;              /* tamaño aumentado (antes 72px → +15%) */
+  aspect-ratio: 3 / 1;
+  object-fit: contain;
+  object-position: center;
+  padding: 0 8px;            /* más juntos (antes 14px) */
+  margin: 0;
+  background: transparent;
+  vertical-align: middle;
+  transition: transform .25s ease, opacity .25s ease;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
+/* Ajustes de tamaño máximos */
+.labels-seq img[src$=".png"],
+.labels-seq img[src$=".svg"],
+.labels-seq img[src$=".jpg"] {
+  max-height: 84px;
+  min-height: 84px;
+  max-width: 240px;
+}
+
+/* Excepción: mantener "Circle of Life" más pequeño */
+.labels-seq img[alt*="Circle of Life"] {
+  height: 60px !important;
+  max-height: 60px !important;
+  padding: 0 10px;
+  transform: scale(1.05); /* leve compensación para que no quede perdido */
+}
+
+/* Hover con efecto sutil */
+.labels-seq img:hover {
+  transform: scale(1.08);
+  opacity: 1;
+  filter: drop-shadow(0 4px 8px rgba(255,255,255,0.3));
+}
+
+/* Móviles (proporcionalmente más chicos, pero más juntos aún) */
+@media (max-width: 1068px) {
+  .labels-seq img {
+    height: 86px;
+    max-width: 160px;
+    padding: 0 5px;
+  }
+  .labels-seq img[alt*="Circle of Life"] {
+    height: 46px !important;
+  }
+}
+
+/* --- Begin merged styles from 4.11 (added 2025-11-04) --- */
+/*
+ * Global styles for To The Moon Management
+ *
+ * This stylesheet defines the site layout, colour palette and component styles. It
+ * includes the marquee override and artist grid definitions provided in the
+ * specification, while adding complementary rules for the header, footer,
+ * modals and services pages. Where possible values are stored in CSS
+ * variables for easy maintenance. The design strives to be responsive and
+ * accessible with sensible typography and contrasts.
+ */
+
+/* Colour variables */
+:root {
+  --blue: #06172f;
+  --blue-2: #072036;
+  --ink: #071229;
+  --fg: #e8edf6;
+  --brand-h: 84px;
+  --tabs-h: 56px;
+}
+
+/* Reset and base styles */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.6;
+  background: #f6f8fb;
+  color: var(--ink);
+}
+img { max-width: 100%; height: auto; display: block; }
+
+/* Header and navigation */
+.site-header { position: sticky; top: 0; z-index: 1000; background: var(--blue); color: var(--fg); }
+.brandbar { display: flex; justify-content: center; align-items: center; height: var(--brand-h); border-bottom: 1px solid rgba(255,255,255,0.18); }
+.tabsbar { background: var(--blue-2); border-bottom: 1px solid rgba(255,255,255,0.18); }
+.nav-tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+}
+.nav-tabs a {
+  display: block;
+  padding: 14px 0;
+  color: var(--fg);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 0.85rem;
+  border-bottom: 2px solid transparent;
+}
+.nav-tabs a:hover { border-color: rgba(255,255,255,0.55); }
+.nav-tabs a[aria-current="page"] { border-color: #fff; }
+
+.page-title {
+  text-align: center;
+  font-size: 2rem;
+  margin: 32px 0 16px;
+  color: var(--blue);
+}
+
+/* Hero sections */
+.hero, .services-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+  color: #fff;
+}
+.home-hero {
+  background: linear-gradient(180deg, #2f3e78 0%, #131b3a 100%);
+}
+.services-hero {
+  background: linear-gradient(45deg, #06172f, #072036, #103371, #1a1a8c);
+  background-size: 400% 400%;
+  animation: gradientAnim 12s ease infinite;
+}
+@keyframes gradientAnim {
+  0% { background-position: 0 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* Marquee styles from the specification */
+.labels-seq img {
+  display: inline-block;
+  height: 84px;
+  width: auto;
+  object-fit: contain;
+  padding: 0 8px;
+  vertical-align: middle;
+  transition: transform .22s ease, opacity .22s;
+}
+.labels-seq img[src$=".svg"],
+.labels-seq img[src$=".png"],
+.labels-seq img[src$=".jpg"] {
+  max-height: 84px;
+  min-height: 84px;
+  max-width: 240px;
+}
+.labels-seq img[alt*="Circle of Life"] {
+  height: 60px !important;
+  max-height: 60px !important;
+  padding: 0 10px;
+}
+.labels-marquee { overflow: hidden; background: #fff; }
+.labels-track {
+  display: flex;
+  gap: 8px;
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.labels-marquee:hover .labels-track { animation-play-state: paused; }
+
+/* Artists grid */
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+@media (max-width: 900px) {
+  .artists-grid { grid-template-columns: 1fr; }
+}
+.artist-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px 8px 0 0;
+}
+.artist-card h3 {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* Modals */
+.artist-modal, .contact-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.72);
+  z-index: 2200;
+}
+.artist-modal[hidden], .contact-modal[hidden] { display: none; }
+.modal-wrapper {
+  width: min(960px, 94%);
+  max-height: 92vh;
+  overflow: auto;
+  border-radius: 12px;
+  padding: 18px;
+  background: linear-gradient(180deg, #06172f, #072036);
+  color: #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+.contact-modal .modal-wrapper {
+  background: #fff;
+  color: #071229;
+  padding: 22px;
+}
+.modal-close {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  background: none;
+  border: 0;
+  color: currentColor;
+  font-size: 24px;
+  cursor: pointer;
+}
+body.modal-open { overflow: hidden; }
+.modal-wrapper h2 { margin-top: 0; }
+
+/* Form elements */
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; margin-bottom: 4px; font-weight: 600; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #cfd7ea;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.btn-primary {
+  display: inline-block;
+  margin-top: 12px;
+  background: var(--blue);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.btn-primary:hover { background: #193766; }
+
+/* Services layout */
+.services-main {
+  flex: 1;
+  max-width: 1100px;
+  margin: 0;
+  padding: 0;
+}
+/* Services layout wraps the table of contents and main content */
+.services-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+/* Stack the layout on narrow screens */
+@media (max-width: 900px) {
+  .services-layout {
+    flex-direction: column;
+    padding: 20px;
+  }
+}
+.services-toc {
+  position: sticky;
+  top: 100px;
+  align-self: flex-start;
+  padding: 20px;
+  background: #f9fbff;
+  border-left: 4px solid var(--blue);
+  margin: 20px;
+  border-radius: 8px;
+}
+.services-toc h3 { margin-top: 0; font-size: 1.1rem; color: var(--blue); }
+.services-toc ul { list-style: none; padding-left: 0; margin: 0; }
+.services-toc li { margin-bottom: 8px; }
+.services-toc a { color: var(--blue); text-decoration: none; font-size: .9rem; }
+.services-toc a:hover { text-decoration: underline; }
+.service-section { margin-bottom: 56px; }
+.service-section h2 { font-size: 1.6rem; color: var(--blue); margin-bottom: 20px; }
+.services-row {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+}
+.service-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  min-width: 260px;
+  flex: 0 0 auto;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  scroll-snap-align: start;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.service-icon img { width: 64px; height: 64px; object-fit: contain; }
+.service-content h3 { margin: 0 0 6px; font-size: 1.1rem; color: var(--blue); }
+.service-content p { margin: 0; font-size: .95rem; color: #3a4a6c; max-width: 280px; }
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--blue);
+  color: var(--fg);
+  border-top: 1px solid rgba(255,255,255,0.18);
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  .labels-track { animation: none; }
+  .services-hero { animation: none; }
+  .service-card:hover { transform: none; }
+}/* --- End merged styles from 4.11 --- */
+
+/* =========================================================
+   Ajustes personalizados posteriores a la fusión
+   ========================================================= */
+/* Fondo oscuro para la página de artistas */
+.artists-page {
+  background: var(--blue);
+  color: var(--fg);
+}
+
+/* Enlaces dentro de artistas deben mantener color claro */
+.artists-page a { color: var(--fg); }
+
+/* Contenedor de imagen de la tarjeta para posicionar superposición */
+.artist-card .image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Superposición con el nombre del artista centrado */
+.artist-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+/* Acciones en el formulario de contacto */
+.contact-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+.btn-whatsapp {
+  display: inline-block;
+  background: #25D366;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+.btn-whatsapp:hover {
+  background: #1fa85e;
+}
+
+/*
+ * ==== Personalizaciones para la página ARTISTS (fondo animado, etiquetas y modales) ====
+ * Estas reglas se añaden al final del archivo para que tengan prioridad sobre definiciones previas.
+ */
+
+/* Variables de color (CSS custom properties) */
+:root {
+  --dark-blue: #071229;
+  --light-blue: #0a2748;
+  --accent: #0AB7E6;
+  --bg-marquee: #01060f;
+  --white: #f5f5fa;
+  --off-white: #e1e4ea;
+}
+
+/* General container used across sections */
+.container {
+  width: min(1140px, 92%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Header styles */
+.site-header {
+  background: var(--dark-blue);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+}
+.site-logo {
+  height: 48px;
+  display: block;
+}
+.main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.main-nav a,
+.nav-contact-btn {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 10px;
+  transition: color .2s ease;
+}
+.main-nav a:hover,
+.nav-contact-btn:hover {
+  color: var(--accent);
+}
+.nav-contact-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Footer styles */
+.site-footer {
+  background: var(--dark-blue);
+  color: var(--off-white);
+  padding: 24px 0;
+  font-size: 14px;
+  text-align: center;
+}
+.site-footer .footer-links {
+  margin-top: 8px;
+}
+.site-footer .footer-links a {
+  color: var(--accent);
+  text-decoration: none;
+  margin: 0 4px;
+  font-weight: 600;
+}
+.site-footer .footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* Artists page structure */
+body.artists-page {
+  background: var(--dark-blue);
+  color: var(--white);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Moving overlay layer */
+.bg-anim {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(120deg, rgba(10,183,230,0.05) 0%, rgba(5,18,40,0.1) 50%, rgba(10,183,230,0.05) 100%);
+  animation: backgroundMove 20s linear infinite;
+  mix-blend-mode: overlay;
+}
+@keyframes backgroundMove {
+  from { transform: translateX(-10%); }
+  50%  { transform: translateX(10%); }
+  to   { transform: translateX(-10%); }
+}
+
+/* Labels marquee */
+.labels-marquee {
+  background: var(--bg-marquee);
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+  z-index: 2;
+}
+.labels-clip { overflow: hidden; }
+.labels-track {
+  display: flex;
+  gap: 24px;
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.labels-marquee:hover .labels-track {
+  animation-play-state: paused;
+}
+.labels-marquee::before,
+.labels-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  pointer-events: none;
+  z-index: 3;
+}
+.labels-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-marquee) 0%, transparent 100%);
+}
+.labels-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg-marquee) 0%, transparent 100%);
+}
+.labels-track img {
+  height: 84px;
+  width: auto;
+  object-fit: contain;
+  display: inline-block;
+  padding: 0 8px;
+}
+.labels-track img[alt*="Circle of Life"] {
+  height: 60px !important;
+  max-height: 60px !important;
+}
+
+/* Artists section */
+.artists-section {
+  padding: 60px 0;
+  z-index: 2;
+  position: relative;
+}
+.section-title {
+  font-size: clamp(26px, 5vw, 48px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--off-white);
+  /* animación sutil para mover el título arriba y abajo */
+  animation: floatTitle 8s ease-in-out infinite alternate;
+}
+
+@keyframes floatTitle {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+@media (max-width: 860px) {
+  .artists-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+.artist-card {
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease;
+}
+.artist-card:hover {
+  transform: translateY(-4px);
+}
+.image-container {
+  position: relative;
+}
+.image-container img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.artist-card:hover .image-container img {
+  transform: scale(1.04);
+}
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+.overlay::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 38%;
+  background: linear-gradient(180deg, rgba(7,18,41,0) 0%, rgba(7,18,41,0.95) 100%);
+}
+.artist-name {
+  position: relative;
+  z-index: 2;
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.artist-card:hover .artist-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Generic modal styles */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.72);
+  z-index: 2200;
+}
+.modal[hidden] { display: none; }
+.modal-wrapper {
+  width: min(920px, 94%);
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  z-index: 10;
+  padding: 4px;
+}
+.modal-close:hover { color: var(--accent); }
+
+/* Artist modal specifics */
+.artist-modal .modal-wrapper {
+  background: linear-gradient(180deg, #0a2748 0%, #051024 100%);
+  color: var(--white);
+  padding: 0;
+}
+.artist-modal .modal-top {
+  position: relative;
+}
+.artist-modal .modal-top img.modal-photo {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  display: block;
+}
+.artist-modal .modal-top::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 36%;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(7,18,41,0.94) 100%);
+  pointer-events: none;
+}
+.artist-modal .modal-body {
+  padding: 20px 24px 30px;
+}
+.artist-modal .modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.artist-modal h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+}
+.artist-modal .modal-links a {
+  display: inline-block;
+  margin-left: 8px;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+}
+.artist-modal .modal-links a:hover { text-decoration: underline; }
+.artist-modal h4 {
+  margin-top: 22px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--off-white);
+}
+.artist-modal .bio-text {
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--off-white);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.artist-modal.opened .bio-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+.artist-modal .modal-actions {
+  margin-top: 24px;
+  text-align: center;
+}
+.artist-modal .modal-actions .btn-primary {
+  font-size: 16px;
+  padding: 10px 22px;
+}
+
+/* Contact modal specifics */
+.contact-modal .modal-wrapper {
+  background: #fff;
+  color: #071229;
+  padding: 22px;
+}
+.contact-inner h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 24px;
+  font-weight: 800;
+}
+.contact-inner label {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.contact-inner input,
+.contact-inner textarea {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  font-size: 14px;
+  border: 1px solid #c0c4cc;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+}
+.contact-inner textarea { resize: vertical; }
+.contact-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 16px;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.btn-primary:hover { background: #099ccc; }
+.btn-whatsapp {
+  display: inline-block;
+  background: #25D366;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background .2s ease;
+}
+.btn-whatsapp:hover { background: #1ea954; }
+
+/* Body lock when modal open */
+body.modal-open { overflow: hidden; }
+
+/* Respecta preferencias: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .bg-anim, .labels-track {
+    animation: none !important;
+  }
+  .artist-card:hover .image-container img {
+    transform: none !important;
+  }
+  .artist-name,
+  .artist-modal .bio-text {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+/* ===== Uniform label sizing: todos los logos legibles ===== */
+.labels-marquee {
+  background: linear-gradient(90deg, rgba(0,0,0,0.95), rgba(0,0,0,0.9));
+  padding: 18px 6px;
+  position: relative;
+  overflow:hidden;
+}
+
+.labels-track {
+  display:flex;
+  gap:18px;
+  align-items:center;
+  animation: marquee 36s linear infinite;
+  will-change: transform;
+}
+
+/* Tamaño uniforme y legible para todos los labels */
+.labels-track img {
+  display:inline-block;
+  height:96px;           /* altura objetivo en desktop (ajustable) */
+  width:auto;
+  object-fit:contain;
+  padding:0 12px;
+  vertical-align:middle;
+  transition: transform .22s ease, opacity .22s ease;
+}
+
+/* soporte para distintos tipos */
+.labels-track img[src$=".svg"],
+.labels-track img[src$=".png"],
+.labels-track img[src$=".jpg"] {
+  max-height:96px;
+  min-height:84px;
+  max-width:260px;
+}
+
+/* Si quieres la excepción (circle más pequeño), coméntala o elimínala.
+   Si la tienes actualmente, BORRA/COMENTA la regla siguiente:
+   .labels-track img[alt*="Circle of Life"] { height:60px !important; ... }
+*/
+
+/* Responsive: bajar un poco la altura en pantallas pequeñas */
+@media (max-width:900px) {
+  .labels-track img { height:72px; max-height:80px; padding:0 8px; }
+  .labels-track { gap:12px; }
 }
