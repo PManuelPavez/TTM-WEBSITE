@@ -1,208 +1,212 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>TTM — Services</title>
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg" href="assets/favicon.svg">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>To The Moon — Servicios</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <!-- Header -->
-  <header class="site-header" role="banner">
-    <div class="brandbar">
-      <div class="brandbar-inner container">
-        <a href="index.html" class="brand" aria-label="To The Moon Management — Inicio">
-          <picture>
-            <source srcset="assets/logo.svg" type="image/svg+xml">
-            <img src="assets/logo.svg" alt="To The Moon Management" width="320" height="76" loading="eager" decoding="async">
-          </picture>
-          <span class="brand-sub"></span>
-        </a>
+<body class="services-page">
 
-        <button class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
-          <span class="bar" aria-hidden="true"></span>
-          <span class="bar" aria-hidden="true"></span>
-          <span class="bar" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-
-     <nav id="mainNav" class="tabsbar" aria-label="Navegación principal">
-      <div class="tabsbar-inner container">
-        <ul class="nav-tabs" role="menubar">
-          <li role="none"><a role="menuitem" href="index.html">Home</a></li>
-          <li role="none"><a role="menuitem" href="artists.html">Artists</a></li>
-          <li role="none"><a role="menuitem" href="services.html"aria-current="page">Services</a></li>
-          <li role="none"><a role="menuitem" href="team.html">Team</a></li>
-          <li role="none"><a role="menuitem" href="contact.html">Contact</a></li>
+  <!-- Header (consistent with site header) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="site-logo-link" aria-label="To The Moon Home">
+        <img src="assets/logo.svg" alt="To The Moon" class="site-logo" width="160" height="auto" loading="eager" />
+      </a>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="artists.html">Artists</a></li>
+          <li><a href="services.html" class="active">Services</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="#" id="openContactHeader">Contact</a></li>
         </ul>
-      </div>
-    </nav>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menú">
+        <span class="hamburger"></span>
+      </button>
+    </div>
   </header>
-<section class="services-hero">
-      <div class="hero-content">
-        <h1>Nuestros Servicios</h1>
-        <p>Descubrí lo que podemos hacer por vos</p>
+
+  <!-- Hero or intro if present -->
+  <main class="page-content">
+    <section class="hero-compact">
+      <div class="container">
+        <h1 class="page-title">Nuestros Servicios</h1>
+        <p class="lead">Acompañamos a artistas en cada etapa: desde la identidad de marca hasta la producción, la logística y el crecimiento personal.</p>
       </div>
     </section>
 
-    <!-- Services layout: wrap table of contents and main content in a flex container -->
-    <div class="services-layout">
-      <!-- Sticky table of contents for service sections -->
-      <aside class="services-toc">
-        <h3>Contents</h3>
-        <ul>
-          <li><a href="#management">Management</a></li>
-          <li><a href="#booking">Booking</a></li>
-          <li><a href="#promotion">Promotion</a></li>
-          <li><a href="#distribution">Distribution</a></li>
-        </ul>
-      </aside>
-      <main class="services-main">
-        <!-- Management section -->
-        <section id="management" class="service-section">
-          <h2>Management</h2>
-          <div class="services-row">
-            <div class="service-card">
-              <div class="service-icon"><img src="assets/moon.png" alt="Management" loading="lazy" width="64" height="64" /></div>
-              <div class="service-content">
-                <h3>Desarrollo de Artistas</h3>
-                <p>Ofrecemos planificación de carrera a largo plazo, asesoramiento estratégico y apoyo diario para ayudar a los artistas a crecer su marca.</p>
-              </div>
-            </div>
-            <div class="service-card">
-              <div class="service-icon"><img src="assets/moon.png" alt="Management" loading="lazy" width="64" height="64" /></div>
-              <div class="service-content">
-                <h3>Coordinación de Proyectos</h3>
-                <p>Coordinamos todos los aspectos de los proyectos de un artista, desde los calendarios de lanzamientos hasta el merchandising, para lograr el máximo impacto.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Booking section -->
-        <section id="booking" class="service-section">
-          <h2>Booking</h2>
-          <div class="services-row">
-            <div class="service-card">
-              <div class="service-icon"><img src="assets/moon.png" alt="Booking" loading="lazy" width="64" height="64" /></div>
-              <div class="service-content">
-                <h3>Planificación de Giras</h3>
-                <p>Organizamos giras que conectan a los artistas con su público alrededor del mundo, encargándonos de la logística de principio a fin.</p>
-              </div>
-            </div>
-            <div class="service-card">
-              <div class="service-icon"><img src="assets/moon.png" alt="Booking" loading="lazy" width="64" height="64" /></div>
-              <div class="service-content">
-                <h3>Negociación de Eventos</h3>
-                <p>Nuestro equipo negocia las fechas de actuaciones y se asegura de que cada presentación cuente con condiciones favorables y una compensación justa.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Promotion section -->
-        <section id="promotion" class="service-section">
-          <h2>Promotion</h2>
-          <div class="services-row">
-            <div class="service-card">
-              <div class="service-icon"><img src="assets/moon.png" alt="Promotion" loading="lazy" width="64" height="64" /></div>
-              <div class="service-content">
-                <h3>Campañas de Medios</h3>
-                <p>Creamos campañas promocionales multiplataforma adaptadas al estilo y público objetivo de cada artista.</p>
-              </div>
-            </div>
-            <div class="service-card">
-              <div class="service-icon"><img src="assets/moon.png" alt="Promotion" loading="lazy" width="64" height="64" /></div>
-              <div class="service-content">
-                <h3>Estrategia en Redes Sociales</h3>
-                <p>Nuestros expertos digitales gestionan la presencia en redes sociales, impulsando la interacción de los fans y el crecimiento orgánico de las comunidades.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Distribution section -->
-        <section id="distribution" class="service-section">
-          <h2>Distribution</h2>
-          <div class="services-row">
-            <div class="service-card">
-              <div class="service-icon"><img src="assets/moon.png" alt="Distribution" loading="lazy" width="64" height="64" /></div>
-              <div class="service-content">
-                <h3>Distribución Digital</h3>
-                <p>Nos aseguramos de que tu música llegue a todas las principales plataformas de streaming con una gestión integral de lanzamientos.</p>
-              </div>
-            </div>
-            <div class="service-card">
-              <div class="service-icon"><img src="assets/moon.png" alt="Distribution" loading="lazy" width="64" height="64" /></div>
-              <div class="service-content">
-                <h3>Lanzamientos Físicos</h3>
-                <p>Desde vinilos hasta CDs, nos encargamos de la fabricación y distribución para poner copias físicas en manos de los fans.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
- 
-  <!-- FOOTER -->
+    <!-- SERVICES: reemplazado contenido -->
+    <section id="services" class="services-list">
+      <div class="container">
+        <h2 class="section-title">Nuestros Servicios</h2>
+
+        <ol class="services-ol">
+          <li>
+            <h3>1. Manager personal</h3>
+            <p>
+              En TTM el artista cuenta con un acompañamiento cercano y constante. El
+              manager personal se convierte en una herramienta integral que organiza,
+              planifica y gestiona todas las áreas que componen al artista —tanto la
+              parte humana como la de marca—. El objetivo principal es que el artista
+              pueda enfocarse plenamente en su arte y que, mientras se entrega a esa
+              pasión, se construya como individuo.
+            </p>
+          </li>
+
+          <li>
+            <h3>2. Estrategia de carrera y marca</h3>
+            <p>
+              Trabajamos en la construcción de una identidad sólida y diferenciada.
+              Desarrollamos un plan estratégico individualizado, hecho a medida del
+              artista, que potencie la marca y trace un camino claro de crecimiento,
+              con objetivos medibles y acciones concretas que generen impacto a largo
+              plazo dentro de la industria.
+            </p>
+          </li>
+
+          <li>
+            <h3>3. Agenda interactiva</h3>
+            <p>
+              Diseñamos y compartimos una agenda personalizada y digital en la que
+              manager y artista trabajan en conjunto. Allí se definen objetivos SMART,
+              se dividen en hitos y tareas, y se siguen con metodologías ágiles (Scrum,
+              sprints), asegurando organización, claridad y avances constantes.
+            </p>
+          </li>
+
+          <li>
+            <h3>4. Entrenamiento / Studio</h3>
+            <p>
+              Contamos con un estudio de producción musical y una sala de entrenamiento
+              de mezcla en nuestra oficina en Ciudad Autónoma de Buenos Aires. Este
+              espacio está pensado para que los artistas puedan desarrollar su sonido,
+              perfeccionar su técnica y crear sinergia entre ellos, compartiendo
+              conocimientos e inspiración. El estudio está disponible durante todo el
+              año para que cada artista de To The Moon pueda aprovecharlo plenamente
+              y seguir creciendo en comunidad.
+            </p>
+          </li>
+
+          <li>
+            <h3>5. Desarrollo personal</h3>
+            <p>
+              Sabemos que el éxito real comienza con la persona. Por eso brindamos
+              herramientas de apoyo en salud mental, nutrición, entrenamiento físico
+              y hábitos sostenibles, asegurando que el artista crezca en equilibrio y
+              mantenga un rendimiento alto sin comprometer su bienestar.
+            </p>
+          </li>
+
+          <li>
+            <h3>6. Desarrollo de productos audiovisuales</h3>
+            <p>
+              Contamos con un equipo de fotógrafos, filmmakers y community managers que
+              generan contenido profesional y creativo. De esta manera, el artista no
+              depende de terceros y puede comunicar su identidad con material propio,
+              de calidad y alineado a su visión.
+            </p>
+          </li>
+
+          <li>
+            <h3>7. Press &amp; media</h3>
+            <p>
+              Gestionamos la relación con la prensa, medios y plataformas, elaborando
+              estrategias de comunicación que amplifiquen el alcance del artista. Desde
+              notas y entrevistas hasta presencia en medios digitales, aseguramos una
+              exposición coherente y positiva de la marca.
+            </p>
+          </li>
+
+          <li>
+            <h3>8. Logística y viajes</h3>
+            <p>
+              Organizamos y coordinamos traslados, itinerarios y necesidades logísticas
+              en cada fecha o gira. El objetivo es que el artista tenga una experiencia
+              fluida y segura, pudiendo concentrarse en su performance sin preocuparse
+              por los detalles operativos.
+            </p>
+          </li>
+
+          <li>
+            <h3>9. Booking, legal &amp; negotiation</h3>
+            <p>
+              Asesoramos y gestionamos negociaciones de contratos, bookings y acuerdos
+              comerciales. Garantizamos transparencia, respaldo legal y condiciones justas
+              que protejan al artista y fortalezcan su desarrollo profesional.
+            </p>
+          </li>
+
+          <li>
+            <h3>10. Espiritualidad</h3>
+            <p>
+              En TTM entendemos que la carrera artística también es un camino personal
+              profundo. Por eso ofrecemos acompañamiento espiritual y prácticas de
+              conciencia que ayudan al artista a mantenerse en paz, conectado con su
+              propósito y con claridad frente a los desafíos de la industria. A lo largo
+              del año organizamos retiros al campo para desconectar del ruido, conectar
+              con la naturaleza y abrir espacios de reflexión y filosofía compartida.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Optional additional CTA section -->
+    <section class="services-cta">
+      <div class="container">
+        <p class="cta-text">Querés saber más o agendar una reunión? <a href="#" id="openContactFooter">Contactanos</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (copiado / consistente con otras páginas) -->
   <footer class="site-footer">
     <div class="container footer-grid">
-      <p>© 2025 To The Moon Management</p>
-      <div class="social">
-        <a href="https://www.instagram.com/tothemoonmanagement" target="_blank" class="soc ig" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7m10 2c1.6 0 3 1.4 3 3v10c0 1.6-1.4 3-3 3H7c-1.6 0-3-1.4-3-3V7c0-1.6 1.4-3 3-3h10M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
-        </a>
-        <button class="soc mail" id="openForm" aria-label="Email">
-          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 13.5 2 6.75V18h20V6.75L12 13.5Z"/></svg>
-        </button>
+      <div class="footer-brand">
+        <a href="index.html"><img src="assets/logo.svg" alt="To The Moon" width="140" loading="lazy"></a>
+      </div>
+      <div class="footer-links">
+        <nav aria-label="Footer">
+          <a href="artists.html">Artists</a>
+          <a href="services.html">Services</a>
+          <a href="team.html">Team</a>
+        </nav>
+      </div>
+      <div class="footer-contact">
+        <p>Booking: <a href="mailto:tothemoonartists@gmail.com">tothemoonartists@gmail.com</a></p>
+        <p>Redes: <a href="#">Instagram</a> · <a href="#">YouTube</a></p>
       </div>
     </div>
   </footer>
 
- <!-- MODAL DE CONTACTO -->
-<div class="contact-modal" id="contactModal" hidden>
-  <div class="modal-overlay"></div>
-  <div class="modal-content">
-    <button class="close-modal" id="closeForm" aria-label="Cerrar formulario">&times;</button>
-    <h2>Contacto</h2>
-
-    <form id="contactForm" action="https://formspree.io/f/yourFormID" method="POST">
-      <input type="text" name="name" id="name" placeholder="Nombre" required>
-
-      <select name="subject" id="subject" required>
-        <option value="" disabled selected>Seleccioná el motivo</option>
-        <option value="Services">Services</option>
-        <option value="Booking">Booking</option>
-        <option value="General Inquiry">General Inquiry</option>
-      </select>
-
-      <div id="artistSelectContainer" hidden>
-        <select name="artist" id="artist">
-          <option value="" disabled selected>Elegí un artista</option>
-          <option value="Servando">Servando</option>
-          <option value="Luciano Bedini">Luciano Bedini</option>
-          <option value="Manu Pavez">Manu Pavez</option>
-          <option value="Fideksen">Fideksen</option>
-          <option value="Kentavros">Kentavros</option>
-          <option value="p37ro">p37ro</option>
-        </select>
+  <!-- Contact modal markup (if site uses a shared modal, this keeps it available) -->
+  <div id="contactModal" class="modal contact-modal" hidden aria-hidden="true" role="dialog" aria-labelledby="contactTitle">
+    <div class="modal-wrapper">
+      <button class="modal-close" aria-label="Cerrar">×</button>
+      <div class="contact-inner">
+        <h2 id="contactTitle">Contacto</h2>
+        <form id="contactForm" action="#" method="POST">
+          <label for="cf_name">Nombre</label>
+          <input id="cf_name" name="name" type="text" required>
+          <label for="cf_email">Email</label>
+          <input id="cf_email" name="email" type="email" required>
+          <label for="cf_subject">Asunto</label>
+          <input id="cf_subject" name="subject" type="text">
+          <label for="cf_message">Mensaje</label>
+          <textarea id="cf_message" name="message" rows="5"></textarea>
+          <div class="contact-actions">
+            <button id="cf_send" class="btn-primary" type="submit">Enviar</button>
+            <a id="cf_whatsapp" class="btn-whatsapp" href="https://wa.me/5490000000000" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </form>
       </div>
-
-      <textarea name="message" id="message" rows="6" required placeholder="Hola TTM! Me contacto por:"></textarea>
-
-      <button type="submit" class="btn-primary">Enviar</button>
-    </form>
+    </div>
   </div>
-</div>
 
-<!-- TOAST -->
-<div class="toast" id="toast" hidden>¡Gracias por contactarte con To The Moon! Te responderemos pronto.</div>
-
-  <!-- scripts -->
   <script src="script.js" defer></script>
-  <script src="services-horizontal.js" defer></script>
 </body>
 </html>
-
-
-
