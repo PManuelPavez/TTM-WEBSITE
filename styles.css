@@ -2607,3 +2607,106 @@ body.modal-open { overflow: hidden; }
   .site-header, .site-footer, .nav-toggle { display:none; }
   .services-ol > li::before { color:#000; }
 }
+/* ===== Services: estilo oscuro, titulos centrados y micro-interactividad ===== */
+
+/* Asegura ancho cómodo y centrado */
+.services-page .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Títulos centrados */
+.page-title, .section-title {
+  text-align: center;
+  color: #071229;
+  font-weight: 800;
+}
+
+/* Oscurecer fondos de los bloques y añadir separación */
+.services-ol > li {
+  background: linear-gradient(180deg, rgba(7,18,41,0.06), rgba(7,18,41,0.035));
+  border: 1px solid rgba(7,18,41,0.06);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 14px 0;
+  transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s, background .2s;
+  will-change: transform;
+  cursor: default;
+  overflow: visible;
+}
+
+/* Hover: ligera elevacion y sombra */
+.services-ol > li:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(7,18,41,0.09);
+  background: linear-gradient(180deg, rgba(7,18,41,0.085), rgba(7,18,41,0.045));
+}
+
+/* H3 interactive look */
+.services-ol li h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #052033;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Make headings look like clickable toggles on small devices */
+.services-ol li h3 .chev {
+  margin-left: auto;
+  font-size: 12px;
+  color: #0a2b3a;
+  transition: transform .22s ease;
+}
+
+/* Paragraph styling */
+.services-ol li p {
+  margin: 0;
+  color: #123745;
+  font-size: 14.4px;
+  line-height: 1.62;
+  opacity: 1;
+  transition: opacity .28s ease, max-height .36s ease;
+}
+
+/* COLLAPSIBLE behaviour: initially expanded, click toggles .open class.
+   If prefer all collapsed on load, change `.collapsible` usage in JS. */
+.services-ol li.collapsible p {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-top: 0;
+}
+.services-ol li.collapsible.open p {
+  max-height: 1600px; /* suficiente para párrafos largos */
+  opacity: 1;
+}
+
+/* Rotate chevron when open */
+.services-ol li.collapsible.open h3 .chev { transform: rotate(90deg); }
+
+/* Reveal animation (on scroll) */
+.services-ol li.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .42s ease, transform .42s ease;
+}
+.services-ol li.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive: ajuste paddings y tipografías */
+@media (max-width: 820px) {
+  .services-ol > li { padding: 14px; }
+  .services-ol li h3 { font-size: 15px; }
+  .services-ol li p { font-size: 15px; }
+}
+
+/* CTA */
+.services-cta .cta-text a { color: var(--accent, #0AB7E6); font-weight: 700; }
+
+/* ensure footer contrast remains good */
+.site-footer { background: #071229; color: #d7f3fb; }
