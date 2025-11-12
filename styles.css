@@ -2874,3 +2874,10 @@ button, .nav-list a, .btn-primary, .btn-whatsapp, .nav-toggle {
   .site-header .site-logo { width: 120px; }
   .site-footer .footer-brand img { width: 110px; }
 }
+/* Fuerza negrita y consistencia en títulos de servicios */
+.services-ol li h3,
+.services-ol li h3 * {
+  font-weight: 700 !important;
+  color: #052033 !important;
+  letter-spacing: -0.01em;
+}
