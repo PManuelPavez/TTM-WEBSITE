@@ -213,3 +213,49 @@ function showToast(text = '¡Gracias por contactarte con To The Moon! Te respond
 // === UNDERLINE ANIMATION ===
 const underline = document.querySelector('.underline-animated');
 window.addEventListener('load', () => underline?.classList.add('active'));
+
+// services-interactions.js  (pegar al final de script.js o como archivo nuevo y añadir <script src="...">)
+document.addEventListener('DOMContentLoaded', () => {
+  const items = document.querySelectorAll('.services-ol > li');
+  // Añadimos clases 'reveal' y 'collapsible' para control
+  items.forEach(li => {
+    li.classList.add('reveal'); // mejora la animación al scrollear
+    // hacemos clic en el H3 para abrir/cerrar
+    const h3 = li.querySelector('h3');
+    if (!h3) return;
+    // añadir chevron si no existe
+    if (!h3.querySelector('.chev')) {
+      const chev = document.createElement('span');
+      chev.className = 'chev';
+      chev.innerHTML = '▸'; // símbolo simple
+      h3.appendChild(chev);
+    }
+    // hacemos que sea "collapsible" al click en móviles/usuarios que quieran toggle
+    li.classList.add('collapsible');
+    h3.style.cursor = 'pointer';
+    h3.addEventListener('click', () => {
+      li.classList.toggle('open');
+    });
+  });
+
+  // IntersectionObserver para revelar elementos al entrar en viewport
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('visible');
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.services-ol > li.reveal').forEach(el => io.observe(el));
+
+  // opcional: smooth anchor scroll para enlaces internos
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const tgt = document.querySelector(a.getAttribute('href'));
+      if (tgt) { e.preventDefault(); tgt.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+
+});
