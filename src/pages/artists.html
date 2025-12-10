@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To The Moon Management — Artists</title>
+  <!-- Preconnect to Google Fonts and load Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <!-- Supabase config: completá estos dos valores una sola vez -->
+  <meta name="supabase-url" content="https://scpffteryuzbazolztyp.supabase.co">
+  <meta name="supabase-anon-key" content="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjcGZmdGVyeXV6YmF6b2x6dHlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3MjcyMDksImV4cCI6MjA4MDMwMzIwOX0.57cSvd4_N3EF0o12cv8mkL3wUJLxaomO3th0YtGxgs8">
+  <!-- Base and layout styles -->
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <!-- Component styles -->
+  <link rel="stylesheet" href="../styles/components/header.css">
+  <link rel="stylesheet" href="../styles/components/footer.css">
+  <link rel="stylesheet" href="../styles/components/card-artist.css">
+  <link rel="stylesheet" href="../styles/components/modal-artist.css">
+  <link rel="stylesheet" href="../styles/components/modal-contact.css">
+  <link rel="stylesheet" href="../styles/components/toast.css">
+  <link rel="stylesheet" href="../styles/components/label-slider.css">
+</head>
+<body class="artists-page">
+  <!-- Shared header (inlined for static build) -->
+  <header class="c-site-header" role="banner">
+    <div class="brandbar">
+      <div class="brandbar-inner">
+        <a href="home.html" class="brand" aria-label="To The Moon Management — Home">
+          <picture>
+            <source srcset="../../assets/logo.svg" type="image/svg+xml">
+            <img src="../../assets/logo.svg" alt="To The Moon Management"
+                 width="320" height="76" loading="eager" decoding="async" />
+          </picture>
+          <span class="brand-sub"></span>
+        </a>
+        <button class="nav-toggle" aria-expanded="false"
+                aria-controls="mainNav" aria-label="Abrir menú">
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <nav id="mainNav" class="tabsbar" aria-label="Navegación principal">
+      <ul class="nav-tabs">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="artists.html">Artists</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><button data-ttm-open="contact-modal" class="nav-contact-btn" type="button">Contact</button></li>
+      </ul>
+    </nav>
+  </header>
+
+    <!-- Main content: artists grid + labels slider -->
+  <main class="container page-content" id="main">
+    <section class="artists-section section">
+      <h1 class="section-title">Artists</h1>
+      <div
+        id="artistsGrid"
+        class="artists-grid grid cards"
+        aria-live="polite"
+        data-ttm-sb-table="artists"
+      ></div>
+    </section>
+
+    <section
+      class="section labels-section"
+      data-ttm-labels-section
+      aria-labelledby="labels-section-title"
+    >
+      <h2 id="labels-section-title" class="section-title">
+        Labels we worked with
+      </h2>
+
+      <div
+        class="c-labels-slider"
+        data-ttm-labels-slider
+        role="group"
+        aria-label="Slider de sellos discográficos"
+      >
+        <button
+          class="labels-slider__arrow labels-slider__arrow--prev"
+          type="button"
+          data-ttm-labels-prev
+          aria-label="Sello anterior"
+        >
+          ‹
+        </button>
+
+        <div
+          class="labels-slider__viewport"
+          data-ttm-labels-viewport
+          tabindex="0"
+          role="region"
+          aria-label="Sellos discográficos con los que trabajamos"
+        >
+          <ul
+            class="labels-slider__track"
+            data-ttm-labels-track
+          >
+            <!-- Items <li> generados dinámicamente por JS desde Supabase -->
+          </ul>
+        </div>
+
+        <button
+          class="labels-slider__arrow labels-slider__arrow--next"
+          type="button"
+          data-ttm-labels-next
+          aria-label="Sello siguiente"
+        >
+          ›
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared footer (inlined for static build) -->
+  <footer class="c-site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <p>© 2025 To The Moon Management</p>
+      <div class="social">
+        <a href="https://www.instagram.com/tothemoonmanagement" target="_blank" rel="noopener" class="soc ig" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7m10 2c1.6 0 3 1.4 3 3v10c0 1.6-1.4 3-3 3H7c-1.6 0-3-1.4-3-3V7c0-1.6 1.4-3 3-3h10M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+        </a>
+        <button type="button" class="soc mail" data-ttm-open="contact-modal" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 13.5 2 6.75V18h20V6.75L12 13.5Z"/></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact modal (shared with other pages) -->
+  <div class="c-modal-contact contact-modal modal" id="contactModal">
+    <div class="modal-overlay" data-close="contact-modal"></div>
+    <div class="modal-content">
+      <button class="close-modal" type="button" aria-label="Cerrar formulario">×</button>
+      <h2>Contacto</h2>
+      <form id="contactForm">
+        <input type="text" id="cf_name" name="name" placeholder="Nombre" required>
+        <select id="cf_subject" name="subject" required>
+          <option value="" disabled selected>Seleccioná el motivo</option>
+          <option value="Services">Services</option>
+          <option value="Booking">Booking</option>
+          <option value="General Inquiry">General Inquiry</option>
+        </select>
+        <div id="artistSelectContainer" hidden>
+          <select id="cf_artist" name="artist">
+            <option value="" disabled selected>Elegí un artista</option>
+            <!-- opciones de artistas generadas dinámicamente -->
+          </select>
+        </div>
+        <textarea id="cf_message" name="message" rows="6" placeholder="Hola TTM! Me contacto por:" required></textarea>
+        <button type="submit" class="btn-primary">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Artist modal for detail view -->
+  <div id="artistModal" class="c-modal-artist modal" aria-hidden="true" role="dialog" aria-labelledby="artistTitle">
+    <div class="modal-overlay" data-close="artist-modal"></div>
+    <div class="modal-content">
+      <button class="modal-close" type="button" aria-label="Cerrar artista">×</button>
+      <div id="artistModalContent"><!-- Contenido dinámico insertado por JS --></div>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div id="toast" class="c-toast hidden" role="status" aria-live="polite"></div>
+
+  <!-- JavaScript entrypoint -->
+  <script type="module" src="../js/app.js"></script>
+</body>
+</html>

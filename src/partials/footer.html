@@ -1,0 +1,21 @@
+<!-- Shared site footer.
+
+This partial renders the footer used across all pages.
+It contains copyright text and simple social/contact actions.
+Do not duplicate this markup inside individual pages; instead reference
+this partial from each page or include it via a build step. -->
+<footer class="c-site-footer" role="contentinfo">
+  <div class="container footer-grid">
+    <p>© 2025 To The Moon Management</p>
+    <div class="social">
+      <!-- Instagram link opens the official TTM account in a new tab. -->
+      <a href="https://www.instagram.com/tothemoonmanagement" target="_blank" rel="noopener" class="soc ig" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7m10 2c1.6 0 3 1.4 3 3v10c0 1.6-1.4 3-3 3H7c-1.6 0-3-1.4-3-3V7c0-1.6 1.4-3 3-3h10M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+      </a>
+      <!-- Email button triggers the shared contact modal via data attribute. -->
+      <button type="button" class="soc mail" data-ttm-open="contact-modal" aria-label="Email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 13.5 2 6.75V18h20V6.75L12 13.5Z"/></svg>
+      </button>
+    </div>
+  </div>
+</footer>

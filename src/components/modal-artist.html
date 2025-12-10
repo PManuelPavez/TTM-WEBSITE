@@ -1,0 +1,12 @@
+<!-- Artist modal component
+
+Contains the wrapper and overlay for displaying details about a selected
+artist.  The actual content is injected dynamically by JavaScript.  This
+component should be included near the end of the page body. -->
+<div id="artistModal" class="c-modal-artist modal" hidden aria-hidden="true" role="dialog" aria-labelledby="artistTitle">
+  <div class="modal-overlay" data-close="artist-modal"></div>
+  <div class="modal-content">
+    <button class="modal-close" type="button" aria-label="Cerrar artista">×</button>
+    <div id="artistModalContent"><!-- Contenido dinámico insertado por JS --></div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Federico Mordeglia",
+    "role": "Director de Estrategias",
+    "title": "Director de Estrategias y Project Manager",
+    "bio": "Fundador de To The Moon, Federico combina su experiencia como Project Manager en Google con su formación en derecho y management para guiar el crecimiento integral de cada artista. Diseña estrategias personalizadas que unen desarrollo profesional, bienestar y propósito, asegurando una carrera sustentable, genuina y con identidad propia.",
+    "links": { "tel": "+5491112345678" }
+  },
+  {
+    "name": "Felix Peralta",
+    "role": "Manager Personal",
+    "title": "Manager Personal y Tour Manager",
+    "bio": "Como socio director, Félix acompaña a los artistas en cada paso de su recorrido, tanto en lo humano como en lo operativo. Con formación en liderazgo estratégico, coordina giras, fechas y planificación logística, garantizando que cada experiencia esté organizada con detalle, calidez y visión a largo plazo.",
+    "links": { "tel": "+5491122233344" }
+  },
+  {
+    "name": "Miranda Peterson",
+    "role": "Nutricionista",
+    "title": "Nutricionista",
+    "bio": "Miranda cuida la energía y el bienestar físico de los artistas. A través de planes personalizados, enseña a nutrirse con consciencia para sostener la vitalidad y el equilibrio que exige la vida artística, conectando cuerpo, mente y creatividad.",
+    "links": { "ig": "https://instagram.com/usuario.miranda", "email": "miranda@tothemoon.example" }
+  },
+  {
+    "name": "Catalina Culell",
+    "role": "Fotógrafa & Community",
+    "title": "Fotógrafa y Community Manager",
+    "bio": "Catalina transforma la esencia de cada artista en imagen y comunicación. Su mirada artística y estratégica conecta lo visual con lo emocional, plasmando la identidad de To The Moon con coherencia, estética y autenticidad en cada contenido.",
+    "links": { "ig": "https://instagram.com/usuario.catalina", "email": "catalina@tothemoon.example" }
+  }
+]

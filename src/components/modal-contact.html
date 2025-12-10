@@ -1,0 +1,30 @@
+<!-- Contact modal component
+
+Shared contact form used across the site.  The subject dropdown controls
+whether the artist selection dropdown is shown.  The form submission is
+handled by the modal-contact JavaScript module, which also resets the
+form and displays toast notifications. -->
+<div class="c-modal-contact contact-modal modal" id="contactModal" hidden>
+  <div class="modal-overlay" data-close="contact-modal"></div>
+  <div class="modal-content">
+    <button class="close-modal" type="button" aria-label="Cerrar formulario">×</button>
+    <h2>Contacto</h2>
+    <form id="contactForm">
+      <input type="text" id="cf_name" name="name" placeholder="Nombre" required>
+      <select id="cf_subject" name="subject" required>
+        <option value="" disabled selected>Seleccioná el motivo</option>
+        <option value="Services">Services</option>
+        <option value="Booking">Booking</option>
+        <option value="General Inquiry">General Inquiry</option>
+      </select>
+      <div id="artistSelectContainer" hidden>
+        <select id="cf_artist" name="artist">
+          <option value="" disabled selected>Elegí un artista</option>
+          <!-- dynamic options inserted via JS -->
+        </select>
+      </div>
+      <textarea id="cf_message" name="message" rows="6" placeholder="Hola TTM! Me contacto por:" required></textarea>
+      <button type="submit" class="btn-primary">Enviar</button>
+    </form>
+  </div>
+</div>

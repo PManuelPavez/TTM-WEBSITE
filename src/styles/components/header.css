@@ -1,0 +1,33 @@
+/* Header specific styles */
+
+.c-site-header {
+  /* Inherits sticky, colours from layout.css */
+}
+
+.brandbar-inner .brand {
+  display: inline-grid;
+  place-items: center;
+  line-height: 1;
+}
+
+.brandbar-inner .brand-sub {
+  margin-top: 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.38em;
+  opacity: 0.9;
+}
+
+.nav-contact-btn {
+  background: none;
+  border: none;
+  color: var(--color-surface);
+  cursor: pointer;
+  padding: var(--space-xs) var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.nav-contact-btn:hover,
+.nav-contact-btn:focus-visible {
+  text-decoration: underline;
+}

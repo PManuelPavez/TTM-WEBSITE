@@ -1,0 +1,32 @@
+<!-- Hero slider component
+
+This component defines the markup for the home page hero slider.  It contains
+three slides with images and captions.  The slider controls and dot navigation
+are created by the JavaScript module and are not hard‑coded here.
+-->
+<section class="c-hero-slider hero">
+  <div class="slides">
+    <div class="slide is-active" style="background-image:url('../assets/slide1.jpg')">
+      <div class="hero-caption">
+        <h2 class="display">Unlock Potential</h2>
+        <p>Representamos artistas con propósito, visión y autenticidad.</p>
+      </div>
+    </div>
+    <div class="slide" style="background-image:url('../assets/slide2.jpg')">
+      <div class="hero-caption">
+        <h2 class="display">Music. Identity. Growth.</h2>
+        <p>Gestión integral de carrera con enfoque humano y estratégico.</p>
+      </div>
+    </div>
+    <div class="slide" style="background-image:url('../assets/slide3.jpg')">
+      <div class="hero-caption">
+        <h2 class="display">To The Moon Management</h2>
+        <p>Donde la pasión se convierte en trayectoria.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Buttons and dots will be injected by JS -->
+  <button class="ctrl prev" aria-label="Diapositiva anterior">‹</button>
+  <button class="ctrl next" aria-label="Diapositiva siguiente">›</button>
+  <div class="dots" role="tablist" aria-label="Selector de diapositivas"></div>
+</section>

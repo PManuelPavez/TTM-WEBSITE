@@ -1,0 +1,56 @@
+{
+  "site-header": {
+    "classes": ["c-site-header", "has-sticky"],
+    "slots": ["brand", "nav"],
+    "data": {"ttm-role": "string"},
+    "states": ["scrolled", "menu-open"]
+  },
+  "site-footer": {
+    "classes": ["c-site-footer"],
+    "slots": ["nav", "legal", "social"],
+    "data": {},
+    "states": []
+  },
+  "hero-slider": {
+    "classes": ["c-hero-slider", "is-animated"],
+    "slots": ["slide-list", "dot-list", "caption"],
+    "data": {"ttm-slider": "hero"},
+    "states": ["idle", "playing", "paused", "reduced-motion"]
+  },
+  "card-artist": {
+    "classes": ["c-card-artist", "is-featured"],
+    "slots": ["image", "name", "role", "tags"],
+    "data": {"artist-id": "string"},
+    "states": ["hover", "focus", "featured"]
+  },
+  "modal-artist": {
+    "classes": ["c-modal-artist", "is-open"],
+    "slots": ["header", "bio", "gallery", "cta"],
+    "data": {"modal": "artist", "target-id": "string"},
+    "states": ["open", "closing", "loading"]
+  },
+  "contact-modal": {
+    "classes": ["c-modal-contact", "is-open"],
+    "slots": ["header", "form", "footer"],
+    "data": {"ttm-modal": "contact"},
+    "states": ["open", "closing", "submitting", "success", "error"]
+  },
+  "toast": {
+    "classes": ["c-toast", "is-visible", "is-error"],
+    "slots": ["icon", "message"],
+    "data": {"ttm-toast": "global"},
+    "states": ["hidden", "visible", "error", "success"]
+  },
+  "service-card": {
+    "classes": ["service-card"],
+    "slots": ["title", "text"],
+    "data": {},
+    "states": []
+  },
+  "team-card": {
+    "classes": ["team-card"],
+    "slots": ["name", "role", "bio", "contacts"],
+    "data": {},
+    "states": []
+  }
+}

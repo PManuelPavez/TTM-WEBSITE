@@ -1,0 +1,24 @@
+/* styles/components/services.css */
+
+/* Styles for the services page cards */
+.service-card {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+}
+
+.service-title {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.service-text {
+  margin: 0;
+  color: var(--color-ink-muted);
+  line-height: 1.6;
+}

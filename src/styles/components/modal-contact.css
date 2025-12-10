@@ -1,0 +1,35 @@
+/* Contact modal specific styles */
+
+.c-modal-contact form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.c-modal-contact input,
+.c-modal-contact select,
+.c-modal-contact textarea {
+  width: 100%;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.c-modal-contact button.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-radius: var(--radius-pill);
+  padding: var(--space-sm) var(--space-md);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.c-modal-contact button.btn-primary:hover {
+  background: var(--color-accent-soft);
+  color: var(--color-bg);
+}

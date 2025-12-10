@@ -1,0 +1,54 @@
+/* styles/components/team.css */
+
+/* Basic card layout for team members */
+.team-card {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+  border-left: 4px solid var(--color-accent);
+}
+
+.team-name {
+  margin: 0 0 var(--space-xs) 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.team-role {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+}
+
+.team-bio {
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--color-ink-muted);
+  line-height: 1.6;
+}
+
+.team-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.team-contacts .contact-btn {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.team-contacts .contact-btn:hover,
+.team-contacts .contact-btn:focus {
+  background: var(--color-accent-soft);
+  color: var(--color-bg);
+}

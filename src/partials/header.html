@@ -1,0 +1,37 @@
+<!-- Shared site header.
+
+This partial renders the navigation bar used across all pages.
+It contains the brand/logo, a responsive menu button and a navigation list.
+Do not duplicate this markup inside individual pages; instead reference
+this partial from each page or include it via a build step. -->
+<header class="c-site-header" role="banner">
+  <div class="brandbar">
+    <div class="brandbar-inner">
+      <a href="home.html" class="brand" aria-label="To The Moon Management — Home">
+        <picture>
+          <source srcset="../../assets/logo.svg" type="image/svg+xml">
+          <img src="../../assets/logo.svg" alt="To The Moon Management"
+               width="320" height="76" loading="eager" decoding="async" />
+        </picture>
+        <span class="brand-sub"></span>
+      </a>
+      <!-- Burger button toggles the mobile nav; JS sets aria-expanded -->
+      <button class="nav-toggle" aria-expanded="false"
+              aria-controls="mainNav" aria-label="Abrir menú">
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+  <nav id="mainNav" class="tabsbar" aria-label="Navegación principal">
+    <ul class="nav-tabs">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="artists.html">Artists</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="team.html">Team</a></li>
+      <!-- The contact button triggers a modal; JS handles the event -->
+      <li><button data-ttm-open="contact-modal" class="nav-contact-btn" type="button">Contact</button></li>
+    </ul>
+  </nav>
+</header>

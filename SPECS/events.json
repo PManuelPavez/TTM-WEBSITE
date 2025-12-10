@@ -1,0 +1,32 @@
+{
+  "open:artist-modal": {
+    "emits": "card-artist",
+    "payload": { "id": "string" },
+    "listens": ["modal-artist"]
+  },
+  "close:artist-modal": {
+    "emits": "modal-artist",
+    "payload": {},
+    "listens": ["modal-artist", "app"]
+  },
+  "open:contact-modal": {
+    "emits": "app",
+    "payload": { "source": "string", "artistId": "string|null" },
+    "listens": ["contact-modal"]
+  },
+  "close:contact-modal": {
+    "emits": "contact-modal",
+    "payload": {},
+    "listens": ["contact-modal", "app"]
+  },
+  "toast:show": {
+    "emits": "app",
+    "payload": { "variant": "success|error|info", "message": "string" },
+    "listens": ["toast"]
+  },
+  "nav:toggle": {
+    "emits": "site-header",
+    "payload": { "open": "boolean" },
+    "listens": ["site-header", "app"]
+  }
+}

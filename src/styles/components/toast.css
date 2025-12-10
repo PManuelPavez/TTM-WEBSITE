@@ -1,0 +1,20 @@
+/* Toast notification styles */
+
+.c-toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-lg);
+  transform: translateX(-50%);
+  background: var(--color-ink);
+  color: var(--color-surface);
+  border: 1px solid var(--color-bg-alt);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  box-shadow: var(--shadow-2);
+  font-size: 0.875rem;
+  z-index: var(--z-toast);
+}
+
+.c-toast.hidden {
+  display: none;
+}

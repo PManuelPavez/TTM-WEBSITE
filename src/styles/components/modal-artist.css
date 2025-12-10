@@ -1,0 +1,165 @@
+/* Modal styles for artist and contact modals */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-duration-md) var(--motion-ease-standard);
+}
+
+.modal[open] {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal .modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay);
+  opacity: 0;
+  transition: opacity var(--motion-duration-md) var(--motion-ease-standard);
+}
+
+.modal[open] .modal-overlay {
+  opacity: 1;
+}
+
+.modal .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -46%);
+  width: min(90%, 640px);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--color-surface-elevated);
+  color: var(--color-ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-3);
+  padding: var(--space-lg);
+  opacity: 0;
+  transition:
+    opacity var(--motion-duration-md) var(--motion-ease-out),
+    transform var(--motion-duration-md) var(--motion-ease-out);
+}
+
+.modal[open] .modal-content {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+/* Additional styling for artist modal */
+.c-modal-artist .modal-top img {
+  width: 100%;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.c-modal-artist .modal-body {
+  padding-top: var(--space-md);
+}
+
+.c-modal-artist .modal-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.c-modal-artist .modal-links a {
+  margin-right: var(--space-sm);
+  font-size: 0.875rem;
+  color: var(--color-accent);
+}
+
+.c-modal-artist .modal-links a:hover {
+  text-decoration: underline;
+}
+/* Artist modal — dark theme consistente con la grilla */
+
+.c-modal-artist .modal-content {
+  background: radial-gradient(circle at top, #020617 0%, #020617 55%);
+  background-color: #020617;
+  color: var(--color-ink-on-dark);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-soft-on-dark);
+}
+
+/* Imagen más contenida y limpia */
+.c-modal-artist .modal-top {
+  margin: calc(-1 * var(--space-lg)) calc(-1 * var(--space-lg)) var(--space-md);
+  overflow: hidden;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.c-modal-artist .modal-photo {
+  width: 100%;
+  max-height: 260px;
+  display: block;
+  object-fit: cover;
+}
+
+/* Tipografía y links en modo dark serio */
+.c-modal-artist .modal-header h2 {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--font-scale-3);
+  color: var(--color-ink-on-dark);
+}
+
+.c-modal-artist .modal-body h4 {
+  margin-top: 0;
+  margin-bottom: var(--space-xs);
+  font-size: var(--font-scale-1);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-ink-muted-on-dark);
+}
+
+.c-modal-artist .bio-text {
+  margin: 0 0 var(--space-md);
+  font-size: var(--font-scale-1);
+  line-height: 1.7;
+  color: var(--color-ink-on-dark);
+}
+
+.c-modal-artist .modal-links a,
+.c-modal-artist .artist-link {
+  margin-right: var(--space-xs);
+  font-size: var(--font-scale-0);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-accent-soft);
+}
+
+.c-modal-artist .modal-links a:hover,
+.c-modal-artist .artist-link:hover {
+  color: var(--color-accent);
+}
+
+/* Botón book en dark mode */
+.c-modal-artist .modal-actions .btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: var(--radius-pill);
+  padding-inline: var(--space-lg);
+}
+
+/* Ajustes desktop: un poco más de aire e imagen algo mayor */
+@media (min-width: 768px) {
+  .c-modal-artist .modal-content {
+    max-width: 720px;
+  }
+
+  .c-modal-artist .modal-top {
+    max-height: 320px;
+  }
+
+  .c-modal-artist .modal-photo {
+    max-height: 320px;
+  }
+}
