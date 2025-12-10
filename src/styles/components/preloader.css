@@ -1,0 +1,85 @@
+
+.c-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #0b0b0d; /* o tu token de bg: var(--color-bg) */
+  color: #e8e8ea;      /* o var(--color-ink) */
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.c-preloader.is-hiding {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.c-preloader.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.c-preloader__inner {
+  text-align: center;
+  max-width: 320px;
+}
+
+.c-preloader__logo {
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.c-preloader__label {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.c-preloader__bar {
+  width: 100%;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(232, 232, 234, 0.12);
+  overflow: hidden;
+}
+
+.c-preloader__bar-fill {
+  display: block;
+  width: 40%;
+  height: 100%;
+  border-radius: inherit;
+  background: #38e8a5; /* tu accent: var(--color-accent) */
+  animation: ttm-preloader-slide 1s ease-in-out infinite;
+}
+
+/* Animación tipo “barra que va y viene” */
+@keyframes ttm-preloader-slide {
+  0% {
+    transform: translateX(-120%);
+  }
+  50% {
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+/* Respeto a usuarios con reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .c-preloader__bar-fill {
+    animation: none;
+    width: 100%;
+    transform: none;
+  }
+}

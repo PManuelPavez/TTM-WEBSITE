@@ -2,7 +2,7 @@
 // Each imported module exposes an init function that sets up behaviour
 // for its corresponding page or component.  Functions are called on
 // DOMContentLoaded to avoid interfering with the page load.
-
+import { initPreloader } from './modules/preloader.js';
 import { initNav } from './modules/nav.js';
 import { initHeroSlider } from './modules/hero-slider.js';
 import { initArtistGrid } from './modules/artist-grid.js';
@@ -14,6 +14,7 @@ import { initTeam } from './modules/team.js';
 import { initLabelsSlider } from './modules/labels-slider.js'; // ← NUEVO
 
 document.addEventListener('DOMContentLoaded', () => {
+  initPreloader();
   initNav();
   initHeroSlider();
   initArtistGrid();

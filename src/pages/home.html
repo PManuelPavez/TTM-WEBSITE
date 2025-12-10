@@ -6,6 +6,8 @@
   <title>To The Moon Management — Home</title>
   <!-- Preconnect to Google Fonts and load Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="../styles/components/preloader.css">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Favicon -->
@@ -26,6 +28,27 @@
   <link rel="stylesheet" href="../styles/components/toast.css">
 </head>
 <body>
+  <body>
+  <!-- Preloader -->
+  <div
+    class="c-preloader is-active"
+    data-ttm-preloader
+  >
+    <div class="c-preloader__inner">
+      <div class="c-preloader__logo">
+        To The Moon
+      </div>
+      <p class="c-preloader__label">
+        Launching artists…
+      </p>
+      <div class="c-preloader__bar" aria-hidden="true">
+        <span class="c-preloader__bar-fill"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resto de tu página: header, main, etc. -->
+
   <!-- Shared header (inlined for static build) -->
   <header class="c-site-header" role="banner">
     <div class="brandbar">
