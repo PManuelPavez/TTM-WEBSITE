@@ -1,7 +1,7 @@
 // src/js/modules/services.js
 // Render dinámico de la página de servicios usando Supabase.
 // - Lee la tabla "services" vía loadServices().
-// - Crea un acordeón por servicio (solo uno abierto a la vez).
+// - Crea un bloque por servicio (puede haber varios abiertos a la vez).
 // - Al abrir un servicio por primera vez, escribe el texto con efecto "typewriter".
 
 import { loadServices } from './data-services.js';
@@ -62,7 +62,7 @@ export async function initServices() {
     const icon = document.createElement('span');
     icon.className = 'c-service__icon';
     icon.setAttribute('aria-hidden', 'true');
-    icon.textContent = '+'; // El CSS puede cambiar esto por un chevron serio
+    icon.textContent = '+'; // El CSS lo puede rotar/cambiar
 
     header.appendChild(title);
     header.appendChild(icon);
@@ -128,22 +128,20 @@ function setupAccordion(root) {
     });
 
     toggle.addEventListener('click', () => {
-      handleToggle(item, items, state);
+      handleToggle(item, state);
     });
   });
 }
 
-function handleToggle(targetItem, allItems, state) {
+/**
+ * Ahora NO cerramos los otros servicios.
+ * Cada item se abre/cierra de forma independiente.
+ */
+function handleToggle(targetItem, state) {
   const data = state.get(targetItem);
   if (!data) return;
 
   const isOpen = targetItem.classList.contains('is-open');
-
-  // Cerramos el resto
-  allItems.forEach((item) => {
-    if (item === targetItem) return;
-    collapseItem(item, state);
-  });
 
   if (isOpen) {
     collapseItem(targetItem, state);
@@ -190,6 +188,7 @@ function collapseItem(item, state) {
   panel.setAttribute('aria-hidden', 'true');
 
   if (currentTyping && currentTyping.paragraph === paragraph) {
+    // Si lo cerrás mientras escribe, completamos el texto igual.
     stopTyping(true);
   } else if (!data.typed) {
     paragraph.textContent = '';
@@ -199,7 +198,8 @@ function collapseItem(item, state) {
 }
 
 function startTyping(paragraph, fullText, onComplete) {
-  stopTyping(false);
+  // Si había otro servicio escribiéndose, lo terminamos
+  stopTyping(true);
 
   paragraph.textContent = '';
   let index = 0;
