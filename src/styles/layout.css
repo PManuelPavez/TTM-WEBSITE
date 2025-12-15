@@ -651,3 +651,25 @@ button[type="submit"]:focus-visible,
     animation: none;
   }
 }
+/* NAV: links siempre en blanco sobre fondo dark */
+.nav-tabs a,
+.nav-tabs button {
+  color: #ffffff;
+}
+
+.nav-tabs a[aria-current="page"],
+.nav-tabs button[aria-current="page"] {
+  color: #ffffff;
+}
+
+/* Links tipo “pill” debajo de OUR GOAL */
+.section-home-links .home-links a,
+.section-home-links .home-card {
+  color: #ffffff;
+}
+
+/* Aseguramos que en hover/focus sigan siendo blancos */
+.section-home-links .home-card:hover,
+.section-home-links .home-card:focus-visible {
+  color: #ffffff;
+}
