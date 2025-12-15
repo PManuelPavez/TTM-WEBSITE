@@ -7,10 +7,12 @@
   overflow: hidden;
 }
 
-/* Contenedor de slides */
+/* Contenedor de slides
+   — altura controlada para fotos 3:2 (5184×3456) */
 .c-hero-slider .slides {
   position: relative;
-  min-height: 320px;
+  /* altura flexible pero razonable en la mayoría de pantallas */
+  min-height: clamp(320px, 60vh, 640px);
 }
 
 /* Cada slide: solo .is-active es visible */
