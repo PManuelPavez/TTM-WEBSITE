@@ -221,3 +221,7 @@
     font-size: var(--font-scale-0);
   }
 }
+/* En layout.css o card-artist.css, escopetazo local */
+.artists-page a {
+  color: var(--color-ink-on-dark);
+}

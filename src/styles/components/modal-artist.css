@@ -126,15 +126,26 @@
   line-height: 1.7;
   color: var(--color-ink-on-dark);
 }
-
 .c-modal-artist .modal-links a,
 .c-modal-artist .artist-link {
   margin-right: var(--space-xs);
   font-size: var(--font-scale-0);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--color-accent-soft);
+  color: var(--color-ink-on-dark);  /* BLANCO / tinta principal */
+  text-decoration: none;
 }
+
+/* Hover / focus: sutil, sin perder el tono serio */
+.c-modal-artist .modal-links a:hover,
+.c-modal-artist .modal-links a:focus-visible,
+.c-modal-artist .artist-link:hover,
+.c-modal-artist .artist-link:focus-visible {
+  color: var(--color-accent);       /* un toque de azul SOLO en interacción */
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
 
 .c-modal-artist .modal-links a:hover,
 .c-modal-artist .artist-link:hover {

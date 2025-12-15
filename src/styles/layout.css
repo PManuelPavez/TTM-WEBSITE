@@ -673,3 +673,14 @@ button[type="submit"]:focus-visible,
 .section-home-links .home-card:focus-visible {
   color: #ffffff;
 }
+/* En base.css o layout.css */
+a {
+  color: var(--color-ink-on-dark);                /* blanco/gris claro */
+  text-decoration-color: var(--color-accent);     /* la línea sí usa el acento */
+}
+
+/* Opcional: hover más marcado */
+a:hover {
+  color: var(--color-ink-on-dark);
+  text-decoration: underline;
+}
