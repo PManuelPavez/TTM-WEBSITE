@@ -361,6 +361,12 @@
     transform: scaleX(1);
   }
 }
+/* OUR GOAL — ensanchar el bloque en desktop */
+@media (min-width: 1024px) {
+  .section-goal .container {
+    max-width: 60rem; /* antes ~42–44rem, ahora respira mucho más */
+  }
+}
 
 /* Artists page dark theme and dynamic heading */
 body.artists-page {
