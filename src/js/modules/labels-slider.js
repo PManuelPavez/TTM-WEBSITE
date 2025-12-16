@@ -1,143 +1,267 @@
 // src/js/modules/labels-slider.js
-// Slider de sellos discográficos en la página Artists.
-// Usa la sección ya definida en artists.html y carga datos desde Supabase.
+// Slider infinito para mostrar sellos discográficos en la página Artists.
+// - Carga data desde loadLabels() (Supabase o fallback).
+// - Genera los <li> dentro del track.
+// - Duplica los ítems y anima con translateX para un loop infinito.
+// - Se pausa al interactuar (hover/focus) y sigue solo después.
 
 import { loadLabels } from './data-labels.js';
 
 export async function initLabelsSlider() {
   const body = document.body;
-  // Solo corre en la página de Artists
   if (!body || !body.classList.contains('artists-page')) return;
 
-  const section = document.querySelector('[data-ttm-labels-section]');
+  const main = document.querySelector('main');
+  if (!main) return;
+
+  // Usamos la sección ya definida en artists.html
+  let section = document.querySelector('[data-ttm-labels-section]');
   if (!section) return;
 
+  const sliderRoot = section.querySelector('[data-ttm-labels-slider]');
   const viewport = section.querySelector('[data-ttm-labels-viewport]');
   const track = section.querySelector('[data-ttm-labels-track]');
   const prevBtn = section.querySelector('[data-ttm-labels-prev]');
   const nextBtn = section.querySelector('[data-ttm-labels-next]');
 
-  if (!viewport || !track || !prevBtn || !nextBtn) {
-    console.warn('[TTM] labels-slider: faltan elementos del DOM.');
-    return;
-  }
+  if (!sliderRoot || !viewport || !track) return;
 
-  let items = [];
+  // A11y base
+  viewport.setAttribute('role', 'region');
+  if (!viewport.hasAttribute('aria-label')) {
+    viewport.setAttribute('aria-label', 'Sellos discográficos');
+  }
+  track.setAttribute('role', 'list');
+
+  let hasLoaded = false;
+  let autoControls = null; // { start, stop }
 
   async function loadAndRenderLabels() {
-    let labels = [];
+    if (hasLoaded) return;
+    hasLoaded = true;
 
+    let labels = [];
     try {
       labels = await loadLabels();
-    } catch (error) {
-      console.error('[TTM] Error cargando labels desde Supabase', error);
+    } catch (err) {
+      console.error('[TTM] Error cargando labels desde Supabase', err);
     }
 
-    track.innerHTML = '';
-
-    // Si no hay data, mostramos un placeholder en vez de esconder la sección
     if (!labels || !labels.length) {
-      const li = document.createElement('li');
-      li.className =
-        'labels-slider__item labels-slider__item--placeholder';
-      li.textContent =
-        'Próximamente, los sellos con los que trabajamos.';
-      track.appendChild(li);
-      items = [li];
+      section.hidden = true;
       return;
     }
+
+    const fragment = document.createDocumentFragment();
 
     labels.forEach((label) => {
       const li = document.createElement('li');
       li.className = 'labels-slider__item';
+      li.setAttribute('role', 'listitem');
 
-      let container;
-
+      let inner = '';
       if (label.url) {
-        const a = document.createElement('a');
-        a.href = label.url;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.className = 'labels-slider__link';
-        container = a;
+        inner = `
+          <a href="${label.url}" target="_blank" rel="noopener">
+            <img src="${label.logo}" alt="${label.name}">
+          </a>
+        `;
       } else {
-        const div = document.createElement('div');
-        div.className = 'labels-slider__logo-wrapper';
-        container = div;
+        inner = `
+          <div class="labels-slider__logo-wrapper">
+            <img src="${label.logo}" alt="${label.name}">
+          </div>
+        `;
       }
 
-      const img = document.createElement('img');
-      img.src = label.logo;
-      img.alt = label.name;
-      img.loading = 'lazy';
-      img.decoding = 'async';
+      li.innerHTML = inner;
 
-      container.appendChild(img);
-      li.appendChild(container);
-      track.appendChild(li);
+      const img = li.querySelector('img');
+      if (img && !img.hasAttribute('loading')) {
+        img.loading = 'lazy';
+        img.decoding = 'async';
+      }
+
+      fragment.appendChild(li);
     });
 
-    items = Array.from(track.querySelectorAll('.labels-slider__item'));
-  }
+    track.innerHTML = '';
+    track.appendChild(fragment);
 
-  function getStep() {
-    if (!items.length) return viewport.clientWidth * 0.6;
-
-    const first = items[0].getBoundingClientRect();
-    const second = items[1]?.getBoundingClientRect();
-
-    if (second) {
-      // distancia entre centros de los dos primeros items
-      return second.left - first.left;
-    }
-
-    return first.width + 24; // fallback con un gap aproximado
-  }
-
-  function scrollByStep(direction) {
-    const step = getStep();
-    viewport.scrollBy({
-      left: direction * step,
-      behavior: 'smooth',
-    });
-  }
-
-  // Controles con flechas
-  prevBtn.addEventListener('click', () => scrollByStep(-1));
-  nextBtn.addEventListener('click', () => scrollByStep(1));
-
-  // Accesible con teclado desde el viewport
-  viewport.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      scrollByStep(1);
-    } else if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      scrollByStep(-1);
-    }
-  });
-
-  // Carga perezosa cuando la sección entra en viewport
-  function setupObserver() {
-    if (!('IntersectionObserver' in window)) {
-      // Fallback para navegadores viejos
-      loadAndRenderLabels();
+    const items = Array.from(track.querySelectorAll('.labels-slider__item'));
+    if (!items.length) {
+      section.hidden = true;
       return;
     }
 
+    // Set up infinito + autoplay
+    autoControls = setupInfiniteSlider({
+      sliderRoot,
+      viewport,
+      track,
+      items,
+      prevBtn,
+      nextBtn,
+    });
+  }
+
+  // --- Infinito + autoplay con translateX ---
+
+  function setupInfiniteSlider({ sliderRoot, viewport, track, items, prevBtn, nextBtn }) {
+    // Duplicamos los ítems para crear un loop visual
+    const originalCount = items.length;
+    const clones = [];
+
+    for (let i = 0; i < originalCount; i++) {
+      const clone = items[i].cloneNode(true);
+      clones.push(clone);
+    }
+    clones.forEach((clone) => track.appendChild(clone));
+
+    // Ahora la mitad del scrollWidth es el ancho de un loop
+    const loopWidth = track.scrollWidth / 2;
+    if (!loopWidth) {
+      console.warn('[TTM] loopWidth = 0 en labels-slider; no se puede animar.');
+      return {
+        start() {},
+        stop() {},
+      };
+    }
+
+    let offset = 0;
+    let rafId = null;
+    let running = false;
+    let lastTs = null;
+
+    // px/segundo — ajustá si lo querés más rápido/lento
+    const SPEED = 40;
+
+    function applyTransform() {
+      // usamos transform para evitar layout thrashing
+      track.style.transform = `translateX(${-offset}px)`;
+    }
+
+    function step(timestamp) {
+      if (!running) return;
+
+      if (lastTs == null) {
+        lastTs = timestamp;
+      }
+
+      const deltaMs = timestamp - lastTs;
+      lastTs = timestamp;
+
+      const deltaPx = (SPEED * deltaMs) / 1000;
+      offset += deltaPx;
+
+      // wrap infinito
+      if (offset >= loopWidth) {
+        offset -= loopWidth;
+      }
+
+      applyTransform();
+      rafId = window.requestAnimationFrame(step);
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      lastTs = null;
+      rafId = window.requestAnimationFrame(step);
+    }
+
+    function stop() {
+      if (!running) return;
+      running = false;
+      if (rafId != null) {
+        window.cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    }
+
+    function nudge(direction) {
+      // movimiento manual con flechas / teclado
+      const delta = viewport.clientWidth * 0.4 || 120;
+      offset += direction * delta;
+
+      // normalizamos el offset
+      while (offset < 0) offset += loopWidth;
+      while (offset >= loopWidth) offset -= loopWidth;
+
+      applyTransform();
+    }
+
+    // Controles: flechas
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        stop();
+        nudge(-1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        stop();
+        nudge(1);
+      });
+    }
+
+    // Teclado dentro del viewport
+    viewport.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        stop();
+        nudge(1);
+      } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        stop();
+        nudge(-1);
+      }
+    });
+
+    // Pausa en interacción; resume después
+    sliderRoot.addEventListener('mouseenter', stop);
+    sliderRoot.addEventListener('mouseleave', start);
+    viewport.addEventListener('focusin', stop);
+    viewport.addEventListener('focusout', start);
+
+    // Arrancamos una vez armado
+    applyTransform();
+
+    return {
+      start,
+      stop,
+    };
+  }
+
+  // Lazy-load usando IntersectionObserver
+  if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(
-      async (entries, observer) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-          observer.disconnect();
-          await loadAndRenderLabels();
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadAndRenderLabels().then(() => {
+              if (autoControls && autoControls.start) {
+                autoControls.start();
+              }
+            });
+            io.disconnect();
+          }
+        });
       },
-      { threshold: 0.25 }
+      {
+        threshold: 0.2,
+      }
     );
 
     io.observe(section);
+  } else {
+    // Fallback sin IO
+    await loadAndRenderLabels();
+    if (autoControls && autoControls.start) {
+      autoControls.start();
+    }
   }
-
-  setupObserver();
 }
