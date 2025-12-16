@@ -1,4 +1,4 @@
-/* Labels slider — componente horizontal con scroll-snap (L3) */
+/* Labels slider — componente horizontal con scroll-snap (L3 PRO) */
 
 /* Sección */
 .labels-section {
@@ -18,8 +18,8 @@
   border-radius: var(--radius-lg);
   background: linear-gradient(
     135deg,
-    rgba(15, 23, 42, 0.95),
-    rgba(15, 23, 42, 0.85)
+    rgba(15, 23, 42, 0.97),
+    rgba(15, 23, 42, 0.9)
   );
   border: 1px solid var(--color-border-soft-on-dark);
   box-shadow: var(--shadow-1);
@@ -38,7 +38,13 @@
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scroll-padding-inline: var(--space-lg);
-  min-height: 72px;
+  min-height: 110px;
+  /* ocultamos scrollbars nativos */
+  scrollbar-width: none;               /* Firefox */
+}
+
+.labels-slider__viewport::-webkit-scrollbar {
+  display: none;                       /* Chrome / Safari */
 }
 
 /* Track: fila */
@@ -46,7 +52,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-xl);
   padding: 0 var(--space-lg);
   margin: 0;
   list-style: none;
@@ -59,18 +65,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 96px;
-  min-height: 48px;
+  min-width: 140px;
+  min-height: 80px;
 }
 
-/* Logos */
+/* Links/contenerdor clickable */
+.labels-slider__link,
+.labels-slider__logo-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--space-sm);
+}
+
+/* Logos — tamaño pro y legibles */
 .labels-slider__item img {
   display: block;
-  max-height: 40px;
+  max-height: 64px;
+  max-width: 180px;
   width: auto;
   object-fit: contain;
   filter: grayscale(1) contrast(1.05);
-  opacity: 0.8;
+  opacity: 0.85;
   transition:
     opacity var(--motion-duration-sm) var(--motion-ease-out),
     filter var(--motion-duration-sm) var(--motion-ease-out),
@@ -80,8 +96,17 @@
 .labels-slider__item img:hover,
 .labels-slider__item img:focus-visible {
   opacity: 1;
-  filter: grayscale(0.1) contrast(1.1);
+  filter: grayscale(0.05) contrast(1.1);
   transform: translateY(-1px);
+}
+
+/* Placeholder cuando no hay labels reales */
+.labels-slider__item--placeholder {
+  min-width: 220px;
+  color: var(--color-ink-muted-on-dark);
+  font-size: var(--font-scale-0);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 /* Flechas */
@@ -139,6 +164,7 @@
 
   .labels-slider__viewport {
     scroll-padding-inline: var(--space-md);
+    min-height: 88px;
   }
 
   .labels-slider__track {
@@ -147,11 +173,13 @@
   }
 
   .labels-slider__item {
-    min-width: 88px;
+    min-width: 120px;
+    min-height: 60px;
   }
 
   .labels-slider__item img {
-    max-height: 32px;
+    max-height: 40px;
+    max-width: 140px;
   }
 }
 
@@ -168,5 +196,41 @@
   .labels-slider__arrow {
     transition: none !important;
     transform: none !important;
+  }
+}
+/* Boost de tamaño para logos muy finos */
+.labels-slider__item img[alt*="La Foresta" i],
+.labels-slider__item img[alt*="D9SA" i],
+.labels-slider__item img[alt*="AH Digital" i],
+
+.labels-slider__item img[alt*="The Mango Alley" i],
+.labels-slider__item img[alt*="Madden" i],
+.labels-slider__item img[alt*="Sound Avenue" i],
+.labels-slider__item img[alt*="Venture Records" i],
+.labels-slider__item img[alt*="Droid 9 South America" i] {
+  max-height: 110px;   /* más grandes  */
+  max-width: 240px;
+}
+.labels-slider__item img[alt*="Traful" i] {
+  max-height: 90px;   /* un poco más grande que el resto */
+  max-width: 200px;
+}
+.labels-slider__item img[alt*="3rd Avenue" i]{
+  max-height: 130px;   /* un poco más grande que el resto */
+  max-width: 200px;
+}
+.labels-slider__item img[alt*="Musique de Lune" i] {
+  max-height: 145px;   /* un poco más grande que el resto */
+  max-width: 200px;
+}
+.labels-slider__item img[alt*="Madden" i] {
+  max-height: 70px;   /* un poco más chico que el resto */
+  max-width: 200px;
+}
+/* En mobile no nos pasamos de rosca */
+@media (max-width: 768px) {
+    .labels-slider__item img[alt*="Droid 9 South America" i] {
+    max-height: 56px;
+    max-width: 200px;
   }
 }

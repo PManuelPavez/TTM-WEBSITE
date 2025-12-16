@@ -361,12 +361,23 @@
     transform: scaleX(1);
   }
 }
-/* OUR GOAL — ensanchar el bloque en desktop */
+/* OUR GOAL — más ancho pero centrado en desktop */
 @media (min-width: 1024px) {
+  /* El bloque completo sigue centrado */
   .section-goal .container {
-    max-width: 60rem; /* antes ~42–44rem, ahora respira mucho más */
+    max-width: 72rem;              /* más ancho que antes */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* La “tarjeta” de texto se ensancha, pero sigue centrada */
+  .section-goal p {
+    max-width: 60rem;              /* Acá abrís el texto */
+    margin-left: auto;
+    margin-right: auto;
   }
 }
+
 
 /* Artists page dark theme and dynamic heading */
 body.artists-page {
