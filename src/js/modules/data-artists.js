@@ -24,20 +24,29 @@ import { fetchTable } from './supabase-client.js';
  * photo se resuelve desde assets/artists en base al nombre.
  */
 
-// Mapa de nombre normalizado -> ruta local (TODOS .png)
 const LOCAL_ARTIST_IMAGES = {
+  // Coinciden directo con nombres simples
+  servando: '../../assets/artists/servando.png',
   fideksen: '../../assets/artists/fideksen.png',
   gasparaguilera: '../../assets/artists/gasparaguilera.png',
   kentavros: '../../assets/artists/kentavros.png',
-  luciano: '../../assets/artists/luciano.png',
-  manu: '../../assets/artists/manu.png',
   mateotapia: '../../assets/artists/mateo_tapia.png',
   matezys: '../../assets/artists/matezys.png',
   p37ro: '../../assets/artists/p37ro.png',
-  servando: '../../assets/artists/servando.png',
   sirenes: '../../assets/artists/sirenes.png',
+
+  // Artistas con nombre + apellido:
+  // soportamos tanto la versión corta como la completa
+  manu: '../../assets/artists/manu.png',
+  manupavez: '../../assets/artists/manu.png',
+
+  luciano: '../../assets/artists/luciano.png',
+  lucianobedini: '../../assets/artists/luciano.png',
+
   sofideren: '../../assets/artists/sofideren.png',
+  sofiaderen: '../../assets/artists/sofideren.png',
 };
+
 
 // "Gaspar Aguilera" -> "gasparaguilera"
 function normalizeKey(value) {
